@@ -36,7 +36,7 @@ export function Logo({ className, iconOnly = false }: LogoProps) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1286 160"
-      className={cn("h-8 w-auto sm:h-10", className)}
+      className={cn("h-8 w-auto", className)}
       aria-label="Hivemind Solutions"
     >
       <title>Hivemind Solutions</title>

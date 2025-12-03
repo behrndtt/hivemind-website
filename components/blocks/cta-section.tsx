@@ -101,7 +101,7 @@ export function CtaSection({
   background,
   className,
 }: CtaSectionProps) {
-  const patternId = `cta-hexagons-${Math.random().toString(36).slice(2, 9)}`;
+  const patternId = "cta-hexagons-pattern";
   
   // Resolve icon from prop
   const Icon = resolveIcon(icon);

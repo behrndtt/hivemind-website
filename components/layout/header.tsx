@@ -94,8 +94,8 @@ export function Header() {
         className={cn(
           "fixed z-50 w-full transition-all duration-300",
           scrolled 
-            ? "bg-black/80 backdrop-blur-md border-b border-zinc-800/50" 
-            : "bg-transparent border-b border-transparent"
+            ? "bg-black/50 backdrop-blur-md" 
+            : "bg-transparent"
         )}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -120,11 +120,15 @@ export function Header() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1">
-              <NavigationMenu>
+              <NavigationMenu delayDuration={0}>
                 <NavigationMenuList>
                   {/* Services Mega Menu */}
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-zinc-300 hover:text-white hover:bg-zinc-800/50 data-[state=open]:bg-zinc-800/50">
+                    <NavigationMenuTrigger 
+                      className="bg-transparent text-zinc-300 hover:text-white hover:bg-zinc-800/50 focus:bg-zinc-800/50 focus:text-white active:bg-zinc-800/50 active:text-white data-[state=open]:bg-zinc-800/50 data-[state=open]:text-white"
+                      onPointerEnter={(e) => e.preventDefault()}
+                      onPointerMove={(e) => e.preventDefault()}
+                    >
                       Services
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
