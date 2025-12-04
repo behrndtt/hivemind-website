@@ -46,13 +46,13 @@ export default function ContactPage() {
                 <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
                   {Icon && <Icon className="h-7 w-7 text-primary" />}
                 </div>
-                <h3 className="mb-1 text-lg font-serif font-light text-white">
+                <h4>
                   {method.title}
-                </h3>
-                <p className="mb-3 text-sm text-zinc-400">
+                </h4>
+                <p className="text-sm text-zinc-400">
                   {method.description}
                 </p>
-                <p className="mb-4 font-medium text-white">{method.value}</p>
+                <p className="my-6 font-serif">{method.value}</p>
                 <Button
                   asChild
                   variant="outline"
@@ -71,7 +71,7 @@ export default function ContactPage() {
       </ContentSection>
 
       {/* Main Content - Two Column */}
-      <ContentSection background="subtle" className="bg-zinc-950">
+      <ContentSection background="subtle" c lassName="bg-zinc-950">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Contact Info Panel */}
           <InView
@@ -89,7 +89,7 @@ export default function ContactPage() {
               >
                 Get In Touch
               </Badge>
-              <h2 className="mb-6 font-serif text-3xl font-light tracking-tight text-white md:text-4xl">
+              <h2 className="mb-6 md:text-4xl">
                 We&apos;re Here to Help
               </h2>
               <p className="mb-8 text-zinc-400">
@@ -108,9 +108,9 @@ export default function ContactPage() {
                       {Icon && <Icon className="h-6 w-6 text-primary" />}
                     </div>
                     <div>
-                      <h3 className="font-serif font-light text-white">
+                      <h4>
                         {info.title}
-                      </h3>
+                      </h4>
                       {info.lines.map((line, lineIndex) => (
                         <p key={lineIndex} className="text-sm text-zinc-400">
                           {line}
@@ -122,7 +122,7 @@ export default function ContactPage() {
               </div>
 
               <div className="mt-8 rounded-lg border-2 border-primary/20 bg-linear-to-br from-primary/5 to-zinc-950 p-6">
-                <h3 className="mb-2 font-serif font-light text-white">
+                <h3 className="mb-2">
                   Existing Support Client?
                 </h3>
                 <p className="mb-4 text-sm text-zinc-400">
@@ -160,7 +160,7 @@ export default function ContactPage() {
               >
                 Common Questions
               </Badge>
-              <h2 className="mb-6 font-serif text-3xl font-light tracking-tight text-white md:text-4xl">
+              <h2 className="mb-6">
                 Frequently Asked
               </h2>
 
@@ -171,9 +171,9 @@ export default function ContactPage() {
                     className="border-zinc-800 bg-zinc-900/50 hover:border-primary/50 transition-all duration-500"
                   >
                     <CardContent className="p-5">
-                      <h3 className="mb-2 font-serif font-light text-white">
+                      <h4 className="mb-2">
                         {faq.question}
-                      </h3>
+                      </h4>
                       <p className="text-sm text-zinc-400">{faq.answer}</p>
                     </CardContent>
                   </Card>

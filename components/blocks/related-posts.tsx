@@ -45,7 +45,7 @@ export function RelatedPosts({
           transition={{ duration: 0.5 }}
           viewOptions={{ once: true }}
         >
-          <h2 className="mb-8 font-serif text-2xl font-light text-white">
+          <h2 className="mb-8 text-2xl font-light text-white">
             {title}
           </h2>
         </InView>
@@ -65,7 +65,7 @@ export function RelatedPosts({
                     >
                       {post.category}
                     </Badge>
-                    <h3 className="mb-2 font-serif font-light text-white group-hover:text-primary transition-colors">
+                    <h3 className="mb-2 font-light text-white group-hover:text-primary transition-colors">
                       {post.title}
                     </h3>
                     <p className="text-sm text-zinc-400 line-clamp-2">

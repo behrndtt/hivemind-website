@@ -137,9 +137,9 @@ export default function InsightsPage() {
             >
               <Card className="border-zinc-800 bg-zinc-900/50">
                 <CardContent className="p-6">
-                  <h3 className="mb-4 font-serif font-light text-white">
+                  <h4 className="mb-4">
                     Categories
-                  </h3>
+                  </h4>
                   <div className="space-y-2">
                     {insightsCategories.map((category, index) => (
                       <button
@@ -176,10 +176,10 @@ export default function InsightsPage() {
             >
               <Card className="border-2 border-primary/20 bg-zinc-900/50">
                 <CardContent className="p-6">
-                  <Bell className="mb-4 h-8 w-8 text-primary" />
-                  <h3 className="mb-2 font-serif font-light text-white">
+                  <Bell className="mb-4 text-primary" />
+                  <h4 className="mb-2">
                     Stay Updated
-                  </h3>
+                  </h4>
                   <p className="mb-4 text-sm text-zinc-400">
                     Be the first to know when we publish new insights and
                     resources.
@@ -208,9 +208,9 @@ export default function InsightsPage() {
             >
               <Card className="border-zinc-800 bg-zinc-900/50">
                 <CardContent className="p-6">
-                  <h3 className="mb-4 font-serif font-light text-white">
+                  <h4 className="mb-4">
                     Quick Links
-                  </h3>
+                  </h4>
                   <div className="space-y-3">
                     <Link
                       href="/services/consulting"

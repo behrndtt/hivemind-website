@@ -100,7 +100,7 @@ export function PostHero({
             </div>
 
             {/* Title */}
-            <h1 className="mb-6 font-serif text-3xl font-light tracking-tight text-white md:text-4xl lg:text-5xl max-w-4xl">
+            <h1 className="mb-6 tracking-tight text-white max-w-4xl">
               {title}
             </h1>
 

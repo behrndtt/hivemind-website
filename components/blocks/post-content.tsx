@@ -48,7 +48,7 @@ export function PostContent({
           <div className="space-y-8 mb-12">
             {challenge && (
               <div>
-                <h2 className="mb-4 flex items-center gap-3 font-serif text-xl font-light text-white">
+                <h2 className="mb-4 flex items-center gap-3 text-white">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                     <Building2 className="h-5 w-5 text-primary" />
                   </div>
@@ -60,7 +60,7 @@ export function PostContent({
 
             {solution && (
               <div>
-                <h2 className="mb-4 flex items-center gap-3 font-serif text-xl font-light text-white">
+                <h2 className="mb-4 flex items-center gap-3 text-white">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                     <CheckCircle2 className="h-5 w-5 text-primary" />
                   </div>

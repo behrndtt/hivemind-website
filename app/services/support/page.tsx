@@ -104,7 +104,7 @@ export default function SupportPage() {
           </div>
           <Card className="border-2 border-primary/20 bg-zinc-900/50">
             <CardContent className="p-8">
-              <h3 className="mb-6 text-xl font-serif font-light text-white">
+              <h3 className="mb-6 text-xl font-light text-white">
                 What Our Clients Say
               </h3>
               <div className="flex text-primary mb-4">

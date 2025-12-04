@@ -100,7 +100,7 @@ export function ContentSection({
           )}
 
           {title && (
-            <h2 className="text-3xl sm:text-4xl font-serif font-normal mb-4">
+            <h2 className="mb-4">
               {renderTitle(title, highlightedWords)}
             </h2>
           )}

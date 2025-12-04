@@ -51,9 +51,9 @@ export function PostSidebar({
         >
           <Card className="border-primary/20 bg-zinc-900/50">
             <CardContent className="p-6">
-              <h3 className="mb-4 font-serif font-light text-white">
+              <h2 className="mb-4 text-white">
                 Key Results
-              </h3>
+              </h2>
               <div className="grid grid-cols-2 gap-4">
                 {results.map((result, index) => (
                   <div
@@ -84,7 +84,7 @@ export function PostSidebar({
         >
           <Card className="border-zinc-800 bg-zinc-900/50">
             <CardContent className="p-6">
-              <h3 className="mb-4 font-serif font-light text-white">Tags</h3>
+              <h2 className="mb-4 text-white">Tags</h2>
               <div className="flex flex-wrap gap-2">
                 {tags.map((tag) => (
                   <Badge
@@ -113,9 +113,9 @@ export function PostSidebar({
         >
           <Card className="border-2 border-primary/20 bg-linear-to-br from-primary/10 to-zinc-900/50">
             <CardContent className="p-6">
-              <h3 className="mb-2 font-serif font-light text-white">
+              <h2 className="mb-2 text-white">
                 {cta.title}
-              </h3>
+              </h2>
               <p className="mb-4 text-sm text-zinc-400">{cta.description}</p>
               <Button
                 asChild

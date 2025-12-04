@@ -103,9 +103,9 @@ export default function HomePage() {
               viewOptions={{ once: true, margin: "-100px" }}
             >
               <div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl mb-6 font-serif font-normal">
+                <h1 className="mb-6">
                   Why Adelaide Businesses Choose Hivemind
-                </h2>
+                </h1>
                 <p className="text-lg text-zinc-400 mb-8">
                   We combine deep Microsoft technical expertise with genuine local
                   understanding. As Adelaide&apos;s dedicated Microsoft cloud

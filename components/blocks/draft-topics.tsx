@@ -33,7 +33,7 @@ export function DraftTopics({
         transition={{ duration: 0.5 }}
         viewOptions={{ once: true }}
       >
-        <h3 className="mb-6 font-serif text-xl font-light text-white">
+        <h3 className="mb-6">
           {title}
         </h3>
         <AnimatedGroup preset="fade" className="grid gap-4 sm:grid-cols-2">
@@ -44,9 +44,9 @@ export function DraftTopics({
                   {String(index + 1).padStart(2, "0")}
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-zinc-300">
+                  <h5 className="text-zinc-300">
                     {draft.title}
-                  </p>
+                  </h5>
                   <p className="mt-1 text-xs text-zinc-500">{draft.category}</p>
                 </div>
               </CardContent>

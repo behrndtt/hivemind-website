@@ -94,7 +94,7 @@ export function TestimonialsSection({
                 </span>
               )}
               {title && (
-                <h2 className="text-3xl sm:text-4xl font-serif font-normal mb-4">
+                <h2 className="text-3xl sm:text-4xl mb-4">
                   {renderTitle(title, highlightedWords)}
                 </h2>
               )}

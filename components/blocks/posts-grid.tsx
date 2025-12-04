@@ -115,7 +115,7 @@ function PostCard({
               )}
             </div>
 
-            <h3 className="mb-3 font-serif text-2xl font-light text-white group-hover:text-primary transition-colors">
+            <h3 className="mb-3 text-white group-hover:text-primary transition-colors">
               {post.title}
             </h3>
 
@@ -194,7 +194,7 @@ function PostCard({
               )}
             </div>
 
-            <h3 className="mb-2 font-serif text-lg font-light text-white group-hover:text-primary transition-colors">
+            <h3 className="mb-2 text-white group-hover:text-primary transition-colors">
               {post.title}
             </h3>
 
@@ -234,7 +234,7 @@ function PostCard({
           {post.type === "case-study" ? "CS" : "IN"}
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-serif font-light text-white group-hover:text-primary transition-colors truncate">
+          <h3 className="text-white group-hover:text-primary transition-colors truncate">
             {post.title}
           </h3>
           <p className="text-sm text-zinc-400 truncate">{post.summary}</p>
@@ -267,9 +267,9 @@ function PostCard({
             </Badge>
           )}
 
-          <h3 className="mb-2 font-serif text-lg font-light text-white group-hover:text-primary transition-colors">
+          <h4 className="mb-2 text-white group-hover:text-primary transition-colors">
             {post.title}
-          </h3>
+          </h4>
 
           <p className="mb-4 text-sm text-zinc-400 line-clamp-3">
             {post.summary}

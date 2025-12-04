@@ -79,7 +79,7 @@ export default function ConsultingPage() {
                     {Icon && <Icon className="h-6 w-6 text-primary" />}
                   </div>
                   <div>
-                    <h3 className="font-serif font-light text-white">
+                    <h3 className="font-light text-white">
                       {benefit.title}
                     </h3>
                     <p className="text-sm text-zinc-400">{benefit.description}</p>
@@ -91,7 +91,7 @@ export default function ConsultingPage() {
           <div>
             <Card className="border-zinc-800 bg-zinc-900/50">
               <CardContent className="p-8">
-                <h3 className="mb-4 text-xl font-serif font-light text-white">
+                <h3 className="mb-4 text-xl font-light text-white">
                   Ready to Get Started?
                 </h3>
                 <p className="mb-6 text-zinc-400">

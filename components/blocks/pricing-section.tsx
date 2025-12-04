@@ -84,7 +84,7 @@ export function PricingSection({
                 </span>
               )}
               {title && (
-                <h2 className="text-3xl sm:text-4xl font-serif font-normal mb-4">
+                <h2 className="text-3xl sm:text-4xl mb-4">
                   {renderTitle(title, highlightedWords)}
                 </h2>
               )}
@@ -117,12 +117,12 @@ export function PricingSection({
 
               <CardContent className="p-6 sm:p-8 flex flex-col h-full">
                 <div className="text-center mb-6 sm:mb-8">
-                  <h3 className="font-serif text-xl sm:text-2xl font-normal text-white mb-2">
+                  <h3 className="text-xl sm:text-2xl text-white mb-2">
                     {plan.name}
                   </h3>
                   {plan.price && (
                     <div className="mb-4">
-                      <span className="font-serif text-3xl sm:text-4xl font-normal text-white">
+                      <span className="font-serif text-3xl sm:text-4xl text-white">
                         {plan.price}
                       </span>
                       {plan.period && (

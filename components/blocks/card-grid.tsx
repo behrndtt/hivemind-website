@@ -144,7 +144,7 @@ function IconTopCard({ item }: { item: IconTopItem }) {
             <Icon className="w-8 h-8" />
           </div>
         )}
-        <h3 className="font-serif text-lg sm:text-xl font-normal mb-3 text-white">
+        <h3 className="mb-3 text-white">
           {item.title}
         </h3>
         {item.description && (
@@ -168,7 +168,7 @@ function IconLeftCard({ item }: { item: IconLeftItem }) {
             <Icon className="h-7 w-7 text-primary" />
           </div>
         )}
-        <h3 className="mb-1 text-lg font-serif font-normal text-white">
+        <h3 className="mb-1 text-white">
           {item.title}
         </h3>
         {item.description && (
@@ -207,7 +207,7 @@ function HorizontalCard({ item }: { item: HorizontalItem }) {
               <Icon className="h-7 w-7 text-primary" />
             </div>
           )}
-          <CardTitle className="text-xl text-white font-serif font-normal">
+          <CardTitle className="text-xl text-white">
             {item.title}
           </CardTitle>
         </CardHeader>
@@ -241,7 +241,7 @@ function NumberedCard({ item, index }: { item: NumberedItem; index: number }) {
     <Card className="h-full border-zinc-800 bg-zinc-900/50 text-center hover:border-primary/50 transition-all duration-500">
       <CardContent className="p-6">
         <div className="mb-3 text-4xl font-bold text-primary/30">{stepNumber}</div>
-        <h3 className="mb-2 text-lg font-serif font-normal text-white">
+        <h3 className="mb-2 text-white">
           {item.title}
         </h3>
         {item.description && (
@@ -263,7 +263,7 @@ function TwoColumnCard({ item }: { item: TwoColumnItem }) {
         </div>
       )}
       <div>
-        <h3 className="font-serif font-normal text-white mb-1">{item.title}</h3>
+        <h3 className="text-white mb-1">{item.title}</h3>
         {item.description && (
           <p className="text-sm text-zinc-400">{item.description}</p>
         )}
@@ -283,7 +283,7 @@ function ServiceOverviewCard({ item }: { item: ServiceOverviewItem }) {
             <Icon className="w-10 h-10" />
           </div>
         )}
-        <h3 className="font-serif text-xl font-normal mb-3 text-white group-hover:text-primary transition-colors">
+        <h3 className="mb-3 text-white group-hover:text-primary transition-colors">
           {item.title}
         </h3>
         {item.description && (
@@ -337,7 +337,7 @@ export function CardGrid<T extends CardGridItem>({
             </Badge>
           )}
           {title && (
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl mb-4 font-serif font-normal text-white">
+            <h2 className="mb-4 text-white">
               {renderTitle(title, highlightedWords)}
             </h2>
           )}

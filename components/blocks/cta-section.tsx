@@ -163,7 +163,7 @@ export function CtaSection({
                 </div>
               )}
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl mb-4 font-serif font-normal">
+              <h2 className="mb-4">
                 {renderTitle(title, highlightedWords)}
               </h2>
 

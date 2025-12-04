@@ -96,7 +96,7 @@ export function TeamGrid({
                 </Badge>
               )}
               {title && (
-                <h2 className="mb-4 text-3xl font-serif font-normal tracking-tight md:text-4xl text-white">
+                <h2 className="mb-4 text-3xl tracking-tight md:text-4xl text-white">
                   {renderTitle(title, highlightedWords)}
                 </h2>
               )}
@@ -128,7 +128,7 @@ export function TeamGrid({
                       {getInitials(member.name)}
                     </div>
                   )}
-                  <h3 className="mb-1 text-lg font-serif font-normal text-white">
+                  <h3 className="mb-1 text-lg text-white">
                     {member.name}
                   </h3>
                   <p className="mb-3 text-sm font-medium text-primary">

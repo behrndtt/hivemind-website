@@ -30,7 +30,12 @@ export default function AboutPage() {
       />
 
       {/* Story Section */}
-      <ContentSection align="left">
+      <ContentSection
+        badge="Our Story"
+        title="Born from a Vision for Better IT"
+        subtitle="To empower organisations through tailored IT solutions that drive growth and innovation."
+        align="left"
+      >
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Main content - header and story paragraphs */}
             <InView
@@ -40,15 +45,6 @@ export default function AboutPage() {
               }}
               transition={{ duration: 0.6 }}
             >
-            <Badge
-              variant="outline"
-              className="mb-4 border-zinc-700 text-zinc-400"
-            >
-              {aboutStory.badge}
-            </Badge>
-            <h2 className="mb-6 text-3xl font-light tracking-tight md:text-4xl font-serif text-white">
-              {aboutStory.title}
-            </h2>
             <div className="space-y-4 text-zinc-400">
               {aboutStory.paragraphs.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
@@ -58,7 +54,7 @@ export default function AboutPage() {
 
           {/* Sidebar - milestone timeline */}
           <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-8">
-            <h3 className="text-xl font-serif font-light text-white mb-6">
+            <h3 className="text-xl font-light text-white mb-6">
               Our Journey
             </h3>
             <MilestoneTimeline events={aboutMilestones} />
