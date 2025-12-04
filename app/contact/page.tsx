@@ -71,7 +71,7 @@ export default function ContactPage() {
       </ContentSection>
 
       {/* Main Content - Two Column */}
-      <ContentSection background="subtle" c lassName="bg-zinc-950">
+      <ContentSection background="subtle" className="bg-zinc-950">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Contact Info Panel */}
           <InView
