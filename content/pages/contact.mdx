@@ -2,83 +2,149 @@
 title: Contact Hivemind Solutions | Microsoft Cloud Consulting Adelaide
 blocks:
   - variant: compact
-    badge: {}
+    align: center
+    badge:
+      text: Contact Us
     title: Let's Start a Conversation
     highlightWords: Conversation
     subtitle: >-
       Ready to transform your Microsoft environment? Have a question about our
       services? We'd love to hear from you.
     _template: pageHero
-  - columns: 3
-    title: Get in Touch
-    subtitle: Multiple ways to reach our team
+  - background: bg-transparent
+    variant: cards
+    columns: 3
+    title: ''
+    subtitle: ''
     cards:
-      - icon:
+      - type: email
+        icon:
           name: Mail
           color: primary
         title: Email Us
+        contactDescription: Get in touch for general enquiries
+        value: hello@hivemindsolutions.com.au
         href: 'mailto:hello@hivemindsolutions.com.au'
-      - icon:
+        action: Send Email
+      - type: phone
+        icon:
           name: Phone
           color: primary
         title: Call Us
+        contactDescription: Speak directly with our team
+        value: +61 8 8123 4567
         href: 'tel:+61881234567'
-      - icon:
+        action: Call Now
+      - type: social
+        icon:
           name: Linkedin
           color: primary
         title: Connect
+        contactDescription: Follow us on LinkedIn
+        value: Hivemind Solutions
         href: 'https://linkedin.com'
+        action: Follow Us
     _template: contactCards
-  - columns: 3
-    title: What to Expect
-    subtitle: How we work with you
-    cards:
-      - title: Quick Response
-        description: |
-          We typically respond to enquiries within 4 business hours.
-        icon:
-          name: MessageSquare
-          color: primary
-      - title: Business Hours
-        description: >
-          Monday – Friday 8:30 AM – 5:30 PM ACST. Emergency support available
-          for managed clients.
-        icon:
-          name: Clock
-          color: primary
-      - title: Local Expertise
-        description: >
-          Based in Adelaide, serving South Australian businesses with local
-          knowledge and support.
-        icon:
-          name: MapPin
-          color: primary
-    _template: serviceCards
-  - title: Frequently Asked Questions
-    subtitle: Answers to common questions
-    items:
-      - question: What industries do you specialise in?
-        answer: >
-          We work with organisations across all industries, with particular
-          experience in healthcare, professional services, manufacturing, and
-          education. Our Microsoft expertise applies regardless of your sector.
-      - question: Do you offer remote support?
-        answer: >
-          Yes, most of our support and consulting services are delivered
-          remotely. We use secure remote access tools and video conferencing to
-          work with clients across South Australia and beyond.
-      - question: What size organisations do you work with?
-        answer: >
-          We support organisations of all sizes, from growing businesses with 20
-          users to enterprises with thousands. Our solutions and support plans
-          scale to match your needs.
-      - question: How quickly can you start a new project?
-        answer: >
-          For most consulting engagements, we can begin within 1-2 weeks of
-          agreement. Emergency support requests are typically addressed within
-          hours.
-    _template: faqSection
-  - title: Ready to Get Started?
+  - background: bg-card
+    columnRatio: 50-50
+    gap: lg
+    padding: md
+    verticalAlign: start
+    leftColumn:
+      - background: bg-transparent
+        layout: textOnly
+        align: left
+        padding: md
+        badge:
+          text: Get In Touch
+        title: We're Here to Help
+        subtitle: >-
+          Whether you're looking for strategic consulting, ongoing support, or
+          just have a question about Microsoft technologies, our team is ready
+          to assist. Reach out through any of the channels above, and we'll get
+          back to you promptly.
+        body: ''
+        _template: contentSection
+      - background: bg-transparent
+        itemLayout: horizontal
+        cardWrapper: false
+        iconStyle: square
+        gap: md
+        title: ''
+        subtitle: ''
+        cards:
+          - title: Quick Response
+            description: |
+              We typically respond to enquiries within 4 business hours.
+            icon:
+              name: BiChat
+          - title: Business Hours
+            description: |
+              Monday – Friday: 8:30 AM – 5:30 PM ACST
+
+              Emergency support available for managed clients
+            icon:
+              name: BiTimeFive
+          - title: Local Expertise
+            description: >
+              Based in Adelaide, serving South Australian businesses with local
+              knowledge and support.
+            icon:
+              name: MapPin
+        _template: iconGrid
+    rightColumn:
+      - background: bg-transparent
+        columns: 1
+        badge:
+          text: Common Questions
+        title: Frequently Asked Questions
+        subtitle: ''
+        items:
+          - question: What industries do you specialise in?
+            answer: >
+              We work with organisations across all industries, with particular
+              experience in healthcare, professional services, manufacturing,
+              and education. Our Microsoft expertise applies regardless of your
+              sector.
+          - question: Do you offer remote support?
+            answer: >
+              Yes, most of our support and consulting services are delivered
+              remotely. We use secure remote access tools and video conferencing
+              to work with clients across South Australia and beyond.
+          - question: How quickly can you start a new project?
+            answer: >
+              For most consulting engagements, we can begin within 1-2 weeks of
+              agreement. Emergency support requests are typically addressed
+              within hours.
+          - question: What is your question?
+            answer: |
+              Answer goes here.
+        _template: faqSection
+      - background: bg-transparent
+        variant: full-width
+        alignment: center
+        cardBackground: ''
+        padding: lg
+        backgroundStyle: none
+        title: ''
+        titleSize: lg
+        subtitle: Have a different question?
+        subtitleSize: lg
+        buttons:
+          - label: Email Your Question
+            href: /
+            variant: primary
+            icon:
+              name: Mail
+              color: primary
+              style: circle
+        _template: ctaSection
+    _template: twoColumn
+  - background: bg-transparent
+    variant: full-width
+    alignment: center
+    backgroundStyle: none
+    title: Ready to Get Started?
     subtitle: >-
       Take the first step toward a better Microsoft environment. Our team is
       ready to discuss your needs and how we can help.
@@ -87,11 +153,10 @@ blocks:
         href: 'mailto:hello@hivemindsolutions.com.au'
         variant: default
         icon:
-          name: Mail
           color: white
       - label: Call +61 8 8123 4567
         href: 'tel:+61881234567'
-        variant: link
+        variant: outline
     _template: ctaSection
 ---
 
