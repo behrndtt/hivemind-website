@@ -2,10 +2,10 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import client from '@/tina/__generated__/client';
 import Layout from '@/components/layout/layout';
-import { Section } from '@/components/layout/section';
 import ClientPage from './client-page';
 
 export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 export default async function Page({
   params,
@@ -26,20 +26,19 @@ export default async function Page({
 
   return (
     <Layout rawPageData={data}>
-      <Section>
-        <ClientPage {...data} />
-      </Section>
+          <ClientPage {...data} />
     </Layout>
   );
 }
 
 export async function generateStaticParams() {
-  let pages = await client.queries.pageConnection();
-  const allPages = pages;
+  try {
+    let pages = await client.queries.pageConnection();
+    const allPages = pages;
 
-  if (!allPages.data.pageConnection.edges) {
-    return [];
-  }
+    if (!allPages.data.pageConnection.edges) {
+      return [];
+    }
 
   while (pages.data.pageConnection.pageInfo.hasNextPage) {
     pages = await client.queries.pageConnection({
@@ -61,4 +60,8 @@ export async function generateStaticParams() {
     .filter((x) => !x.urlSegments.every((x) => x === 'home')); // exclude the home page
 
   return params;
+  } catch (error) {
+    console.warn('Unable to generate static params for pages:', error);
+    return [];
+  }
 }

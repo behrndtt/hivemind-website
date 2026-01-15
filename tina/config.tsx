@@ -3,9 +3,10 @@ import nextConfig from '../next.config'
 
 import Post from "./collection/post";
 import Global from "./collection/global";
-import Author from "./collection/author";
 import Page from "./collection/page";
 import Tag from "./collection/tag";
+import CaseStudy from "./collection/case-study";
+import Insight from "./collection/insight";
 
 const config = defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID!,
@@ -32,7 +33,7 @@ const config = defineConfig({
     basePath: nextConfig.basePath?.replace(/^\//, '') || '', // The base path of the app (could be /blog)
   },
   schema: {
-    collections: [Page, Post, Author, Tag, Global],
+    collections: [Page, Post, Tag, Global, CaseStudy, Insight],
   },
 });
 

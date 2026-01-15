@@ -39,7 +39,7 @@ export const RawRenderer = ({ rawData, parentColor }) => {
       >
         View Raw Data
         <span
-          className={`absolute w-full h-full left-0 top-0 rounded -z-1 ${parentColor === 'primary' ? `bg-white opacity-80` : `bg-current opacity-15`}`}
+          className={`absolute w-full h-full left-0 top-0 rounded -z-1 ${parentColor === 'primary' ? `bg-background opacity-80` : `bg-current opacity-15`}`}
         ></span>
       </button>
       <Transition appear show={isOpen} as={Fragment}>
@@ -55,7 +55,7 @@ export const RawRenderer = ({ rawData, parentColor }) => {
               leaveTo='opacity-0'
             >
               <div className=''>
-                <DialogPanel className='fixed inset-0 bg-linear-to-br from-gray-800 to-gray-1000 opacity-80' />
+                <DialogPanel className='fixed inset-0 bg-linear-to-br from-gray-800 to-gray-950 opacity-80' />
               </div>
             </TransitionChild>
 
@@ -68,7 +68,7 @@ export const RawRenderer = ({ rawData, parentColor }) => {
               leaveFrom='opacity-100 scale-100'
               leaveTo='opacity-0 scale-95'
             >
-              <div className='flex-1 w-full prose dark:prose-dark max-w-3xl p-6 overflow-hidden text-left align-middle transition-all transform bg-white dark:bg-gray-1000 shadow-xl rounded-xl inline-flex flex-col max-h-full'>
+              <div className='flex-1 w-full prose dark:prose-invert max-w-3xl p-6 overflow-hidden text-left align-middle transition-all transform bg-background shadow-xl rounded-xl inline-flex flex-col max-h-full'>
                 <pre className='flex-1 overflow-y-auto'>
                   <code>{JSON.stringify(rawData, null, 2)}</code>
                 </pre>

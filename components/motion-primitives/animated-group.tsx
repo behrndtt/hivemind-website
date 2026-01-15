@@ -1,6 +1,6 @@
 'use client';
-import { ReactNode, type JSX } from 'react';
-import { motion, Variants } from 'motion/react';
+import { ReactNode, useRef, useState, useEffect, type JSX } from 'react';
+import { motion, Variants, useInView, useReducedMotion, type UseInViewOptions } from 'motion/react';
 import React from 'react';
 
 export type PresetType =
@@ -25,6 +25,14 @@ export type AnimatedGroupProps = {
   preset?: PresetType;
   as?: React.ElementType;
   asChild?: React.ElementType;
+  /** Trigger animation immediately on mount (for above-fold content) */
+  triggerOnMount?: boolean;
+  /** Only animate once when entering viewport */
+  once?: boolean;
+  /** Viewport margin for triggering animation earlier/later */
+  margin?: UseInViewOptions['margin'];
+  /** Amount of element that must be in view (0-1) */
+  amount?: 'some' | 'all' | number;
 };
 
 const defaultContainerVariants: Variants = {
@@ -107,7 +115,35 @@ function AnimatedGroup({
   preset,
   as = 'div',
   asChild = 'div',
+  triggerOnMount = false,
+  once = true,
+  margin = '0px',
+  amount = 0.2,
 }: AnimatedGroupProps) {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once, margin, amount });
+  const prefersReducedMotion = useReducedMotion();
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Track hydration to prevent SSR/client mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Fallback timer to ensure elements become visible even if intersection observer fails
+  useEffect(() => {
+    if (!isMounted || hasAnimated || prefersReducedMotion) return;
+
+    const timer = setTimeout(() => {
+      if (!hasAnimated) {
+        setHasAnimated(true);
+      }
+    }, 1500); // Fallback after 1.5 seconds
+
+    return () => clearTimeout(timer);
+  }, [isMounted, hasAnimated, prefersReducedMotion]);
+
   const selectedVariants = {
     item: addDefaultVariants(preset ? presetVariants[preset] : {}),
     container: addDefaultVariants(defaultContainerVariants),
@@ -115,19 +151,59 @@ function AnimatedGroup({
   const containerVariants = variants?.container || selectedVariants.container;
   const itemVariants = variants?.item || selectedVariants.item;
 
-  const MotionComponent = React.useMemo(
-    () => motion.create(as as keyof JSX.IntrinsicElements),
-    [as]
-  );
-  const MotionChild = React.useMemo(
-    () => motion.create(asChild as keyof JSX.IntrinsicElements),
-    [asChild]
-  );
+  const MotionComponent = React.useMemo(() => {
+    if (typeof as === 'string') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return motion.create(as as keyof JSX.IntrinsicElements) as any;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return motion.create(as) as any;
+  }, [as]);
+
+  const MotionChild = React.useMemo(() => {
+    if (typeof asChild === 'string') {
+      return motion.create(asChild as keyof JSX.IntrinsicElements);
+    }
+    return motion.create(asChild);
+  }, [asChild]);
+
+  // Skip animations for reduced motion preference
+  if (prefersReducedMotion) {
+    const StaticComponent = as as React.ElementType;
+    const StaticChild = asChild as React.ElementType;
+    return (
+      <StaticComponent className={className}>
+        {React.Children.map(children, (child, index) => (
+          <StaticChild key={index}>{child}</StaticChild>
+        ))}
+      </StaticComponent>
+    );
+  }
+
+  // Before hydration, render visible to prevent flash of invisible content
+  if (!isMounted) {
+    const StaticComponent = as as React.ElementType;
+    const StaticChild = asChild as React.ElementType;
+    return (
+      <StaticComponent className={className}>
+        {React.Children.map(children, (child, index) => (
+          <StaticChild key={index}>{child}</StaticChild>
+        ))}
+      </StaticComponent>
+    );
+  }
+
+  // Determine animation state
+  const shouldAnimate = triggerOnMount || isInView || hasAnimated;
 
   return (
     <MotionComponent
+      ref={ref as React.Ref<unknown>}
       initial='hidden'
-      animate='visible'
+      animate={shouldAnimate ? 'visible' : 'hidden'}
+      onAnimationComplete={() => {
+        if (once && (isInView || triggerOnMount)) setHasAnimated(true);
+      }}
       variants={containerVariants}
       className={className}
     >

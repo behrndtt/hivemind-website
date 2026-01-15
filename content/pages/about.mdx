@@ -1,6 +1,149 @@
 ---
+title: About Hivemind Solutions | Microsoft Cloud Consulting Adelaide
 blocks:
-  - body: "# What is this?\n\nThis is a [TinaCMS](https://tina.io)-enabled Next.js app, so you can edit your content on a live page. In this project the Tina file-based CMS is used via GraphQL: it's powered by a schema that *you* define. It not only serves content from Markdown files in your repository, but it also generates TinaCMS forms for you automatically ✨.\n\n## New to TinaCMS?\n\nTinaCMS is feature-rich, and leaves a lot of power up to the user on how it's configured.\n\nThere can be a learning curve as you get to grips with how it all fits together.\n\nThe tutorials in our docs will guide you through the basics, to the more advanced ways to use the tool.\n\nCheck out the [Learning Guide](https://tina.io/docs/beginner-tutorials/tutorial-overview) it covers all you need to get up and running with TinaCMS.\n\n## Requirements\n\n* Git\n* [Node.js Active LTS](https://nodejs.org/en/about/releases/)\n* NPM, Yarn, pnpm, or bun\n\n## Install\n\nInstall the project's dependencies:\n\n<scriptCopyBlock\n  codeLanguage=\"bash\"\n  lightTheme=\"catppuccin-latte\"\n  darkTheme=\"catppuccin-mocha\"\n  commandMap=\"npm|npm install\n  pnpm|pnpm install\n  yarn|yarn install\n  bun|bun install\"\n/>\n\n## Run the project locally\n\nTo run the local development server:\n\n<scriptCopyBlock\n  codeLanguage=\"bash\"\n  lightTheme=\"catppuccin-latte\"\n  darkTheme=\"catppuccin-mocha\"\n  commandMap=\"npm|npm run dev\n  pnpm|pnpm run dev\n  yarn|yarn dev\n  bun|bun run dev\"\n/>\n\nThis command starts the GraphQL server and the Next.js application in development mode. It also regenerates your schema types for TypeScript and GraphQL so changes to your `/tina/config.ts` are reflected immediately.\n\nOne of the most interesting aspects of the TinaCloud Content API is that it doesn't actually require anything from the cloud to work locally. Since TinaCMS is by default a Git-backed CMS, everything can be run from your local filesystem via the CLI. \U0001F60E\n\nThis is ideal for development workflows and the API is identical to the one used in TinaCloud, so once you're ready to deploy your application you won't face any challenges there.\n\nOpen [`http://localhost:3000`](http://localhost:3000) in your browser to see your file-based content being loaded from the GraphQL API.\n\nWant to learn more? Go through the [Learning Guide](https://tina.io/docs/beginner-tutorials/tutorial-overview) to understand how to customise your TinaCMS experience.\n\n## Connect to Tina Cloud\n\nWhile the fully-local development workflow is the recommended way for developers to work,\nyou'll obviously want other editors and collaborators to be able to make changes on a hosted website with authentication.\n\nCheck out the docs on how to connect to our hosted backend - [Going to Production with TinaCloud](https://tina.io/docs/tina-cloud/overview)\n\n## Deploy\n\nSites using TinaCMS and TinaCloud can be deployed to lots of hosting providers.\n\nWe have documented some of the popular ones:\n\n* [Vercel](https://tina.io/docs/tina-cloud/deployment-options/vercel)\n* [Netlify](https://tina.io/docs/tina-cloud/deployment-options/netlify)\n* [GitHub Pages](https://tina.io/docs/tina-cloud/deployment-options/github-pages)\n* [Alibaba Cloud](https://tina.io/docs/tina-cloud/deployment-options/alibaba-cloud)\n\nIf your favourite isn't listed here, it doesn't mean that it isn't supported - we just don't have documentation for it yet.\n\n***\n\n## Getting Help\n\nYou might face issues, want to provide feedback or get help with any challenges you may have:\n\n* Read the [TinaCloud documentation](https://tina.io/docs/tina-cloud/).\n* [Join our Discord](https://discord.gg/zumN63Ybpf).\n* Visit the [community forum](https://community.tinacms.org/) to ask questions.\n* Reach out to us on Twitter at [@TinaCMS](https://x.com/tinacms).\n* [Email us](mailto\\:support@tina.io) to schedule a call with our team and share more about your context and what you're trying to achieve.\n\n## LICENSE\n\nLicensed under the [Apache 2.0 license](./LICENSE).\n"
-    _template: content
+  - background: ''
+    variant: compact
+    backgroundStyle: hexagon-orbs
+    align: center
+    badge:
+      text: About Hivemind Solutions
+    title: Adelaide's Trusted Microsoft Partner
+    highlightWords: Microsoft Partner
+    subtitle: >-
+      We're a passionate team of Microsoft specialists dedicated to helping
+      South Australian businesses thrive in the cloud. From startups to
+      enterprises, we deliver solutions that work.
+    _template: pageHero
+  - badge:
+      text: Our Story
+    title: Born from a Vision for Better IT
+    highlightWords: Better IT
+    subtitle: >-
+      To empower organisations through tailored IT solutions that drive growth
+      and innovation.
+    columnRatio: 60-40
+    gap: sm
+    padding: ''
+    verticalAlign: start
+    leftColumn:
+      - layout: textOnly
+        align: ''
+        padding: sm
+        badge:
+          text: ''
+        title: ''
+        highlightWords: ''
+        subtitle: ''
+        body: >
+          Hivemind Solutions was founded with a simple but powerful idea: that
+          every business deserves access to enterprise-grade Microsoft
+          technology, implemented by people who genuinely care about outcomes.
+
+
+          Based in Adelaide, we've grown from a small consultancy into a trusted
+          partner for organisations across South Australia. Our team combines
+          deep technical expertise with a genuine passion for solving complex
+          problems.
+
+
+          We specialise in Microsoft 365, Azure, Intune, and Entra ID—the four
+          pillars that power modern workplaces. Whether you're migrating to the
+          cloud, securing your endpoints, or optimising your existing
+          environment, we bring the expertise to make it happen.
+        _template: contentSection
+    rightColumn:
+      - variant: compact
+        cardWrapper: true
+        alignment: left
+        padding: lg
+        title: Our Journey
+        highlightWords: ''
+        subtitle: ''
+        milestones:
+          - date: Q1 2024
+            title: Milestone title
+            description: ''
+            status: ''
+          - date: Q1 2024
+            title: Milestone title
+            description: ''
+            status: upcoming
+          - date: Q1 2024
+            title: Milestone title
+            description: ''
+            status: upcoming
+          - date: Q1 2024
+            title: Milestone title
+            description: ''
+            status: in-progress
+        _template: milestones
+    _template: twoColumn
+  - columns: 4
+    title: Our Values
+    subtitle: The principles that guide everything we do
+    cards:
+      - title: Client-Focused
+        description: >
+          Every solution we deliver is tailored to your unique business needs
+          and objectives.
+        icon:
+          name: Target
+          color: primary
+      - title: Security-First
+        description: >
+          We embed security best practices into every project, protecting your
+          data and reputation.
+        icon:
+          name: Shield
+          color: primary
+      - title: Innovation-Driven
+        description: >
+          We stay ahead of the curve, bringing you the latest Microsoft
+          technologies and practices.
+        icon:
+          name: Lightbulb
+          color: primary
+      - title: Partnership Mindset
+        description: |
+          We build long-term relationships, becoming an extension of your team.
+        icon:
+          name: Heart
+          color: primary
+    _template: serviceCards
+  - columns: 4
+    title: Meet Our Team
+    subtitle: The experts behind Hivemind Solutions
+    members:
+      - name: Will W.
+        role: Director
+        description: ''
+      - name: Heath B.
+        role: Senior Consultant
+        description: ''
+      - name: Dave H.
+        role: Consultant
+        description: ''
+      - name: Sam B.
+        role: Consultant
+        description: ''
+    _template: teamGrid
+  - icon:
+      name: Award
+      color: primary
+    title: Ready to Work Together?
+    subtitle: >-
+      Let's discuss how Hivemind Solutions can help transform your Microsoft
+      environment and drive real business results.
+    buttons:
+      - label: Get in Touch
+        href: /contact
+        variant: default
+        icon:
+          name: ArrowRight
+          color: white
+      - label: Explore Our Services
+        href: /services/consulting
+        variant: link
+    _template: ctaSection
 ---
 

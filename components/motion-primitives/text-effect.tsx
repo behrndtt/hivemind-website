@@ -7,8 +7,9 @@ import {
   Transition,
   Variant,
   Variants,
+  useReducedMotion,
 } from 'motion/react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export type PresetType = 'blur' | 'fade-in-blur' | 'scale' | 'fade' | 'slide';
 
@@ -221,6 +222,14 @@ export function TextEffect({
   segmentTransition,
   style,
 }: TextEffectProps) {
+  const [isMounted, setIsMounted] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  // Track hydration to prevent SSR/client mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const segments = splitText(children, per);
   const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
 
@@ -260,6 +269,16 @@ export function TextEffect({
       ...segmentTransition,
     }),
   };
+
+  // Skip animations for reduced motion preference or before hydration
+  if (prefersReducedMotion || !isMounted) {
+    const Tag = as as keyof React.JSX.IntrinsicElements;
+    return (
+      <Tag className={className} style={style}>
+        {children}
+      </Tag>
+    );
+  }
 
   return (
     <AnimatePresence mode='popLayout'>

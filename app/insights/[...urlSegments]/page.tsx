@@ -4,6 +4,7 @@ import Layout from '@/components/layout/layout';
 import InsightClientPage from './client-page';
 
 export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 export default async function InsightPage({
   params,
@@ -24,7 +25,8 @@ export default async function InsightPage({
 }
 
 export async function generateStaticParams() {
-  let insights = await client.queries.insightConnection();
+  try {
+    let insights = await client.queries.insightConnection();
   const allInsights = insights;
 
   if (!allInsights.data.insightConnection.edges) {
@@ -49,4 +51,8 @@ export async function generateStaticParams() {
     })) || [];
 
   return params;
+  } catch (error) {
+    console.warn('Unable to generate static params for insights:', error);
+    return [];
+  }
 }

@@ -1,58 +1,196 @@
 {
   "header": {
     "icon": {
-      "name": "Tina",
-      "color": "orange",
+      "name": "Hexagon",
+      "color": "yellow",
       "style": "float"
     },
-    "name": "Tina Starter",
-    "color": "default",
+    "name": "Hivemind Solutions",
+    "color": "primary",
     "nav": [
       {
-        "href": "/",
-        "label": "Home"
+        "label": "Services",
+        "columns": [
+          {
+            "title": "Consulting Services",
+            "href": "/services/consulting",
+            "items": [
+              {
+                "title": "Cloud Architecture & Design",
+                "description": "Strategic planning and architecture for Microsoft 365, Azure, and hybrid environments",
+                "href": "/services/consulting#cloud-architecture",
+                "icon": "Cloud"
+              },
+              {
+                "title": "Migration & Deployment",
+                "description": "Seamless transitions to cloud platforms with zero disruption",
+                "href": "/services/consulting#migration",
+                "icon": "Building2"
+              },
+              {
+                "title": "Copilot & AI Integration",
+                "description": "Harness Microsoft Copilot to transform productivity across your organisation",
+                "href": "/services/consulting#copilot",
+                "icon": "MonitorCog"
+              },
+              {
+                "title": "Identity & Entra ID",
+                "description": "Secure, streamlined identity management and Zero Trust architecture",
+                "href": "/services/consulting#identity",
+                "icon": "Shield"
+              }
+            ]
+          },
+          {
+            "title": "Support Services",
+            "href": "/services/support",
+            "items": [
+              {
+                "title": "Endpoint Management (Intune)",
+                "description": "Modern device management across Windows, macOS, iOS, and Android",
+                "href": "/services/support#endpoint",
+                "icon": "MonitorCog"
+              },
+              {
+                "title": "Security & Compliance",
+                "description": "Essential Eight maturity and Microsoft Defender implementation",
+                "href": "/services/support#security",
+                "icon": "Shield"
+              },
+              {
+                "title": "Monitoring & Optimisation",
+                "description": "Proactive 24/7 monitoring, health checks, and performance tuning",
+                "href": "/services/support#monitoring",
+                "icon": "Cloud"
+              },
+              {
+                "title": "Helpdesk & Support Plans",
+                "description": "Flexible support packages from ad-hoc to fully managed",
+                "href": "/services/support#helpdesk",
+                "icon": "Headphones"
+              }
+            ]
+          }
+        ],
+        "_template": "dropdown"
       },
       {
+        "label": "About",
         "href": "/about",
-        "label": "About"
+        "_template": "link"
       },
       {
-        "href": "/posts",
-        "label": "Blog"
+        "label": "Case Studies",
+        "href": "/case-studies",
+        "_template": "link"
+      },
+      {
+        "label": "Insights",
+        "href": "/insights",
+        "_template": "link"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact",
+        "_template": "link"
       }
-    ]
+    ],
+    "cta": {
+      "label": "Contact Us",
+      "href": "/contact"
+    }
   },
   "footer": {
+    "tagline": "Adelaide-based Microsoft cloud consulting specialists. Expert solutions for Microsoft 365, Azure, Intune & Entra ID.",
+    "contact": {
+      "email": "hello@hivemindsolutions.com.au",
+      "phone": "+61 8 8123 4567",
+      "address": "Adelaide, South Australia"
+    },
+    "columns": [
+      {
+        "title": "Services",
+        "links": [
+          {
+            "label": "Consulting Services",
+            "href": "/services/consulting"
+          },
+          {
+            "label": "Support Services",
+            "href": "/services/support"
+          },
+          {
+            "label": "Cloud Architecture",
+            "href": "/services/consulting#cloud-architecture"
+          },
+          {
+            "label": "Migration & Deployment",
+            "href": "/services/consulting#migration"
+          },
+          {
+            "label": "Endpoint Management",
+            "href": "/services/support#endpoint"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "About Us",
+            "href": "/about"
+          },
+          {
+            "label": "Case Studies",
+            "href": "/case-studies"
+          },
+          {
+            "label": "Insights",
+            "href": "/insights"
+          },
+          {
+            "label": "Contact",
+            "href": "/contact"
+          }
+        ]
+      },
+      {
+        "title": "Specialties",
+        "links": [
+          {
+            "label": "Microsoft 365",
+            "href": "/services/consulting"
+          },
+          {
+            "label": "Azure",
+            "href": "/services/consulting"
+          },
+          {
+            "label": "Intune & Endpoint",
+            "href": "/services/support#endpoint"
+          },
+          {
+            "label": "Entra ID & Security",
+            "href": "/services/consulting#identity"
+          }
+        ]
+      }
+    ],
     "social": [
       {
-        "icon": {
-          "name": "FaLinkedin"
-        },
-        "url": "https://www.linkedin.com/company/tinacms"
+        "platform": "Linkedin",
+        "url": "https://linkedin.com/company/hivemindsolutions"
       },
       {
-        "icon": {
-          "name": "FaGithub"
-        },
-        "url": "https://github.com/tinacms/tinacms"
-      },
-      {
-        "icon": {
-          "name": "FaYoutube"
-        },
-        "url": "https://www.youtube.com/@TinaCMS"
-      },
-      {
-        "icon": {
-          "name": "FaXTwitter"
-        },
-        "url": "https://x.com/TinaCMS"
+        "platform": "Mail",
+        "url": "mailto:hello@hivemindsolutions.com.au"
       }
-    ]
+    ],
+    "copyright": "© 2026 Hivemind Solutions. All rights reserved."
   },
   "theme": {
-    "color": "blue",
+    "color": "primary",
     "font": "sans",
-    "darkMode": "light"
+    "darkMode": "dark"
   }
 }

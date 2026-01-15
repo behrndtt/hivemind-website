@@ -4,6 +4,42 @@
 import * as BoxIcons from 'react-icons/bi';
 import { FaFacebookF, FaGithub, FaLinkedin, FaXTwitter, FaYoutube } from 'react-icons/fa6';
 import { AiFillInstagram } from 'react-icons/ai';
+import {
+  Cloud,
+  Shield,
+  Headphones,
+  Award,
+  Target,
+  Lightbulb,
+  Heart,
+  Mail,
+  Phone,
+  Linkedin,
+  MessageSquare,
+  Clock,
+  MapPin,
+  Workflow,
+  Bot,
+  ShieldCheck,
+  LineChart,
+  Laptop,
+  Activity,
+  FileCheck,
+  Users,
+  Zap,
+  AlertTriangle,
+  CheckCircle2,
+  Wrench,
+  TrendingDown,
+  Building2,
+  MonitorCog,
+  ArrowRight,
+  ArrowUp,
+  ChevronDown,
+  ChevronRight,
+  Menu,
+  X,
+} from 'lucide-react';
 import React from 'react';
 import { useLayout } from './layout/layout-context';
 
@@ -21,68 +57,126 @@ export const IconOptions = {
       />
     </svg>
   ),
+  // BoxIcons (react-icons/bi)
   ...BoxIcons,
+  // Social media icons
   FaFacebookF,
   FaGithub,
   FaLinkedin,
   FaXTwitter,
   FaYoutube,
   AiFillInstagram,
+  // Lucide icons
+  Cloud,
+  Shield,
+  Headphones,
+  Award,
+  Target,
+  Lightbulb,
+  Heart,
+  Mail,
+  Phone,
+  Linkedin,
+  MessageSquare,
+  Clock,
+  MapPin,
+  Workflow,
+  Bot,
+  ShieldCheck,
+  LineChart,
+  Laptop,
+  Activity,
+  FileCheck,
+  Users,
+  Zap,
+  AlertTriangle,
+  CheckCircle2,
+  Wrench,
+  TrendingDown,
+  Building2,
+  MonitorCog,
+  ArrowRight,
+  ArrowUp,
+  ChevronDown,
+  ChevronRight,
+  Menu,
+  X,
 };
 
 const iconColorClass: {
   [name: string]: { regular: string; circle: string };
 } = {
-  blue: {
-    regular: 'text-blue-400',
-    circle: 'bg-blue-400 dark:bg-blue-500 text-blue-50',
+  // Theme-based colors
+  primary: {
+    regular: 'text-primary',
+    circle: 'bg-primary text-primary-foreground',
   },
-  teal: {
-    regular: 'text-teal-400',
-    circle: 'bg-teal-400 dark:bg-teal-500 text-teal-50',
+  secondary: {
+    regular: 'text-secondary-foreground',
+    circle: 'bg-secondary text-secondary-foreground',
   },
-  green: {
-    regular: 'text-green-400',
-    circle: 'bg-green-400 dark:bg-green-500 text-green-50',
+  accent: {
+    regular: 'text-accent-foreground',
+    circle: 'bg-accent text-accent-foreground',
   },
-  red: {
-    regular: 'text-red-400',
-    circle: 'bg-red-400 dark:bg-red-500 text-red-50',
-  },
-  pink: {
-    regular: 'text-pink-400',
-    circle: 'bg-pink-400 dark:bg-pink-500 text-pink-50',
-  },
-  purple: {
-    regular: 'text-purple-400',
-    circle: 'bg-purple-400 dark:bg-purple-500 text-purple-50',
-  },
-  orange: {
-    regular: 'text-orange-400',
-    circle: 'bg-orange-400 dark:bg-orange-500 text-orange-50',
-  },
-  yellow: {
-    regular: 'text-yellow-400',
-    circle: 'bg-yellow-400 dark:bg-yellow-500 text-yellow-50',
+  muted: {
+    regular: 'text-muted-foreground',
+    circle: 'bg-muted text-muted-foreground',
   },
   white: {
-    regular: 'text-white opacity-80',
-    circle: 'bg-white-400 dark:bg-white-500 text-white-50',
+    regular: 'text-foreground',
+    circle: 'bg-foreground text-background',
+  },
+  zinc: {
+    regular: 'text-muted-foreground',
+    circle: 'bg-muted text-foreground',
+  },
+  // Legacy color mappings for backward compatibility
+  yellow: {
+    regular: 'text-primary',
+    circle: 'bg-primary text-primary-foreground',
+  },
+  blue: {
+    regular: 'text-primary',
+    circle: 'bg-primary text-primary-foreground',
+  },
+  teal: {
+    regular: 'text-accent-foreground',
+    circle: 'bg-accent text-accent-foreground',
+  },
+  green: {
+    regular: 'text-accent-foreground',
+    circle: 'bg-accent text-accent-foreground',
+  },
+  red: {
+    regular: 'text-destructive',
+    circle: 'bg-destructive text-destructive-foreground',
+  },
+  pink: {
+    regular: 'text-primary',
+    circle: 'bg-primary text-primary-foreground',
+  },
+  purple: {
+    regular: 'text-accent-foreground',
+    circle: 'bg-accent text-accent-foreground',
+  },
+  orange: {
+    regular: 'text-primary',
+    circle: 'bg-primary text-primary-foreground',
   },
 };
 
-const iconSizeClass = {
-  xs: 'w-6 h-6 shrink-0',
-  small: 'w-8 h-8 shrink-0',
-  medium: 'w-12 h-12 shrink-0',
-  large: 'w-14 h-14 shrink-0',
-  xl: 'w-16 h-16 shrink-0',
-  custom: '',
-};
+// Size classes removed - icons now inherit size from parent component via className prop
+// This allows flexible sizing based on context (e.g., 'w-6 h-6' for small, 'w-12 h-12' for large)
 
 //@ts-ignore
 export const Icon = ({ data, parentColor = '', className = '', tinaField = '' }) => {
   const { theme } = useLayout();
+
+  // Handle undefined or missing data gracefully
+  if (!data || !data.name) {
+    return null;
+  }
 
   //@ts-ignore
   if (IconOptions[data.name] === null || IconOptions[data.name] === undefined) {
@@ -94,27 +188,28 @@ export const Icon = ({ data, parentColor = '', className = '', tinaField = '' })
   //@ts-ignore
   const IconSVG = IconOptions[name];
 
-  //@ts-ignore
-  const iconSizeClasses = typeof size === 'string' ? iconSizeClass[size] : iconSizeClass[Object.keys(iconSizeClass)[size]];
-
-  const iconColor = color ? (color === 'primary' ? theme!.color : color) : theme!.color;
+  // Default to 'primary' if no valid color is found
+  const iconColor = color || 'primary';
+  
+  // Ensure we have a valid color class, fall back to primary if not found
+  const colorClass = iconColorClass[iconColor] || iconColorClass['primary'];
 
   if (style == 'circle') {
     return (
       <div
         {...(tinaField ? { 'data-tina-field': tinaField } : {})} // only render data-tina-field if it exists
-        className={`relative z-10 inline-flex items-center justify-center shrink-0 ${iconSizeClasses} rounded-full ${iconColorClass[iconColor].circle} ${className}`}
+        className={`relative z-10 inline-flex items-center justify-center shrink-0 rounded-full ${colorClass.circle} ${className}`}
       >
         <IconSVG className='w-2/3 h-2/3' />
       </div>
     );
   } else {
-    const iconColorClasses =
-      iconColorClass[parentColor === 'primary' && (iconColor === theme!.color || iconColor === 'primary') ? 'white' : iconColor!].regular;
+    const resolvedColor = parentColor === 'primary' && iconColor === 'primary' ? 'white' : iconColor;
+    const iconColorClasses = (iconColorClass[resolvedColor] || iconColorClass['primary']).regular;
     return (
       <IconSVG
         {...(tinaField ? { 'data-tina-field': tinaField } : {})} // only render data-tina-field if it exists
-        className={`${iconSizeClasses} ${iconColorClasses} ${className}`}
+        className={`shrink-0 ${iconColorClasses} ${className}`}
       />
     );
   }

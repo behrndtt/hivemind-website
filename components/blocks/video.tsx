@@ -3,8 +3,8 @@ import * as React from 'react';
 import dynamic from 'next/dynamic';
 import type { Template } from 'tinacms';
 import { PageBlocksVideo } from '@/tina/__generated__/types';
-import { Section } from '../layout/section';
 import { sectionBlockSchemaField } from '../layout/section';
+import { cn } from '@/lib/utils';
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
@@ -13,9 +13,13 @@ export const Video = ({ data }: { data: PageBlocksVideo }) => {
     return null;
   }
   return (
-    <Section background={data.background!} className={`aspect-video ${data.color}`}>
-      <ReactPlayer width='100%' height='100%' style={{ margin: 'auto' }} playing={!!data.autoPlay} loop={!!data.loop} controls={true} url={data.url} />
-    </Section>
+    <section className={cn("py-24 lg:py-32", data.background)}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className={cn("aspect-video", data.color)}>
+          <ReactPlayer width='100%' height='100%' style={{ margin: 'auto' }} playing={!!data.autoPlay} loop={!!data.loop} controls={true} url={data.url} />
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -23,7 +27,6 @@ export const videoBlockSchema: Template = {
   name: 'video',
   label: 'Video',
   ui: {
-    previewSrc: '/blocks/video.png',
     defaultItem: {
       url: 'https://www.youtube.com/watch?v=j8egYW7Jpgk',
     },

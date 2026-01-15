@@ -1,0 +1,82 @@
+---
+category: Azure
+blocks:
+  - category: Azure
+    readingTime: 10 min read
+    _template: postHero
+title: 'Azure Cost Optimisation: Tips from the Field'
+heroImg: /uploads/posts/placeholder.png
+excerpt: >
+  Practical strategies for reducing your Azure spending without sacrificing
+  performance or reliability.
+date: 2024-09-10T00:00:00.000Z
+featured: true
+tags:
+  - azure
+  - cost-optimisation
+  - infrastructure
+  - best-practices
+  - governance
+---
+
+## Why Azure Costs Spiral
+
+We've seen it countless times: organisations migrate to Azure expecting cost savings, only to find their bills higher than anticipated. The good news? Most overspending is preventable with the right strategies.
+
+## Quick Wins
+
+### 1. Right-Size Your VMs
+
+Over 70% of Azure VMs are over-provisioned. Use Azure Advisor to identify opportunities:
+
+* **Review CPU and memory utilisation** over 30 days
+* **Downsize underutilised VMs** one tier at a time
+* **Consider B-series VMs** for variable workloads
+
+### 2. Use Reserved Instances
+
+Commit to 1 or 3-year terms for predictable workloads:
+
+* **Save up to 72%** compared to pay-as-you-go
+* **Exchange or cancel** with flexibility options
+* **Start with production workloads** you know will run continuously
+
+### 3. Shut Down Dev/Test Resources
+
+Non-production resources don't need to run 24/7:
+
+* **Implement auto-shutdown schedules** via Azure Automation
+* **Use Azure DevTest Labs** for developer environments
+* **Consider Azure Spot VMs** for fault-tolerant workloads
+
+### 4. Optimise Storage
+
+Storage costs accumulate quickly:
+
+* **Move cold data** to Archive tier
+* **Delete orphaned disks** and snapshots
+* **Review blob lifecycle policies**
+
+## Governance Strategies
+
+### Implement Budgets and Alerts
+
+* Set budgets at the subscription and resource group level
+* Configure alerts at 50%, 75%, and 90% thresholds
+* Review spending weekly with stakeholders
+
+### Use Tags Consistently
+
+* Tag resources with cost centre, environment, and owner
+* Run monthly reports by tag to identify trends
+* Automate tag enforcement with Azure Policy
+
+## Long-Term Optimisation
+
+* **Consider Azure Hybrid Benefit** for Windows Server and SQL
+* **Evaluate PaaS alternatives** to IaaS workloads
+* **Review architecture** for serverless opportunities
+
+## Need Help?
+
+Our team can conduct an Azure cost review and identify savings opportunities specific to your environment.

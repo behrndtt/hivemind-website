@@ -4,6 +4,7 @@ import Layout from '@/components/layout/layout';
 import CaseStudyClientPage from './client-page';
 
 export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 export default async function CaseStudyPage({
   params,
@@ -24,7 +25,8 @@ export default async function CaseStudyPage({
 }
 
 export async function generateStaticParams() {
-  let caseStudies = await client.queries.caseStudyConnection();
+  try {
+    let caseStudies = await client.queries.caseStudyConnection();
   const allCaseStudies = caseStudies;
 
   if (!allCaseStudies.data.caseStudyConnection.edges) {
@@ -49,4 +51,8 @@ export async function generateStaticParams() {
     })) || [];
 
   return params;
+  } catch (error) {
+    console.warn('Unable to generate static params for case studies:', error);
+    return [];
+  }
 }

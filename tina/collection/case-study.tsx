@@ -1,6 +1,5 @@
-import React from 'react';
 import { videoBlockSchema } from '@/components/blocks/video';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { TagsPickerInput } from '@/tina/fields';
 import type { Collection } from 'tinacms';
 
 const CaseStudy: Collection = {
@@ -66,40 +65,6 @@ const CaseStudy: Collection = {
       },
     },
     {
-      type: 'reference',
-      label: 'Author',
-      name: 'author',
-      collections: ['author'],
-      ui: {
-        //@ts-ignore
-        optionComponent: (
-          props: {
-            name?: string;
-            avatar: string;
-          },
-          _internalSys: { path: string }
-        ) => {
-          const { name, avatar } = props;
-          if (!name) return _internalSys.path;
-
-          return (
-            <p className='flex min-h-8 items-center gap-4'>
-              <Avatar>
-                {avatar && <AvatarImage src={avatar} alt={`${name} Profile`} />}
-                <AvatarFallback>
-                  {name
-                    .split(' ')
-                    .map((part) => part[0]?.toUpperCase() || '')
-                    .join('')}
-                </AvatarFallback>
-              </Avatar>
-              {name}
-            </p>
-          );
-        },
-      },
-    },
-    {
       type: 'datetime',
       label: 'Published Date',
       name: 'date',
@@ -109,30 +74,48 @@ const CaseStudy: Collection = {
       },
     },
     {
-      type: 'object',
+      type: 'boolean',
+      label: 'Featured Post',
+      name: 'featured',
+      description: 'Mark this case study as featured to highlight it at the top of post grids',
+    },
+    {
+      type: 'string',
       label: 'Tags',
       name: 'tags',
       list: true,
+      description: 'Select tags from the tag collection',
+      ui: {
+        // @ts-expect-error - TinaCMS custom component type mismatch
+        component: TagsPickerInput,
+      },
+    },
+    {
+      type: 'object',
+      label: 'Key Results',
+      name: 'results',
+      list: true,
+      description: 'Key metrics or outcomes achieved in this case study',
       fields: [
         {
-          type: 'reference',
-          label: 'Tag',
-          name: 'tag',
-          collections: ['tag'],
-          ui: {
-            optionComponent: (
-              props: {
-                name?: string;
-              },
-              _internalSys: { path: string }
-            ) => props.name || _internalSys.path,
-          },
+          type: 'string',
+          label: 'Value',
+          name: 'value',
+          required: true,
+          description: 'The metric value (e.g., "50%", "$1M", "3x")',
+        },
+        {
+          type: 'string',
+          label: 'Label',
+          name: 'label',
+          required: true,
+          description: 'Description of the metric',
         },
       ],
       ui: {
-        itemProps: (item) => {
-          return { label: item?.tag };
-        },
+        itemProps: (item) => ({
+          label: item?.value ? `${item.value} - ${item.label}` : 'New Result',
+        }),
       },
     },
     {
@@ -204,6 +187,50 @@ const CaseStudy: Collection = {
             defaultItem: {
               placeholder: 'Enter your email',
               buttonText: 'Notify Me',
+            },
+          },
+        },
+        {
+          name: 'Testimonial',
+          label: 'Testimonial',
+          fields: [
+            {
+              name: 'quote',
+              label: 'Quote',
+              type: 'string',
+              required: true,
+              ui: {
+                component: 'textarea',
+              },
+            },
+            {
+              name: 'author',
+              label: 'Author Name',
+              type: 'string',
+              required: true,
+            },
+            {
+              name: 'role',
+              label: 'Role',
+              type: 'string',
+            },
+            {
+              name: 'company',
+              label: 'Company',
+              type: 'string',
+            },
+            {
+              name: 'avatar',
+              label: 'Avatar',
+              type: 'image',
+            },
+          ],
+          ui: {
+            defaultItem: {
+              quote: 'This solution transformed our workflow.',
+              author: 'Jane Smith',
+              role: 'CEO',
+              company: 'Acme Inc',
             },
           },
         },
