@@ -1,8 +1,7 @@
 'use client';
 import React from 'react';
 import { wrapFieldsWithMeta } from 'tinacms';
-import { useTina } from 'tinacms/dist/react';
-import client from '../__generated__/client';
+import { getTagOptions, getTagBySlug } from '@/lib/tags';
 
 interface TagOption {
   value: string;
@@ -11,34 +10,16 @@ interface TagOption {
 
 /**
  * Custom Tags Field Component
- * Fetches available tags from the tag collection and allows multi-select
+ * Uses static tag definitions from lib/tags.ts and stores slugs in object format
+ * Content format: tags: [{ tag: 'azure' }, { tag: 'security' }]
  */
 export const TagsPickerInput = wrapFieldsWithMeta(({ input }) => {
-  const [tags, setTags] = React.useState<TagOption[]>([]);
-  const [loading, setLoading] = React.useState(true);
+  // Get tags from static definitions (no async fetch needed)
+  const tags: TagOption[] = getTagOptions();
   const [inputValue, setInputValue] = React.useState('');
   const [isOpen, setIsOpen] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
-
-  // Fetch tags from collection on mount
-  React.useEffect(() => {
-    const fetchTags = async () => {
-      try {
-        const result = await client.queries.tagConnection();
-        const tagOptions = result.data.tagConnection.edges?.map((edge) => ({
-          value: edge?.node?.name || '',
-          label: edge?.node?.name || '',
-        })) || [];
-        setTags(tagOptions);
-      } catch (error) {
-        console.error('Failed to fetch tags:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTags();
-  }, []);
 
   // Close dropdown when clicking outside
   React.useEffect(() => {
@@ -56,42 +37,46 @@ export const TagsPickerInput = wrapFieldsWithMeta(({ input }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const selectedTags: string[] = input.value || [];
+  // Extract slugs from the object format: [{ tag: 'azure' }, { tag: 'security' }]
+  const rawValue = input.value || [];
+  const selectedSlugs: string[] = rawValue.map((item: { tag?: string } | string) =>
+    typeof item === 'string' ? item : item?.tag || ''
+  ).filter(Boolean);
 
   const filteredTags = tags.filter(
     (tag) =>
       tag.label.toLowerCase().includes(inputValue.toLowerCase()) &&
-      !selectedTags.includes(tag.value)
+      !selectedSlugs.includes(tag.value)
   );
 
-  const handleAddTag = (tagValue: string) => {
-    if (!selectedTags.includes(tagValue)) {
-      input.onChange([...selectedTags, tagValue]);
+  const handleAddTag = (tagSlug: string) => {
+    if (!selectedSlugs.includes(tagSlug)) {
+      // Store in object format: { tag: slug }
+      input.onChange([...rawValue, { tag: tagSlug }]);
     }
     setInputValue('');
     setIsOpen(false);
   };
 
-  const handleRemoveTag = (tagValue: string) => {
-    input.onChange(selectedTags.filter((t) => t !== tagValue));
+  const handleRemoveTag = (tagSlug: string) => {
+    // Filter out the tag with matching slug
+    const newValue = rawValue.filter((item: { tag?: string } | string) => {
+      const slug = typeof item === 'string' ? item : item?.tag;
+      return slug !== tagSlug;
+    });
+    input.onChange(newValue);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && filteredTags.length > 0) {
       e.preventDefault();
       handleAddTag(filteredTags[0].value);
-    } else if (e.key === 'Backspace' && inputValue === '' && selectedTags.length > 0) {
-      handleRemoveTag(selectedTags[selectedTags.length - 1]);
+    } else if (e.key === 'Backspace' && inputValue === '' && selectedSlugs.length > 0) {
+      handleRemoveTag(selectedSlugs[selectedSlugs.length - 1]);
     } else if (e.key === 'Escape') {
       setIsOpen(false);
     }
   };
-
-  if (loading) {
-    return (
-      <div className="text-sm text-gray-400 py-2">Loading tags...</div>
-    );
-  }
 
   return (
     <div style={{ position: 'relative', zIndex: 1000 }}>
@@ -108,9 +93,13 @@ export const TagsPickerInput = wrapFieldsWithMeta(({ input }) => {
           minHeight: '42px',
         }}
       >
-        {selectedTags.map((tag) => (
+        {selectedSlugs.map((slug) => {
+          // Get display name from static definitions
+          const tagDef = getTagBySlug(slug);
+          const displayName = tagDef?.name ?? slug;
+          return (
           <span
-            key={tag}
+            key={slug}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -123,10 +112,10 @@ export const TagsPickerInput = wrapFieldsWithMeta(({ input }) => {
               whiteSpace: 'nowrap',
             }}
           >
-            {tag}
+            {displayName}
             <button
               type="button"
-              onClick={() => handleRemoveTag(tag)}
+              onClick={() => handleRemoveTag(slug)}
               style={{
                 background: 'none',
                 border: 'none',
@@ -136,7 +125,7 @@ export const TagsPickerInput = wrapFieldsWithMeta(({ input }) => {
                 display: 'flex',
                 alignItems: 'center',
               }}
-              aria-label={`Remove ${tag}`}
+              aria-label={`Remove ${displayName}`}
             >
               <svg style={{ width: '14px', height: '14px' }} fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -147,7 +136,8 @@ export const TagsPickerInput = wrapFieldsWithMeta(({ input }) => {
               </svg>
             </button>
           </span>
-        ))}
+          );
+        })}
         <input
           ref={inputRef}
           type="text"
@@ -158,7 +148,7 @@ export const TagsPickerInput = wrapFieldsWithMeta(({ input }) => {
           }}
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
-          placeholder={selectedTags.length === 0 ? 'Select tags...' : ''}
+          placeholder={selectedSlugs.length === 0 ? 'Select tags...' : ''}
           style={{
             flex: 1,
             minWidth: '120px',
@@ -254,15 +244,24 @@ export const TagsPickerInput = wrapFieldsWithMeta(({ input }) => {
 
 /**
  * Tags field schema definition
- * Use this in your collection fields to add tag selection from the tag collection
+ * Use this in your collection fields to add tag selection
+ * Stores tags in object format: [{ tag: 'slug' }, { tag: 'slug' }]
  */
 export const tagsFieldSchema = {
-  type: 'string' as const,
+  type: 'object',
   label: 'Tags',
   name: 'tags',
   list: true,
-  description: 'Select tags from the tag collection',
+  description: 'Select tags for this content',
   ui: {
     component: TagsPickerInput,
   },
-};
+  fields: [
+    {
+      type: 'string',
+      label: 'Tag',
+      name: 'tag',
+    },
+  ],
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any;

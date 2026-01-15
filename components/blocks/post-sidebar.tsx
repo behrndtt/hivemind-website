@@ -9,12 +9,14 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import type {
-  Insight,
-  CaseStudy,
+  InsightQuery,
+  CaseStudyQuery,
 } from '@/tina/__generated__/types';
 
-// Union type for posts
-type Post = Insight | CaseStudy;
+// Type for post data from TinaCMS queries (without _values)
+type InsightPost = InsightQuery['insight'];
+type CaseStudyPost = CaseStudyQuery['caseStudy'];
+type Post = InsightPost | CaseStudyPost;
 
 export interface PostResult {
   /** Metric value (e.g., "+45%", "3x") */

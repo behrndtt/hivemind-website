@@ -70,11 +70,19 @@ interface PageBlocksTwoColumn {
   rightColumn?: any[] | null;
 }
 
+import type { Insight, CaseStudy } from '@/tina/__generated__/types';
+
+interface ColumnBlockProps {
+  block: any;
+  posts?: (Insight | CaseStudy)[];
+  tags?: Array<{ name: string; slug: string; count?: number }>;
+}
+
 /**
  * Renders a block within a column based on its __typename.
  * Reuses all existing block components from the main blocks index.
  */
-function ColumnBlock({ block }: { block: any }) {
+function ColumnBlock({ block, posts, tags }: ColumnBlockProps) {
   if (!block) return null;
 
   // Extract the block type from __typename
@@ -105,7 +113,7 @@ function ColumnBlock({ block }: { block: any }) {
     return <TeamGrid data={block} />;
   }
   if (typename.includes('PostsGrid')) {
-    return <PostsGrid data={block} />;
+    return <PostsGrid data={block} posts={posts} tags={tags} />;
   }
   if (typename.includes('FaqSection')) {
     return <FaqSection data={block} />;
@@ -151,16 +159,18 @@ function ColumnBlock({ block }: { block: any }) {
 
 export interface TwoColumnProps {
   data: PageBlocksTwoColumn;
+  posts?: (Insight | CaseStudy)[];
+  tags?: Array<{ name: string; slug: string; count?: number }>;
 }
 
 /**
  * Two Column Layout block - Flexible container for arranging content side by side.
  * Supports all existing page blocks in each column for maximum flexibility.
  */
-export function TwoColumn({ data }: TwoColumnProps) {
+export function TwoColumn({ data, posts, tags }: TwoColumnProps) {
   const paddingClasses: Record<string, string> = {
     sm: 'py-12 md:py-16',
-    md: 'py-16 md:py-24',
+    md: 'py-24 lg:py-32',
     lg: 'py-20 md:py-32',
   };
 
@@ -223,7 +233,7 @@ export function TwoColumn({ data }: TwoColumnProps) {
                   data-tina-field={tinaField(block)} 
                   className="mb-6 last:mb-0 [&>section]:py-0 [&>section]:px-0 [&>section>div]:px-0 [&>section>div]:max-w-none"
                 >
-                  <ColumnBlock block={block} />
+                  <ColumnBlock block={block} posts={posts} tags={tags} />
                 </div>
               ))}
             </div>
@@ -236,7 +246,7 @@ export function TwoColumn({ data }: TwoColumnProps) {
                   data-tina-field={tinaField(block)} 
                   className="mb-6 last:mb-0 [&>section]:py-0 [&>section]:px-0 [&>section>div]:px-0 [&>section>div]:max-w-none"
                 >
-                  <ColumnBlock block={block} />
+                  <ColumnBlock block={block} posts={posts} tags={tags} />
                 </div>
               ))}
             </div>

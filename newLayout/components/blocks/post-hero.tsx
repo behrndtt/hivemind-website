@@ -58,7 +58,7 @@ export function PostHero({
       {/* Hero Section */}
       <section
         className={cn(
-          "relative overflow-hidden bg-black py-16 md:py-24",
+          "relative overflow-hidden bg-black py-24 lg:py-32",
           className
         )}
       >

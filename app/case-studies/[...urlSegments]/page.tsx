@@ -2,9 +2,63 @@ import React from 'react';
 import client from '@/tina/__generated__/client';
 import Layout from '@/components/layout/layout';
 import CaseStudyClientPage from './client-page';
+import type { CaseStudy, CaseStudyQuery } from '@/tina/__generated__/types';
 
-export const revalidate = 300;
-export const dynamic = 'force-dynamic';
+type CaseStudyPost = CaseStudyQuery['caseStudy'];
+
+/**
+ * Extract tag filenames from a post's tags array
+ * Tags are stored as string references like "content/tags/azure.mdx"
+ */
+function getTagFilenames(tags: CaseStudyPost['tags']): string[] {
+  if (!tags) return [];
+  return tags
+    .map((t) => {
+      const tagRef = t?.tag;
+      if (!tagRef) return null;
+      // Extract filename from path like "content/tags/azure.mdx" -> "azure"
+      const match = tagRef.match(/([^/]+)\.(mdx?|json)$/);
+      return match ? match[1] : null;
+    })
+    .filter((filename): filename is string => Boolean(filename));
+}
+
+/**
+ * Fetch related case studies based on matching tags or industry
+ */
+async function getRelatedCaseStudies(
+  currentFilename: string,
+  currentTags: CaseStudyPost['tags'],
+  currentIndustry: string | null | undefined,
+  limit = 3
+): Promise<CaseStudyPost[]> {
+  const tagFilenames = getTagFilenames(currentTags);
+
+  try {
+    const allCaseStudies = await client.queries.caseStudyConnection({ first: 20 });
+    const edges = allCaseStudies.data?.caseStudyConnection?.edges || [];
+
+    // Filter: exclude current post, find posts with matching tags or industry
+    const related = edges
+      .filter((edge) => {
+        const caseStudy = edge?.node;
+        if (!caseStudy || caseStudy._sys?.filename === currentFilename) return false;
+
+        // Match by industry
+        if (currentIndustry && caseStudy.industry === currentIndustry) return true;
+
+        // Match by tags
+        const postTags = getTagFilenames(caseStudy.tags);
+        return postTags.some((tag) => tagFilenames.includes(tag));
+      })
+      .slice(0, limit)
+      .map((edge) => edge?.node as CaseStudyPost);
+
+    return related;
+  } catch {
+    return [];
+  }
+}
 
 export default async function CaseStudyPage({
   params,
@@ -17,9 +71,19 @@ export default async function CaseStudyPage({
     relativePath: `${filepath}.mdx`,
   });
 
+  // Fetch related posts by tags or industry
+  const caseStudy = data.data?.caseStudy;
+  const relatedPosts = caseStudy
+    ? await getRelatedCaseStudies(
+        caseStudy._sys?.filename || '',
+        caseStudy.tags,
+        caseStudy.industry
+      )
+    : [];
+
   return (
     <Layout rawPageData={data}>
-      <CaseStudyClientPage {...data} />
+      <CaseStudyClientPage {...data} relatedPosts={relatedPosts} />
     </Layout>
   );
 }

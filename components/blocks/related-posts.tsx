@@ -9,12 +9,14 @@ import { AnimatedGroup } from '@/components/motion-primitives/animated-group';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import type {
-  Insight,
-  CaseStudy,
+  InsightQuery,
+  CaseStudyQuery,
 } from '@/tina/__generated__/types';
 
-// Union type for posts
-type Post = Insight | CaseStudy;
+// Type for post data from TinaCMS queries (without _values)
+type InsightPost = InsightQuery['insight'];
+type CaseStudyPost = CaseStudyQuery['caseStudy'];
+type Post = InsightPost | CaseStudyPost;
 
 /**
  * Get post URL based on content type
@@ -29,7 +31,7 @@ function getPostUrl(post: Post, contentType: 'insights' | 'case-studies'): strin
  */
 function getCategoryLabel(post: Post, contentType: 'insights' | 'case-studies'): string {
   if (contentType === 'case-studies' && 'industry' in post) {
-    return (post as CaseStudy).industry || 'Case Study';
+    return (post as CaseStudyPost).industry || 'Case Study';
   }
   return 'Insight';
 }
@@ -71,7 +73,7 @@ export function RelatedPosts({
   return (
     <section
       className={cn(
-        'bg-background py-16 md:py-24 border-t border-border',
+        'bg-background py-24 lg:py-32 border-t border-border',
         className
       )}
     >

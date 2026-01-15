@@ -1,5 +1,5 @@
 import { videoBlockSchema } from '@/components/blocks/video';
-import { TagsPickerInput } from '@/tina/fields';
+import { tagsFieldSchema } from '@/tina/fields';
 import type { Collection } from 'tinacms';
 
 const CaseStudy: Collection = {
@@ -79,17 +79,7 @@ const CaseStudy: Collection = {
       name: 'featured',
       description: 'Mark this case study as featured to highlight it at the top of post grids',
     },
-    {
-      type: 'string',
-      label: 'Tags',
-      name: 'tags',
-      list: true,
-      description: 'Select tags from the tag collection',
-      ui: {
-        // @ts-expect-error - TinaCMS custom component type mismatch
-        component: TagsPickerInput,
-      },
-    },
+    tagsFieldSchema,
     {
       type: 'object',
       label: 'Key Results',

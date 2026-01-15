@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import client from '@/tina/__generated__/client';
 import Layout from '@/components/layout/layout';
 import TagClientPage from './client-page';
-import type { Insight } from '@/tina/__generated__/types';
+import type { CaseStudy } from '@/tina/__generated__/types';
 import {
   getTagBySlug,
   getAllTagSlugs,
@@ -24,37 +24,37 @@ export default async function TagPage({ params }: TagPageProps) {
     notFound();
   }
 
-  // Fetch all insights
-  let insights = await client.queries.insightConnection({
+  // Fetch all case studies
+  let caseStudies = await client.queries.caseStudyConnection({
     sort: 'date',
     last: 50,
   });
-  const allInsights = insights;
+  const allCaseStudies = caseStudies;
 
-  if (!allInsights.data.insightConnection.edges) {
-    allInsights.data.insightConnection.edges = [];
+  if (!allCaseStudies.data.caseStudyConnection.edges) {
+    allCaseStudies.data.caseStudyConnection.edges = [];
   }
 
-  // Paginate to get all insights
-  while (insights.data?.insightConnection.pageInfo.hasPreviousPage) {
-    insights = await client.queries.insightConnection({
+  // Paginate to get all case studies
+  while (caseStudies.data?.caseStudyConnection.pageInfo.hasPreviousPage) {
+    caseStudies = await client.queries.caseStudyConnection({
       sort: 'date',
-      before: insights.data.insightConnection.pageInfo.endCursor,
+      before: caseStudies.data.caseStudyConnection.pageInfo.endCursor,
     });
 
-    if (!insights.data.insightConnection.edges) {
+    if (!caseStudies.data.caseStudyConnection.edges) {
       break;
     }
 
-    allInsights.data.insightConnection.edges.push(
-      ...insights.data.insightConnection.edges.reverse()
+    allCaseStudies.data.caseStudyConnection.edges.push(
+      ...caseStudies.data.caseStudyConnection.edges.reverse()
     );
   }
 
   // Extract all posts
-  const allPosts = (allInsights.data.insightConnection.edges || [])
+  const allPosts = (allCaseStudies.data.caseStudyConnection.edges || [])
     .map((edge) => edge?.node)
-    .filter((node) => node !== null && node !== undefined) as Insight[];
+    .filter((node) => node !== null && node !== undefined) as CaseStudy[];
 
   // Filter posts by tag using shared utility
   const posts = filterPostsByTag(allPosts, slug);

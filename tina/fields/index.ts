@@ -11,7 +11,7 @@ export { iconSchema, IconPickerInput } from './icon';
 // Color picker for icon and other color fields
 export { ColorPickerInput } from './color';
 
-// Tags picker that loads options from the tag collection
+// Tags picker for multi-select tag fields
 export { TagsPickerInput, tagsFieldSchema } from './tags';
 
 // Shared field definitions for blocks

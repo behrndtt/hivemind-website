@@ -350,7 +350,7 @@ export function PostsGrid({ data, posts = [], sidebarContent, tags }: PostsGridP
   );
 
   return (
-    <section className={cn('py-16 md:py-24', data.background || 'bg-background')}>
+    <section className={cn('py-24 lg:py-32', data.background || 'bg-background')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {hasHeader && (
           <InView

@@ -128,7 +128,7 @@ const Block = ({ block, posts, tags }: BlockComponentProps) => {
       return <QuickLinks data={block} />;
     // Layout blocks
     case "PageBlocksTwoColumn":
-      return <TwoColumn data={block} />;
+      return <TwoColumn data={block} posts={posts} tags={tags} />;
     // Utility blocks
     case "PageBlocksVideo":
       return <Video data={block} />;

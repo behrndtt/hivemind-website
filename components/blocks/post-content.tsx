@@ -8,12 +8,14 @@ import { InView } from '@/components/motion-primitives/in-view';
 import { Card, CardContent } from '@/components/ui/card';
 import { components } from '@/components/mdx-components';
 import type {
-  Insight,
-  CaseStudy,
+  InsightQuery,
+  CaseStudyQuery,
 } from '@/tina/__generated__/types';
 
-// Union type for posts
-type Post = Insight | CaseStudy;
+// Type for post data from TinaCMS queries (without _values)
+type InsightPost = InsightQuery['insight'];
+type CaseStudyPost = CaseStudyQuery['caseStudy'];
+type Post = InsightPost | CaseStudyPost;
 
 /**
  * Get initials from a name
@@ -37,7 +39,7 @@ export interface PostContentProps {
 export function PostContent({ post, className }: PostContentProps) {
   // Check if this is a case study
   const isCaseStudy = 'client' in post || 'industry' in post;
-  const caseStudy = post as CaseStudy;
+  const caseStudy = post as CaseStudyPost;
 
   // Extract challenge and solution from case study if available
   // These would come from structured fields or the body

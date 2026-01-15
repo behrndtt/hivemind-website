@@ -1,30 +1,10 @@
 query pageQuery {
   ...LayoutQueryFragment
-  postConnection {
-    edges {
-      node {
-        id
-        date
-        title
-        excerpt
-        _sys {
-          filename
-        }
-      }
-    }
-  }
 }
 
 query contentQuery($relativePath: String!) {
   ...LayoutQueryFragment
   page(relativePath: $relativePath) {
     ...PageParts
-  }
-}
-
-query blogPostQuery($relativePath: String!) {
-  ...LayoutQueryFragment
-  post(relativePath: $relativePath) {
-    ...PostParts
   }
 }

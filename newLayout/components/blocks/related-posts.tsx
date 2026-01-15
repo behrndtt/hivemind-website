@@ -32,7 +32,7 @@ export function RelatedPosts({
   return (
     <section
       className={cn(
-        "bg-zinc-950 py-16 md:py-24 border-t border-zinc-800",
+        "bg-zinc-950 py-24 lg:py-32 border-t border-zinc-800",
         className
       )}
     >

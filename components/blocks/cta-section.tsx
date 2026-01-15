@@ -223,7 +223,7 @@ function FeaturesList({ features, alignment = 'left' }: FeaturesListProps) {
   if (!features || features.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 mt-6 mb-8">
       {features.map((feature, index) => (
         feature && <FeatureItem key={index} feature={feature} alignment={alignment} />
       ))}
@@ -300,14 +300,14 @@ export function CtaSection({ data }: CtaSectionProps) {
               )}
 
               <div className={cn(
-                "relative z-10 flex flex-col gap-6",
+                "relative z-10 flex flex-col",
                 alignmentClasses[alignment as keyof typeof alignmentClasses]
               )}>
                 {data.icon && (
                   <div
                     data-tina-field={tinaField(data, 'icon')}
                     className={cn(
-                      "flex",
+                      "flex mb-6",
                       alignment === 'center' ? 'justify-center' : alignment === 'right' ? 'justify-end' : 'justify-start'
                     )}
                   >
@@ -321,7 +321,7 @@ export function CtaSection({ data }: CtaSectionProps) {
                   <h2
                     data-tina-field={tinaField(data, 'title')}
                     className={cn(
-                      "tracking-tight text-foreground",
+                      "mb-4 tracking-tight text-foreground",
                       titleSizeClasses[titleSize as keyof typeof titleSizeClasses]
                     )}
                   >
@@ -348,7 +348,7 @@ export function CtaSection({ data }: CtaSectionProps) {
 
                 {data.buttons && data.buttons.length > 0 && (
                   <div className={cn(
-                    "flex flex-col sm:flex-row gap-4",
+                    "flex flex-col sm:flex-row gap-4 mt-8",
                     buttonAlignmentClasses[alignment as keyof typeof buttonAlignmentClasses]
                   )}>
                     {data.buttons.map((button, index) => (
@@ -393,7 +393,7 @@ export function CtaSection({ data }: CtaSectionProps) {
     return (
       <section
         className={cn(
-          'relative py-16 md:py-24 overflow-hidden',
+          'relative py-20 md:py-28 overflow-hidden',
           data.background || 'bg-card'
         )}
       >
@@ -415,14 +415,14 @@ export function CtaSection({ data }: CtaSectionProps) {
             viewOptions={{ once: true, margin: '-100px' }}
           >
             <div className={cn(
-              "mx-auto max-w-3xl flex flex-col gap-4",
+              "mx-auto max-w-3xl flex flex-col",
               alignmentClasses[alignment as keyof typeof alignmentClasses]
             )}>
               {data.title && (
                 <h2
                   data-tina-field={tinaField(data, 'title')}
                   className={cn(
-                    "tracking-tight text-foreground",
+                    "mb-4 tracking-tight text-foreground",
                     titleSizeClasses[titleSize as keyof typeof titleSizeClasses]
                   )}
                 >
@@ -448,7 +448,7 @@ export function CtaSection({ data }: CtaSectionProps) {
 
               {data.buttons && data.buttons.length > 0 && (
                 <div className={cn(
-                  "flex flex-col sm:flex-row items-center gap-4",
+                  "flex flex-col sm:flex-row items-center gap-4 mt-8",
                   buttonAlignmentClasses[alignment as keyof typeof buttonAlignmentClasses]
                 )}>
                   {data.buttons.map((button, index) => (
@@ -546,60 +546,6 @@ export function CtaSection({ data }: CtaSectionProps) {
     );
   }
 
-  // Compact variant - for sidebars and narrow spaces
-  if (variant === 'compact') {
-    return (
-      <div className={cn(
-        'flex flex-col gap-4 rounded-xl border border-border p-6',
-        cardBackgroundClasses[cardBackground as keyof typeof cardBackgroundClasses] || 'bg-card/50'
-      )}>
-        {data.icon && (
-          <div
-            data-tina-field={tinaField(data, 'icon')}
-            className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10"
-          >
-            <Icon data={data.icon} className="h-6 w-6 text-primary" />
-          </div>
-        )}
-        {data.title && (
-          <h3
-            data-tina-field={tinaField(data, 'title')}
-            className="text-lg font-semibold text-foreground"
-          >
-            {renderTitle(data.title, data.highlightWords || undefined)}
-          </h3>
-        )}
-        {data.subtitle && (
-          <p
-            data-tina-field={tinaField(data, 'subtitle')}
-            className="text-sm text-muted-foreground"
-          >
-            {data.subtitle}
-          </p>
-        )}
-        {data.buttons && data.buttons.length > 0 && (
-          <div className="flex flex-col gap-2">
-            {data.buttons.map((button, index) => (
-              <div key={index} data-tina-field={tinaField(button)}>
-                <Button
-                  asChild
-                  size="sm"
-                  variant={button?.variant === 'outline' ? 'outline' : 'default'}
-                  className="w-full justify-center"
-                >
-                  <Link href={button?.href || '/'}>
-                    {button?.icon && <Icon data={button.icon} className="w-4 h-4" />}
-                    {button?.label}
-                  </Link>
-                </Button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  }
-
   // Inline variant (default fallback)
   return (
     <section className={cn('py-8', data.background || 'bg-background')}>
@@ -661,7 +607,6 @@ export const ctaSectionBlockSchema: Template = {
         { label: 'Full Width', value: 'full-width' },
         { label: 'Minimal', value: 'minimal' },
         { label: 'Inline', value: 'inline' },
-        { label: 'Compact (Sidebar)', value: 'compact' },
       ],
     },
     {

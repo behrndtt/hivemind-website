@@ -4,17 +4,19 @@ import Link from 'next/link';
 import { useRef, useEffect, useState } from 'react';
 import { tinaField } from 'tinacms/dist/react';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
-import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Building2, Briefcase, TrendingUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { AnimatedGroup } from '@/components/motion-primitives/animated-group';
 import { Badge } from '@/components/ui/badge';
 import type {
-  Insight,
-  CaseStudy,
+  InsightQuery,
+  CaseStudyQuery,
 } from '@/tina/__generated__/types';
 
-// Union type for posts
-type Post = Insight | CaseStudy;
+// Type for post data from TinaCMS queries (without _values)
+type InsightPost = InsightQuery['insight'];
+type CaseStudyPost = CaseStudyQuery['caseStudy'];
+type Post = InsightPost | CaseStudyPost;
 
 /**
  * Format date for display
@@ -258,11 +260,18 @@ export function PostHero({
 }: PostHeroProps) {
   // Get category label for case studies
   const categoryLabel = contentType === 'case-study' 
-    ? (post as CaseStudy).industry || 'Case Study'
+    ? (post as CaseStudyPost).industry || 'Case Study'
     : 'Insight';
 
   // Check if featured (based on heroImg presence as a proxy)
   const isFeatured = Boolean(post.heroImg);
+
+  // Get case study specific fields
+  const client = contentType === 'case-study' ? (post as CaseStudyPost).client : null;
+  const industry = contentType === 'case-study' ? (post as CaseStudyPost).industry : null;
+
+  // Get results (available on both types)
+  const results = post.results?.filter(Boolean) || [];
 
   return (
     <>
@@ -346,7 +355,60 @@ export function PostHero({
                 <Clock className="h-4 w-4" />
                 <span>{estimateReadingTime(post.title)} min read</span>
               </div>
+
+              {/* Client (case studies only) */}
+              {client && (
+                <div
+                  data-tina-field={contentType === 'case-study' ? tinaField(post as CaseStudyPost, 'client') : undefined}
+                  className="flex items-center gap-2"
+                >
+                  <Building2 className="h-4 w-4" />
+                  <span>{client}</span>
+                </div>
+              )}
+
+              {/* Industry (case studies only) */}
+              {industry && (
+                <div
+                  data-tina-field={contentType === 'case-study' ? tinaField(post as CaseStudyPost, 'industry') : undefined}
+                  className="flex items-center gap-2"
+                >
+                  <Briefcase className="h-4 w-4" />
+                  <span>{industry}</span>
+                </div>
+              )}
             </div>
+
+            {/* Key Results */}
+            {results.length > 0 && (
+              <div className="mt-10 pt-8 border-t border-border/50">
+                <div className="flex items-center gap-2 mb-6 text-sm font-medium text-muted-foreground">
+                  <TrendingUp className="h-4 w-4" />
+                  <span>Key Results</span>
+                </div>
+                <div
+                  data-tina-field={tinaField(post, 'results')}
+                  className="grid grid-cols-2 md:grid-cols-4 gap-6"
+                >
+                  {results.map((result, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col items-center text-center p-4 rounded-xl bg-primary/5 border border-primary/10"
+                    >
+                      <data
+                        value={result?.value || ''}
+                        className="text-2xl md:text-3xl font-bold text-primary"
+                      >
+                        {result?.value}
+                      </data>
+                      <div className="mt-2 text-sm text-muted-foreground">
+                        {result?.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </AnimatedGroup>
         </div>
       </section>
