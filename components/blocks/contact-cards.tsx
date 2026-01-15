@@ -82,9 +82,8 @@ function CardVariant({ card }: Omit<ContactCardProps, 'variant'>) {
   return (
     <Card
       data-tina-field={tinaField(card)}
-      className="h-full border-zinc-800 bg-zinc-900/50 hover:border-primary/50 transition-all duration-500 hover:-translate-y-1"
     >
-      <CardContent className="flex flex-col items-center p-6 text-center gap-4">
+      <CardContent className="flex flex-col items-center text-center">
         <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
           {card.icon ? (
             <Icon data={card.icon} className="h-7 w-7 text-primary" />
@@ -95,14 +94,14 @@ function CardVariant({ card }: Omit<ContactCardProps, 'variant'>) {
         <div className="flex flex-col gap-1">
           <h3
             data-tina-field={tinaField(card, 'title')}
-            className="text-white"
+            className="text-foreground"
           >
             {card.title}
           </h3>
           {card.contactDescription && (
             <p
               data-tina-field={tinaField(card, 'contactDescription')}
-              className="text-sm text-zinc-400"
+              className="text-sm text-muted-foreground"
             >
               {card.contactDescription}
             </p>
@@ -111,7 +110,7 @@ function CardVariant({ card }: Omit<ContactCardProps, 'variant'>) {
         {card.value && (
           <p
             data-tina-field={tinaField(card, 'value')}
-            className="py-2 font-serif text-white"
+            className="py-2 font-serif text-foreground"
           >
             {card.value}
           </p>
@@ -121,7 +120,7 @@ function CardVariant({ card }: Omit<ContactCardProps, 'variant'>) {
             asChild
             variant="outline"
             size="sm"
-            className="rounded-full border-zinc-700 text-zinc-300 hover:border-primary hover:text-white"
+            className="rounded-full border-border text-muted-foreground hover:border-primary hover:text-foreground"
           >
             <Link
               href={card.href}
@@ -146,7 +145,7 @@ function ListVariant({ card }: Omit<ContactCardProps, 'variant'>) {
   return (
     <div
       data-tina-field={tinaField(card)}
-      className="flex items-start gap-4 py-4 border-b border-zinc-800 last:border-0"
+      className="flex items-start gap-4 py-4 border-b border-border last:border-0"
     >
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
         {card.icon ? (
@@ -158,14 +157,14 @@ function ListVariant({ card }: Omit<ContactCardProps, 'variant'>) {
       <div className="flex-1">
         <h3
           data-tina-field={tinaField(card, 'title')}
-          className="font-medium text-white"
+          className="font-medium text-foreground"
         >
           {card.title}
         </h3>
         {card.contactDescription && (
           <p
             data-tina-field={tinaField(card, 'contactDescription')}
-            className="text-sm text-zinc-400"
+            className="text-sm text-muted-foreground"
           >
             {card.contactDescription}
           </p>
@@ -185,7 +184,7 @@ function ListVariant({ card }: Omit<ContactCardProps, 'variant'>) {
           ) : (
             <span
               data-tina-field={tinaField(card, 'value')}
-              className="text-white font-serif block mt-1"
+              className="text-foreground font-serif block mt-1"
             >
               {card.value}
             </span>
@@ -213,7 +212,7 @@ function MinimalVariant({ card }: Omit<ContactCardProps, 'variant'>) {
       <div>
         <span
           data-tina-field={tinaField(card, 'title')}
-          className="text-sm text-zinc-400 mr-2"
+          className="text-sm text-muted-foreground mr-2"
         >
           {card.title}:
         </span>
@@ -223,7 +222,7 @@ function MinimalVariant({ card }: Omit<ContactCardProps, 'variant'>) {
               href={href}
               target={card.type === 'address' ? '_blank' : undefined}
               rel={card.type === 'address' ? 'noopener noreferrer' : undefined}
-              className="text-white hover:text-primary transition-colors"
+              className="text-foreground hover:text-primary transition-colors"
               data-tina-field={tinaField(card, 'value')}
             >
               {card.value}
@@ -231,7 +230,7 @@ function MinimalVariant({ card }: Omit<ContactCardProps, 'variant'>) {
           ) : (
             <span
               data-tina-field={tinaField(card, 'value')}
-              className="text-white"
+              className="text-foreground"
             >
               {card.value}
             </span>
@@ -274,7 +273,7 @@ export function ContactCards({ data }: ContactCardsProps) {
   const hasHeader = data.badge || data.title || data.subtitle;
 
   return (
-    <section className={cn('py-20 md:py-28', data.background || 'bg-zinc-950')}>
+    <section className={cn('py-16 md:py-24', data.background || 'bg-background')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {hasHeader && (
           <InView
@@ -290,7 +289,7 @@ export function ContactCards({ data }: ContactCardsProps) {
                 <div data-tina-field={tinaField(data, 'badge')}>
                   <Badge
                     variant="outline"
-                    className="mb-4 border-zinc-700 text-zinc-400 inline-flex items-center gap-2"
+                    className="mb-4 border-border text-muted-foreground inline-flex items-center gap-2"
                   >
                     {data.badge.icon && <Icon data={data.badge.icon} className="w-3 h-3" />}
                     {data.badge.text}
@@ -300,7 +299,7 @@ export function ContactCards({ data }: ContactCardsProps) {
               {data.title && (
                 <h2
                   data-tina-field={tinaField(data, 'title')}
-                  className="mb-4 text-3xl tracking-tight md:text-4xl text-white"
+                  className="mb-4 text-3xl tracking-tight md:text-4xl text-foreground"
                 >
                   {renderTitle(data.title, data.highlightWords || undefined)}
                 </h2>
@@ -308,7 +307,7 @@ export function ContactCards({ data }: ContactCardsProps) {
               {data.subtitle && (
                 <p
                   data-tina-field={tinaField(data, 'subtitle')}
-                  className="text-zinc-400"
+                  className="text-muted-foreground"
                 >
                   {data.subtitle}
                 </p>
@@ -331,7 +330,7 @@ export function ContactCards({ data }: ContactCardsProps) {
         ) : variant === 'list' ? (
           <AnimatedGroup
             preset="blur-slide"
-            className="mx-auto max-w-2xl rounded-lg border border-zinc-800 bg-zinc-900/50 p-6"
+            className="mx-auto max-w-2xl rounded-lg border border-border bg-card/50 p-6"
           >
             {cards.map((card, index) => (
               <ContactCard key={index} card={card!} variant={variant} />

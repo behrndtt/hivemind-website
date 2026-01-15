@@ -56,10 +56,10 @@ function IconCard({ card, layout = 'vertical', showCardWrapper = true, iconStyle
           <Icon data={card.icon} className={iconClasses} />
         </div>
       )}
-      <div className={cn(!isHorizontal && 'mt-4 flex items-center gap-4')}>
+      <div className='flex flex-col gap-2'>
         <CardTitle
           data-tina-field={tinaField(card, 'title')}
-          className={cn('text-foreground', isHorizontal ? 'mb-1' : 'mb-2')}
+          className="text-foreground"
         >
           {card.title}
         </CardTitle>
@@ -72,7 +72,7 @@ function IconCard({ card, layout = 'vertical', showCardWrapper = true, iconStyle
           </div>
         )}
         {(card as any).value && (
-          <p className={cn('font-medium text-foreground', isHorizontal ? 'mt-2' : 'mt-3 mb-4')}>
+          <p className={cn('font-medium text-foreground', isHorizontal && 'mt-2')}>
             {(card as any).value}
           </p>
         )}
@@ -83,7 +83,7 @@ function IconCard({ card, layout = 'vertical', showCardWrapper = true, iconStyle
             size="sm"
             className={cn(
               'rounded-full border-border text-foreground/80 hover:border-primary hover:text-foreground',
-              isHorizontal ? 'mt-3' : 'mt-4'
+              isHorizontal && 'mt-3'
             )}
           >
             <Link href={card.href} target={card.href.startsWith('http') ? '_blank' : undefined}>
@@ -98,8 +98,8 @@ function IconCard({ card, layout = 'vertical', showCardWrapper = true, iconStyle
 
   // Wrap in card if enabled
   const cardContent = showCardWrapper ? (
-    <Card className="h-full border-border bg-card/50 hover:border-primary/50 transition-all duration-500 hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
-      <CardContent className="p-6">{content}</CardContent>
+    <Card>
+      <CardContent>{content}</CardContent>
     </Card>
   ) : (
     <div className="py-3">{content}</div>

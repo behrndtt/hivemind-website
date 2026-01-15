@@ -31,8 +31,8 @@ function LinkCard({ card }: LinkCardProps) {
       className="group block"
       aria-label={card.title || 'Link card'}
     >
-      <Card className="h-full border-border bg-card/50 hover:border-primary/50 transition-all duration-500 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
-        <CardContent className="flex items-center justify-between gap-4 p-6">
+      <Card>
+        <CardContent className="flex flex-row items-center justify-between">
           <div className="flex items-center gap-4">
             {card.icon && (
               <div
@@ -42,7 +42,7 @@ function LinkCard({ card }: LinkCardProps) {
                 <Icon data={card.icon} className="h-6 w-6 text-primary" />
               </div>
             )}
-            <div>
+            <div className='flex flex-col gap-2'>
               <CardTitle
                 data-tina-field={tinaField(card, 'title')}
                 className="text-foreground group-hover:text-primary transition-colors"

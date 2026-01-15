@@ -30,13 +30,13 @@ interface ShowcaseCardProps {
  */
 function ShowcaseCard({ card }: ShowcaseCardProps) {
   const cardContent = (
-    <Card className="overflow-hidden border-border bg-card/50 hover:border-primary/50 transition-all duration-500 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+    <Card className="overflow-hidden">
       <div className="grid md:grid-cols-3 gap-6">
-        <CardHeader className="md:col-span-1 bg-muted/30 p-6">
+        <CardHeader className="md:col-span-1 bg-muted/30 p-6 gap-4">
           {card.icon && (
             <div
               data-tina-field={tinaField(card, 'icon')}
-              className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-lg bg-primary/10 border border-primary/20"
+              className="inline-flex h-14 w-14 items-center justify-center rounded-lg bg-primary/10 border border-primary/20"
             >
               <Icon data={card.icon} className="h-7 w-7 text-primary" />
             </div>
@@ -48,11 +48,11 @@ function ShowcaseCard({ card }: ShowcaseCardProps) {
             {card.title}
           </CardTitle>
         </CardHeader>
-        <CardContent className="md:col-span-2 p-6">
+        <CardContent className="md:col-span-2">
           {card.description && (
             <div
               data-tina-field={tinaField(card, 'description')}
-              className="mb-4 text-muted-foreground prose dark:prose-invert"
+              className="text-muted-foreground prose dark:prose-invert"
             >
               <TinaMarkdown content={card.description} components={components} />
             </div>

@@ -26,26 +26,26 @@ interface ServiceCardProps {
  */
 function ServiceCard({ card }: ServiceCardProps) {
   const cardContent = (
-    <Card className="h-full border-border bg-card/50 hover:border-primary/50 transition-all duration-500 hover:-translate-y-1 group focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
-      <CardContent className="p-6 sm:p-8">
+    <Card>
+      <CardContent>
         {card.icon && (
           <div
             data-tina-field={tinaField(card, 'icon')}
-            className="text-primary mb-4"
+            className="text-primary"
           >
             <Icon data={card.icon} className="w-10 h-10" />
           </div>
         )}
         <CardTitle
           data-tina-field={tinaField(card, 'title')}
-          className="mb-3 text-foreground group-hover:text-primary transition-colors"
+          className="text-foreground group-hover:text-primary transition-colors"
         >
           {card.title}
         </CardTitle>
         {card.description && (
           <div
             data-tina-field={tinaField(card, 'description')}
-            className="text-muted-foreground mb-4 prose dark:prose-invert prose-sm"
+            className="text-muted-foreground prose dark:prose-invert prose-sm"
           >
             <TinaMarkdown content={card.description} components={components} />
           </div>

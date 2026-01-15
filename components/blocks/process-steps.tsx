@@ -23,17 +23,17 @@ interface StepCardProps {
  */
 function StepCard({ step, index }: StepCardProps) {
   return (
-    <Card className="h-full border-border bg-card/50 text-center hover:border-primary/50 transition-all duration-500 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
-      <CardContent className="py-7 px-5">
+    <Card className="text-center">
+      <CardContent className="text-center">
         <div
-          className="my-3 text-4xl font-serif font-bold text-primary/30"
+          className="text-4xl font-serif font-bold text-primary/30"
           aria-hidden="true"
         >
           {String(index + 1).padStart(2, '0')}
         </div>
         <CardTitle
           data-tina-field={tinaField(step, 'title')}
-          className="mb-2 text-foreground"
+          className="text-foreground"
         >
           <span className="sr-only">Step {index + 1}: </span>
           <h3>{step.title}</h3>

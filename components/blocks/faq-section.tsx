@@ -91,7 +91,7 @@ export function FaqSection({ data }: FaqSectionProps) {
   const rightItems = columns === 2 ? items.slice(Math.ceil(items.length / 2)) : [];
 
   return (
-    <section className={cn('py-20 md:py-28', data.background || 'bg-background')}>
+    <section className={cn('py-16 md:py-24', data.background || 'bg-background')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <BlockHeader data={data} />
 

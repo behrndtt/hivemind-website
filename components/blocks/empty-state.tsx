@@ -79,9 +79,9 @@ export function EmptyState({ data }: EmptyStateProps) {
           data.section?.padding || 'p-0'
         )}
       >
-        <CardContent className="flex flex-col items-center justify-center p-12 text-center">
+        <CardContent className="flex flex-col items-center justify-center gap-6 p-12 text-center">
           {/* Icon */}
-          <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
             {data.icon ? (
               <Icon data={data.icon} className="h-10 w-10 text-primary" />
             ) : (
@@ -93,7 +93,7 @@ export function EmptyState({ data }: EmptyStateProps) {
           {data.title && (
             <h2
               data-tina-field={tinaField(data, 'title')}
-              className="mb-4 text-foreground"
+              className="text-foreground"
             >
               {data.title}
             </h2>
@@ -103,7 +103,7 @@ export function EmptyState({ data }: EmptyStateProps) {
           {data.description && (
             <p
               data-tina-field={tinaField(data, 'description')}
-              className="mb-8 max-w-md text-muted-foreground"
+              className="max-w-md text-muted-foreground"
             >
               {data.description}
             </p>

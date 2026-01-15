@@ -20,13 +20,13 @@ export const Footer = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
           {/* Brand Column */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-6">
+          <div className="lg:col-span-1 flex flex-col gap-6">
+            <Link href="/" className="inline-block">
               <Logo iconOnly className="h-12 w-auto" />
             </Link>
             {footer.tagline && (
               <p 
-                className="text-muted-foreground text-sm leading-relaxed mb-6"
+                className="text-muted-foreground text-sm leading-relaxed"
                 data-tina-field={tinaField(footer, "tagline")}
               >
                 {footer.tagline}
@@ -66,8 +66,8 @@ export const Footer = () => {
 
           {/* Footer Columns */}
           {footer.columns?.map((column, idx) => (
-            <div key={idx} data-tina-field={tinaField(column)}>
-              <h3 className="text-foreground font-semibold mb-4">{column?.title}</h3>
+            <div key={idx} data-tina-field={tinaField(column)} className="flex flex-col gap-4">
+              <h3 className="text-foreground font-semibold">{column?.title}</h3>
               <ul className="space-y-3">
                 {column?.links?.map((link, linkIdx) => (
                   <li key={linkIdx}>

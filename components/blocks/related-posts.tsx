@@ -95,7 +95,7 @@ export function RelatedPosts({
         >
           {displayPosts.map((post, index) => (
             <div key={post._sys?.filename || index}>
-              <Card className="group h-full border-border bg-card/50 hover:border-primary/50 transition-all duration-500">
+              <Card>
                 <Link
                   href={getPostUrl(post, contentType)}
                   className="block h-full"
@@ -110,14 +110,14 @@ export function RelatedPosts({
                       <div className="absolute inset-0 bg-linear-to-t from-background/80 to-transparent" />
                     </div>
                   )}
-                  <CardContent className="p-5">
+                  <CardContent>
                     <Badge
                       variant="outline"
-                      className="mb-3 border-border text-muted-foreground"
+                      className="border-border text-muted-foreground"
                     >
                       {getCategoryLabel(post, contentType)}
                     </Badge>
-                    <h3 className="mb-2 font-light text-foreground group-hover:text-primary transition-colors">
+                    <h3 className="font-light text-foreground group-hover:text-primary transition-colors">
                       {post.title}
                     </h3>
                     {post.excerpt && (
@@ -125,7 +125,7 @@ export function RelatedPosts({
                         {getExcerptText(post.excerpt)}
                       </p>
                     )}
-                    <div className="mt-4 flex items-center text-primary text-sm font-medium">
+                    <div className="flex items-center text-primary text-sm font-medium">
                       Read more
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </div>

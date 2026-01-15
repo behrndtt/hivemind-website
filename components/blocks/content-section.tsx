@@ -54,9 +54,13 @@ export function ContentSection({ data }: ContentSectionProps) {
 
   // Render the text content block
   const renderTextContent = () => (
-    <div className={cn(hasImage ? 'lg:w-1/2' : 'max-w-3xl mx-auto', !hasImage && data.align === 'center' && 'text-center')}>
+    <div className={cn(
+      'flex flex-col gap-4',
+      hasImage ? 'lg:w-1/2' : 'max-w-3xl mx-auto',
+      !hasImage && data.align === 'center' && 'text-center'
+    )}>
       {data.badge?.text && (
-        <div data-tina-field={tinaField(data, 'badge')} className="mb-4">
+        <div data-tina-field={tinaField(data, 'badge')}>
           <Badge
             variant="outline"
             className="border-border text-muted-foreground inline-flex items-center gap-2"
@@ -70,7 +74,6 @@ export function ContentSection({ data }: ContentSectionProps) {
       {data.title && (
         <h2
           data-tina-field={tinaField(data, 'title')}
-          className="mb-4"
         >
           {renderTitle(data.title, data.highlightWords || undefined)}
         </h2>
@@ -79,7 +82,7 @@ export function ContentSection({ data }: ContentSectionProps) {
       {data.subtitle && (
         <p
           data-tina-field={tinaField(data, 'subtitle')}
-          className="text-muted-foreground text-lg mb-6"
+          className="text-muted-foreground text-lg"
         >
           {data.subtitle}
         </p>

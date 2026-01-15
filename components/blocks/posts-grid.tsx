@@ -77,7 +77,7 @@ function CardVariant({ post, contentType }: Omit<PostCardProps, 'variant'>) {
   const url = getPostUrl(post, contentType);
 
   return (
-    <Card className="h-full group border-border bg-card/50 hover:border-primary/50 hover:-translate-y-1 transition-all duration-500 overflow-hidden">
+    <Card className="overflow-hidden">
       {post.heroImg && (
         <div className="relative aspect-video overflow-hidden">
           <img
@@ -88,7 +88,7 @@ function CardVariant({ post, contentType }: Omit<PostCardProps, 'variant'>) {
           <div className="absolute inset-0 bg-linear-to-t from-background/80 to-transparent" />
         </div>
       )}
-      <CardHeader className="space-y-2">
+      <CardHeader className="gap-2">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           {post.date && (
             <>
@@ -350,7 +350,7 @@ export function PostsGrid({ data, posts = [], sidebarContent, tags }: PostsGridP
   );
 
   return (
-    <section className={cn('py-20 md:py-28', data.background || 'bg-background')}>
+    <section className={cn('py-16 md:py-24', data.background || 'bg-background')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {hasHeader && (
           <InView

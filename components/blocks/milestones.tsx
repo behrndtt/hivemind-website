@@ -145,14 +145,14 @@ function CardVariant({ milestone, index }: Omit<MilestoneCardProps, 'variant' | 
     <div
       data-tina-field={tinaField(milestone)}
       className={cn(
-        'relative rounded-lg border p-6 transition-all duration-300',
+        'relative flex flex-col gap-4 rounded-lg border p-6 transition-all duration-300',
         isCompleted && 'border-primary/50 bg-primary/5',
         isInProgress && 'border-primary bg-primary/10',
         !isCompleted && !isInProgress && 'border-border bg-card/50'
       )}
     >
       {/* Status indicator */}
-      <div className="mb-4 flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <span
           className={cn(
             'inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-medium',
@@ -178,7 +178,7 @@ function CardVariant({ milestone, index }: Omit<MilestoneCardProps, 'variant' | 
 
       <h3
         data-tina-field={tinaField(milestone, 'title')}
-        className="mb-2 text-foreground"
+        className="text-foreground"
       >
         {milestone.title}
       </h3>
@@ -290,7 +290,7 @@ export function Milestones({ data }: MilestonesProps) {
   );
 
   return (
-    <section className={cn('py-20 md:py-28', data.background || 'bg-background')}>
+    <section className={cn('py-16 md:py-24', data.background || 'bg-background')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {useCardWrapper ? (
           <InView

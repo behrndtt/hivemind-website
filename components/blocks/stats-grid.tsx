@@ -25,11 +25,11 @@ interface StatItemProps {
  */
 function InlineStripStat({ stat }: StatItemProps) {
   return (
-    <div className="text-center">
+    <div className="flex flex-col items-center gap-2 text-center">
       <data
         value={stat.value || ''}
         data-tina-field={tinaField(stat, 'value')}
-        className="block text-primary mb-2 font-serif"
+        className="block text-primary font-serif"
       >
         {stat.value}
       </data>
@@ -48,12 +48,12 @@ function InlineStripStat({ stat }: StatItemProps) {
  */
 function CardGridStat({ stat }: StatItemProps) {
   return (
-    <Card className="border-border bg-card/50 text-center hover:border-primary/50 transition-all duration-500">
-      <CardContent className="p-6">
+    <Card className="text-center">
+      <CardContent>
         {stat.icon && (
           <div
             data-tina-field={tinaField(stat, 'icon')}
-            className="flex justify-center mb-4"
+            className="flex justify-center"
           >
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
               <Icon data={stat.icon} className="w-6 h-6 text-primary" />
@@ -63,7 +63,7 @@ function CardGridStat({ stat }: StatItemProps) {
         <data
           value={stat.value || ''}
           data-tina-field={tinaField(stat, 'value')}
-          className="block text-primary mb-2 font-serif"
+          className="block text-primary font-serif"
         >
           {stat.value}
         </data>
@@ -76,7 +76,7 @@ function CardGridStat({ stat }: StatItemProps) {
         {stat.statDescription && (
           <p
             data-tina-field={tinaField(stat, 'statDescription')}
-            className="mt-2 text-xs text-muted-foreground"
+            className="text-xs text-muted-foreground"
           >
             {stat.statDescription}
           </p>
@@ -104,7 +104,7 @@ export function StatsGrid({ data }: StatsGridProps) {
   // Inline strip variant - horizontal strip with border
   if (variant === 'inline-strip') {
     return (
-      <section className={cn('py-16 border-y border-border/50', data.background || 'bg-background')}>
+      <section className={cn('py-12 md:py-16 border-y border-border/50', data.background || 'bg-background')}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <BlockHeader data={data} className="mb-8" />
           <InView
@@ -130,7 +130,7 @@ export function StatsGrid({ data }: StatsGridProps) {
 
   // Card grid variant (default)
   return (
-    <section className={cn('py-16', data.background || 'bg-background')}>
+    <section className={cn('py-12 md:py-16', data.background || 'bg-background')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <BlockHeader data={data} />
         <AnimatedGroup

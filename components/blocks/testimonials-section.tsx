@@ -38,13 +38,13 @@ interface TestimonialCardProps {
 
 function TestimonialCard({ testimonial }: TestimonialCardProps) {
   return (
-    <Card className="h-full border-border bg-card/50 hover:border-primary/50 transition-all duration-500">
-      <CardContent className="pt-6">
+    <Card>
+      <CardContent>
         <StarRating />
 
         <blockquote
           data-tina-field={tinaField(testimonial, 'quote')}
-          className="text-md mb-6 text-foreground/80 font-serif font-normal"
+          className="text-md text-foreground/80 font-serif font-normal"
         >
           &ldquo;{testimonial.quote}&rdquo;
         </blockquote>
@@ -105,7 +105,7 @@ export function TestimonialsSection({ data }: TestimonialsSectionProps) {
   };
 
   return (
-    <section className={cn('py-20 md:py-28', data.background || 'bg-background')}>
+    <section className={cn('py-16 md:py-24', data.background || 'bg-background')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <BlockHeader data={data} />
 

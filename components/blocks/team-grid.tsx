@@ -35,31 +35,31 @@ interface TeamMemberCardProps {
 
 function TeamMemberCard({ member }: TeamMemberCardProps) {
   return (
-    <Card className="h-full border-border bg-card/50 hover:border-primary/50 hover:scale-[1.02] transition-all duration-500">
-      <CardContent className="p-6">
+    <Card>
+      <CardContent>
         {member.image ? (
           <img
             src={member.image}
             alt={member.name || ''}
-            className="mb-4 h-20 w-20 rounded-full object-cover"
+            className="h-20 w-20 rounded-full object-cover"
             data-tina-field={tinaField(member, 'image')}
           />
         ) : (
-          <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-linear-to-br from-primary to-primary/70 text-2xl font-bold text-primary-foreground">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-linear-to-br from-primary to-primary/70 text-2xl font-bold text-primary-foreground">
             {getInitials(member.name || 'TM')}
           </div>
         )}
 
         <h3
           data-tina-field={tinaField(member, 'name')}
-          className="mb-1 text-foreground"
+          className="text-foreground"
         >
           {member.name}
         </h3>
 
         <p
           data-tina-field={tinaField(member, 'role')}
-          className="mb-3 text-sm font-medium text-primary"
+          className="text-sm font-medium text-primary"
         >
           {member.role}
         </p>
@@ -67,7 +67,7 @@ function TeamMemberCard({ member }: TeamMemberCardProps) {
         {member.description && (
           <div
             data-tina-field={tinaField(member, 'description')}
-            className="mb-4 text-sm text-muted-foreground prose dark:prose-invert prose-sm"
+            className="text-sm text-muted-foreground prose dark:prose-invert prose-sm"
           >
             <TinaMarkdown content={member.description} components={components} />
           </div>
@@ -103,7 +103,7 @@ export function TeamGrid({ data }: TeamGridProps) {
   };
 
   return (
-    <section className={cn('py-20 md:py-28', data.background || 'bg-background')}>
+    <section className={cn('py-16 md:py-24', data.background || 'bg-background')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <BlockHeader data={data} />
 

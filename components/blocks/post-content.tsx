@@ -44,7 +44,7 @@ export function PostContent({ post, className }: PostContentProps) {
   const hasStructuredContent = isCaseStudy && (caseStudy.client || caseStudy.industry);
 
   return (
-    <div className={cn('lg:col-span-2', className)}>
+    <div className={cn('flex flex-col gap-8 lg:col-span-2', className)}>
       <InView
         variants={{
           hidden: { opacity: 0, y: 20 },
@@ -52,11 +52,12 @@ export function PostContent({ post, className }: PostContentProps) {
         }}
         transition={{ duration: 0.5 }}
         viewOptions={{ once: true }}
+        className="flex flex-col gap-8"
       >
         {/* Case Study Client Info */}
         {isCaseStudy && caseStudy.client && (
-          <div className="mb-8 rounded-lg border border-border bg-card/50 p-6">
-            <div className="flex items-center gap-3 mb-2">
+          <div className="flex flex-col gap-2 rounded-lg border border-border bg-card/50 p-6">
+            <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                 <Building2 className="h-5 w-5 text-primary" />
               </div>
@@ -73,7 +74,7 @@ export function PostContent({ post, className }: PostContentProps) {
             {caseStudy.industry && (
               <div
                 data-tina-field={tinaField(post, 'industry')}
-                className="mt-2 text-sm text-muted-foreground"
+                className="text-sm text-muted-foreground"
               >
                 Industry: {caseStudy.industry}
               </div>

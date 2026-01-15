@@ -79,7 +79,7 @@ export function BlockHeader({
   const headerContent = (
     <div
       className={cn(
-        'mb-10',
+        'mb-12 flex flex-col gap-4',
         maxWidthClasses[maxWidth],
         alignClasses[align],
         className
@@ -89,7 +89,7 @@ export function BlockHeader({
         <div data-tina-field={tinaField(data, 'badge')}>
           <Badge
             variant="outline"
-            className="mb-4 border-border text-muted-foreground inline-flex items-center gap-2"
+            className="border-border text-muted-foreground inline-flex items-center gap-2"
           >
             {data.badge.icon && (
               <Icon data={data.badge.icon} className="w-3 h-3" />
@@ -103,7 +103,7 @@ export function BlockHeader({
         <HeadingTag
           data-tina-field={tinaField(data, 'title')}
           className={cn(
-            'mb-4 tracking-tight text-foreground',
+            'tracking-tight text-foreground',
             titleClassName
           )}
         >

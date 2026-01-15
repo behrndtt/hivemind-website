@@ -186,10 +186,10 @@ function PricingCard({ plan }: PricingCardProps) {
   return (
     <Card
       className={cn(
-        'relative h-full transition-all duration-500 hover:scale-[1.02]',
+        'relative',
         isHighlighted
           ? 'border-primary shadow-lg shadow-primary/20 bg-card/80'
-          : 'border-border bg-card/50 hover:border-primary/50'
+          : ''
       )}
     >
       {isHighlighted && (
@@ -202,18 +202,18 @@ function PricingCard({ plan }: PricingCardProps) {
           </span>
         </div>
       )}
-      <CardContent className="p-6 sm:p-8 flex flex-col h-full">
+      <CardContent className="flex flex-col gap-6 sm:gap-8 h-full">
         {/* Plan Header */}
-        <div className="text-center mb-6 sm:mb-8">
+        <div className="flex flex-col gap-4 text-center">
           <h3
             data-tina-field={tinaField(plan, 'name')}
-            className="text-xl sm:text-2xl font-semibold text-foreground mb-4"
+            className="text-xl sm:text-2xl font-semibold text-foreground"
           >
             {plan.name}
           </h3>
 
           {/* Price Display */}
-          <div data-tina-field={tinaField(plan, 'price')} className="mb-2">
+          <div data-tina-field={tinaField(plan, 'price')}>
             {isSpecialPrice ? (
               <data
                 value={plan.price || ''}
@@ -262,7 +262,7 @@ function PricingCard({ plan }: PricingCardProps) {
         {plan.features && plan.features.length > 0 && (
           <ul
             data-tina-field={tinaField(plan, 'features')}
-            className="mb-6 sm:mb-8 grow space-y-3 sm:space-y-4"
+            className="grow space-y-3 sm:space-y-4"
           >
             {plan.features.map((feature, index) => (
               <PricingFeatureItem
@@ -307,7 +307,7 @@ export function PricingSection({ data }: PricingSectionProps) {
   const columnClass = columnClasses[columns];
 
   return (
-    <section className={cn('py-20 md:py-28', data.background || 'bg-background')}>
+    <section className={cn('py-16 md:py-24', data.background || 'bg-background')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <BlockHeader data={data} />
 
