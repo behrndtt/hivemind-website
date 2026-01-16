@@ -4,13 +4,20 @@ import Layout from "@/components/layout/layout";
 import ClientPage from "./[...urlSegments]/client-page";
 
 export default async function Home() {
-  const data = await client.queries.page({
-    relativePath: `home.mdx`,
-  });
+  let data = null;
+
+  try {
+    data = await client.queries.page({
+      relativePath: `home.mdx`,
+    });
+  } catch (error) {
+    console.warn('Failed to fetch home page data:', error);
+    // Continue with null data - page will render with empty content
+  }
 
   return (
     <Layout rawPageData={data}>
-      <ClientPage {...data} />
+      {data && <ClientPage {...data} />}
     </Layout>
   );
 }

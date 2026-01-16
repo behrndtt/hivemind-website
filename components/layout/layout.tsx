@@ -9,20 +9,28 @@ type LayoutProps = PropsWithChildren & {
 };
 
 export default async function Layout({ children, rawPageData }: LayoutProps) {
-  const { data: globalData } = await client.queries.global({
-    relativePath: "index.json",
-  },
-    {
-      fetchOptions: {
-        next: {
-          revalidate: 60,
-        },
+  let globalSettings = null;
+
+  try {
+    const { data: globalData } = await client.queries.global({
+      relativePath: "index.json",
+    },
+      {
+        fetchOptions: {
+          next: {
+            revalidate: 60,
+          },
+        }
       }
-    }
-  );
+    );
+    globalSettings = globalData.global;
+  } catch (error) {
+    console.warn('Failed to fetch global settings:', error);
+    // Continue with null global settings - components should handle gracefully
+  }
 
   return (
-    <LayoutProvider globalSettings={globalData.global} pageData={rawPageData}>
+    <LayoutProvider globalSettings={globalSettings} pageData={rawPageData}>
       <Header />
       <main className="overflow-x-hidden flex-1">
         {children}

@@ -24,43 +24,52 @@ export default async function TagPage({ params }: TagPageProps) {
     notFound();
   }
 
-  // Fetch all case studies
-  let caseStudies = await client.queries.caseStudyConnection({
-    sort: 'date',
-    last: 50,
-  });
-  const allCaseStudies = caseStudies;
+  let allPosts: CaseStudy[] = [];
+  let posts: CaseStudy[] = [];
+  let tags: ReturnType<typeof extractTagsFromPosts> = [];
 
-  if (!allCaseStudies.data.caseStudyConnection.edges) {
-    allCaseStudies.data.caseStudyConnection.edges = [];
-  }
-
-  // Paginate to get all case studies
-  while (caseStudies.data?.caseStudyConnection.pageInfo.hasPreviousPage) {
-    caseStudies = await client.queries.caseStudyConnection({
+  try {
+    // Fetch all case studies
+    let caseStudies = await client.queries.caseStudyConnection({
       sort: 'date',
-      before: caseStudies.data.caseStudyConnection.pageInfo.endCursor,
+      last: 50,
     });
+    const allCaseStudiesData = caseStudies;
 
-    if (!caseStudies.data.caseStudyConnection.edges) {
-      break;
+    if (!allCaseStudiesData.data.caseStudyConnection.edges) {
+      allCaseStudiesData.data.caseStudyConnection.edges = [];
     }
 
-    allCaseStudies.data.caseStudyConnection.edges.push(
-      ...caseStudies.data.caseStudyConnection.edges.reverse()
-    );
+    // Paginate to get all case studies
+    while (caseStudies.data?.caseStudyConnection.pageInfo.hasPreviousPage) {
+      caseStudies = await client.queries.caseStudyConnection({
+        sort: 'date',
+        before: caseStudies.data.caseStudyConnection.pageInfo.endCursor,
+      });
+
+      if (!caseStudies.data.caseStudyConnection.edges) {
+        break;
+      }
+
+      allCaseStudiesData.data.caseStudyConnection.edges.push(
+        ...caseStudies.data.caseStudyConnection.edges.reverse()
+      );
+    }
+
+    // Extract all posts
+    allPosts = (allCaseStudiesData.data.caseStudyConnection.edges || [])
+      .map((edge) => edge?.node)
+      .filter((node) => node !== null && node !== undefined) as CaseStudy[];
+
+    // Filter posts by tag using shared utility
+    posts = filterPostsByTag(allPosts, slug);
+
+    // Extract all unique tags for the sidebar using shared utility
+    tags = extractTagsFromPosts(allPosts);
+  } catch (error) {
+    console.warn(`Failed to fetch case studies for tag "${slug}":`, error);
+    // Continue with empty posts - page will render with no results
   }
-
-  // Extract all posts
-  const allPosts = (allCaseStudies.data.caseStudyConnection.edges || [])
-    .map((edge) => edge?.node)
-    .filter((node) => node !== null && node !== undefined) as CaseStudy[];
-
-  // Filter posts by tag using shared utility
-  const posts = filterPostsByTag(allPosts, slug);
-
-  // Extract all unique tags for the sidebar using shared utility
-  const tags = extractTagsFromPosts(allPosts);
 
   return (
     <Layout>

@@ -24,43 +24,52 @@ export default async function TagPage({ params }: TagPageProps) {
     notFound();
   }
 
-  // Fetch all insights
-  let insights = await client.queries.insightConnection({
-    sort: 'date',
-    last: 50,
-  });
-  const allInsights = insights;
+  let allPosts: Insight[] = [];
+  let posts: Insight[] = [];
+  let tags: ReturnType<typeof extractTagsFromPosts> = [];
 
-  if (!allInsights.data.insightConnection.edges) {
-    allInsights.data.insightConnection.edges = [];
-  }
-
-  // Paginate to get all insights
-  while (insights.data?.insightConnection.pageInfo.hasPreviousPage) {
-    insights = await client.queries.insightConnection({
+  try {
+    // Fetch all insights
+    let insights = await client.queries.insightConnection({
       sort: 'date',
-      before: insights.data.insightConnection.pageInfo.endCursor,
+      last: 50,
     });
+    const allInsightsData = insights;
 
-    if (!insights.data.insightConnection.edges) {
-      break;
+    if (!allInsightsData.data.insightConnection.edges) {
+      allInsightsData.data.insightConnection.edges = [];
     }
 
-    allInsights.data.insightConnection.edges.push(
-      ...insights.data.insightConnection.edges.reverse()
-    );
+    // Paginate to get all insights
+    while (insights.data?.insightConnection.pageInfo.hasPreviousPage) {
+      insights = await client.queries.insightConnection({
+        sort: 'date',
+        before: insights.data.insightConnection.pageInfo.endCursor,
+      });
+
+      if (!insights.data.insightConnection.edges) {
+        break;
+      }
+
+      allInsightsData.data.insightConnection.edges.push(
+        ...insights.data.insightConnection.edges.reverse()
+      );
+    }
+
+    // Extract all posts
+    allPosts = (allInsightsData.data.insightConnection.edges || [])
+      .map((edge) => edge?.node)
+      .filter((node) => node !== null && node !== undefined) as Insight[];
+
+    // Filter posts by tag using shared utility
+    posts = filterPostsByTag(allPosts, slug);
+
+    // Extract all unique tags for the sidebar using shared utility
+    tags = extractTagsFromPosts(allPosts);
+  } catch (error) {
+    console.warn(`Failed to fetch insights for tag "${slug}":`, error);
+    // Continue with empty posts - page will render with no results
   }
-
-  // Extract all posts
-  const allPosts = (allInsights.data.insightConnection.edges || [])
-    .map((edge) => edge?.node)
-    .filter((node) => node !== null && node !== undefined) as Insight[];
-
-  // Filter posts by tag using shared utility
-  const posts = filterPostsByTag(allPosts, slug);
-
-  // Extract all unique tags for the sidebar using shared utility
-  const tags = extractTagsFromPosts(allPosts);
 
   return (
     <Layout>

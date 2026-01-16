@@ -14,12 +14,21 @@ export interface InsightsClientPageProps {
       relativePath: string;
     };
     query: string;
-  };
+  } | null;
   posts: Insight[];
   tags?: Array<{ name: string; slug: string; count?: number }>;
 }
 
 export default function InsightsClientPage({ pageData, posts, tags }: InsightsClientPageProps) {
+  // Handle null pageData during local builds
+  if (!pageData) {
+    return (
+      <ErrorBoundary>
+        <Blocks posts={posts} tags={tags} />
+      </ErrorBoundary>
+    );
+  }
+
   const { data } = useTina({ ...pageData });
 
   return (
