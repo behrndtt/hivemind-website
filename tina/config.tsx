@@ -1,5 +1,4 @@
 import { defineConfig } from "tinacms";
-import nextConfig from '../next.config'
 
 import Global from "./collection/global";
 import Page from "./collection/page";
@@ -28,7 +27,7 @@ const config = defineConfig({
   build: {
     publicFolder: "public", // The public asset folder for your framework
     outputFolder: "admin", // within the public folder
-    basePath: nextConfig.basePath?.replace(/^\//, '') || '', // The base path of the app (could be /blog)
+    basePath: process.env.NEXT_PUBLIC_BASE_PATH || '', // GitHub Pages repo name (e.g., /hivemind-website)
   },
   schema: {
     collections: [Page, Global, CaseStudy, Insight],
