@@ -191,6 +191,6 @@
   "theme": {
     "color": "primary",
     "font": "sans",
-    "darkMode": "dark"
+    "darkMode": "light"
   }
 }
