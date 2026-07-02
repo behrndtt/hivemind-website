@@ -397,7 +397,7 @@ export function PostHero({
                     >
                       <data
                         value={result?.value || ''}
-                        className="text-2xl md:text-3xl font-bold text-primary"
+                        className="text-2xl md:text-3xl font-semibold text-primary"
                       >
                         {result?.value}
                       </data>

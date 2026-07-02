@@ -38,7 +38,7 @@ export function MilestoneTimeline({
 
             {/* Event content */}
             <div className="flex flex-col gap-0.5">
-              <span className="font-sans text-sm font-bold text-primary">
+              <span className="font-sans text-sm font-semibold text-primary">
                 {event.year}
               </span>
               <span className="text-sm text-muted-foreground leading-snug">

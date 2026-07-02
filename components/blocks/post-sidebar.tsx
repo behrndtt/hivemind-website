@@ -85,7 +85,7 @@ export function PostSidebar({
                     key={index}
                     className="rounded-lg bg-muted/50 p-4 text-center"
                   >
-                    <div className="text-xl font-bold text-primary">
+                    <div className="text-xl font-semibold text-primary">
                       {result.metric}
                     </div>
                     <div className="text-xs text-muted-foreground">{result.label}</div>
