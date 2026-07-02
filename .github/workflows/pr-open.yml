@@ -42,17 +42,6 @@ jobs:
         run: pnpm install
 
       - name: Build
-        # Retries because TinaCloud indexes the pushed schema asynchronously via webhook,
-        # so the remote index can briefly lag behind the branch that was just pushed.
-        run: |
-          MAX_ATTEMPTS=5
-          ATTEMPT=1
-          until pnpm build; do
-            if [ "$ATTEMPT" -ge "$MAX_ATTEMPTS" ]; then
-              echo "❌ Build failed after $ATTEMPT attempts"
-              exit 1
-            fi
-            echo "⚠️ Build failed, possibly because TinaCloud is still indexing the updated schema. Retrying in 30s (attempt $ATTEMPT/$MAX_ATTEMPTS)..."
-            ATTEMPT=$((ATTEMPT + 1))
-            sleep 30
-          done
+        # Uses the local, git-backed content and schema instead of validating against
+        # TinaCloud's remote index, since this site is a static export and doesn't need
+        run: pnpm build
