@@ -97,7 +97,21 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
       - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} build
+        # Retries because TinaCloud indexes the pushed schema asynchronously via webhook.
+        # Right after a schema change is pushed, the remote index can briefly lag behind,
+        # causing "local schema doesn't match remote schema" failures until indexing catches up.
+        run: |
+          MAX_ATTEMPTS=5
+          ATTEMPT=1
+          until ${{ steps.detect-package-manager.outputs.runner }} build; do
+            if [ "$ATTEMPT" -ge "$MAX_ATTEMPTS" ]; then
+              echo "❌ Build failed after $ATTEMPT attempts"
+              exit 1
+            fi
+            echo "⚠️ Build failed, possibly because TinaCloud is still indexing the updated schema. Retrying in 30s (attempt $ATTEMPT/$MAX_ATTEMPTS)..."
+            ATTEMPT=$((ATTEMPT + 1))
+            sleep 30
+          done
         env:
           NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID }}
           NEXT_PUBLIC_TINA_BRANCH: ${{ github.ref_name }}
