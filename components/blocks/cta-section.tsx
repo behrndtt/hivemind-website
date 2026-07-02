@@ -268,7 +268,7 @@ export function CtaSection({ data }: CtaSectionProps) {
   const variant = data.variant || 'boxed';
   const alignment = data.alignment || 'center';
   const titleSize = data.titleSize || 'lg';
-  const subtitleSize = data.subtitleSize || 'lg';
+  const subtitleSize = data.subtitleSize || 'md';
   const cardBackground = data.cardBackground || 'default';
   const padding = data.padding || 'lg';
 
