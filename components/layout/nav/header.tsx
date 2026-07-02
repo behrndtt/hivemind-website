@@ -117,7 +117,7 @@ export const Header = () => {
                                   <div key={colIdx} data-tina-field={tinaField(column)}>
                                     <Link
                                       href={column?.href || "#"}
-                                      className="mb-4 block text-sm font-semibold text-primary hover:underline"
+                                      className="mb-4 block text-sm font-medium text-primary hover:underline"
                                     >
                                       {column?.title} →
                                     </Link>
@@ -185,7 +185,7 @@ export const Header = () => {
             {/* Desktop CTA */}
             {cta && (
               <div className="hidden lg:flex items-center" data-tina-field={tinaField(header, "cta")}>
-                <Button asChild className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6">
+                <Button asChild className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6">
                   <Link href={cta.href || "/contact"}>{cta.label || "Contact Us"}</Link>
                 </Button>
               </div>
@@ -210,7 +210,7 @@ export const Header = () => {
                   const columns = item.columns || [];
                   return (
                     <div key={idx}>
-                      <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+                      <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
                         {item.label}
                       </div>
                       <div className="space-y-2">
@@ -249,7 +249,7 @@ export const Header = () => {
               {/* Mobile CTA */}
               {cta && (
                 <div className="pt-4 border-t border-border">
-                  <Button asChild className="w-full rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
+                  <Button asChild className="w-full rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium">
                     <Link href={cta.href || "/contact"} onClick={() => setMenuState(false)}>
                       {cta.label || "Contact Us"}
                     </Link>

@@ -63,11 +63,11 @@ export default function TagClientPage({
             </Badge>
           </div>
 
-          <h1 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
+          <h1 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
             Case studies tagged with "{tagName}"
           </h1>
 
-          <p className="text-lg text-muted-foreground max-w-2xl">
+          <p className="text-md text-muted-foreground max-w-2xl">
             Browse all case studies related to {tagName.toLowerCase()}.
           </p>
         </div>

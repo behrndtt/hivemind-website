@@ -39,7 +39,7 @@ export function TagsSidebar({ data, tags, basePath = '/insights/tag' }: TagsSide
         <Tag className="h-4 w-4 text-primary" aria-hidden="true" />
         <h3
           data-tina-field={tinaField(data, 'title')}
-          className="text-sm font-semibold text-foreground"
+          className="text-sm font-medium text-foreground"
         >
           {title}
         </h3>

@@ -85,7 +85,7 @@ export function PostSidebar({
                     key={index}
                     className="rounded-lg bg-muted/50 p-4 text-center"
                   >
-                    <div className="text-xl font-semibold text-primary">
+                    <div className="text-xl font-medium text-primary">
                       {result.metric}
                     </div>
                     <div className="text-xs text-muted-foreground">{result.label}</div>
@@ -163,7 +163,7 @@ export function PostSidebar({
               <p className="mb-4 text-sm text-muted-foreground">{cta.description}</p>
               <Button
                 asChild
-                className="w-full rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary/90"
+                className="w-full rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90"
               >
                 <Link href={cta.buttonHref}>
                   {cta.buttonText}

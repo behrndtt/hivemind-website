@@ -515,7 +515,7 @@ export function PageHero({ data }: PageHeroProps) {
               data-tina-field={tinaField(data, 'subtitle')}
               className={cn(
                 'text-muted-foreground mb-8 whitespace-pre-line',
-                isFullVariant ? 'text-lg sm:text-xl max-w-2xl' : 'text-lg max-w-2xl',
+                isFullVariant ? 'text-md sm:text-xl max-w-2xl' : 'text-md max-w-2xl',
                 data.align === 'center' && 'mx-auto'
               )}
             >
@@ -537,7 +537,7 @@ export function PageHero({ data }: PageHeroProps) {
                     size="lg"
                     variant={button?.variant === 'outline' ? 'outline' : 'default'}
                     className={cn(
-                      'rounded-full px-8 font-semibold',
+                      'rounded-full px-8 font-medium',
                       button?.variant === 'outline'
                         ? 'border-border hover:bg-muted hover:border-primary/50'
                         : 'bg-primary hover:bg-primary/90 text-primary-foreground'

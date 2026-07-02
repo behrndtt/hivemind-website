@@ -90,7 +90,7 @@ export function PostContent({ post, className }: PostContentProps) {
             data-tina-field={tinaField(post, '_body')}
             className="prose dark:prose-invert prose-zinc max-w-none
               prose-headings:text-foreground
-              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:font-semibold
+              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:font-medium
               prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:font-normal
               prose-p:text-muted-foreground prose-p:leading-relaxed
               prose-a:text-primary prose-a:no-underline hover:prose-a:underline
@@ -134,7 +134,7 @@ export function PostTestimonial({
     <Card className={cn('border-primary/20 bg-card/50', className)}>
       <CardContent className="p-6 lg:p-8">
         <Quote className="h-8 w-8 text-primary/50 mb-4" />
-        <blockquote className="mb-4 font-sans text-lg text-foreground/80 leading-relaxed">
+        <blockquote className="mb-4 font-sans text-md text-foreground/80 leading-relaxed">
           &ldquo;{quote}&rdquo;
         </blockquote>
         <div className="flex items-center gap-3">

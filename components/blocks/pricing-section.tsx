@@ -146,7 +146,7 @@ function PricingButton({ button, isHighlighted, isFirst }: PricingButtonProps) {
     <Button
       asChild
       className={cn(
-        'w-full rounded-full font-semibold',
+        'w-full rounded-full font-medium',
         variantClasses[variant as keyof typeof variantClasses] || variantClasses.outline
       )}
       variant={variant === 'primary' ? 'default' : (variant as 'outline' | 'ghost' | 'secondary')}
@@ -207,7 +207,7 @@ function PricingCard({ plan }: PricingCardProps) {
         <div className="flex flex-col gap-4 text-center">
           <h3
             data-tina-field={tinaField(plan, 'name')}
-            className="text-xl sm:text-2xl font-semibold text-foreground"
+            className="text-xl sm:text-2xl font-medium text-foreground"
           >
             {plan.name}
           </h3>
@@ -217,7 +217,7 @@ function PricingCard({ plan }: PricingCardProps) {
             {isSpecialPrice ? (
               <data
                 value={plan.price || ''}
-                className={cn('text-4xl sm:text-5xl font-sans font-semibold', priceColor)}
+                className={cn('text-4xl sm:text-5xl font-sans font-medium', priceColor)}
               >
                 {plan.price}
               </data>
@@ -229,7 +229,7 @@ function PricingCard({ plan }: PricingCardProps) {
                   </span>
                   <data
                     value={plan.price || ''}
-                    className={cn('text-4xl sm:text-5xl font-sans font-semibold mx-1', priceColor)}
+                    className={cn('text-4xl sm:text-5xl font-sans font-medium mx-1', priceColor)}
                   >
                     {plan.price}
                   </data>

@@ -55,7 +55,7 @@ function CompactVariant({ milestone, isLast }: Omit<MilestoneCardProps, 'variant
         {milestone.date && (
           <span
             data-tina-field={tinaField(milestone, 'date')}
-            className="font-sans text-sm font-semibold text-primary"
+            className="font-sans text-sm font-medium text-primary"
           >
             {milestone.date}
           </span>
@@ -100,7 +100,7 @@ function TimelineVariant({ milestone, index, isLast }: Omit<MilestoneCardProps, 
           {isCompleted ? (
             <CheckCircle className="h-5 w-5" />
           ) : (
-            <span className="text-sm font-semibold">{index + 1}</span>
+            <span className="text-sm font-medium">{index + 1}</span>
           )}
         </div>
       </div>

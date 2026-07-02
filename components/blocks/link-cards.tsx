@@ -144,7 +144,7 @@ export function LinkCards({ data }: LinkCardsProps) {
             {data.title && (
               <h3
                 data-tina-field={tinaField(data, 'title')}
-                className="text-sm font-semibold text-foreground"
+                className="text-sm font-medium text-foreground"
               >
                 {data.title}
               </h3>

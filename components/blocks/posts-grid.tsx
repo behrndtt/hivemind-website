@@ -370,7 +370,7 @@ export function PostsGrid({ data, posts = [], sidebarContent, tags }: PostsGridP
               {data.subtitle && (
                 <p
                   data-tina-field={tinaField(data, 'subtitle')}
-                  className="text-muted-foreground whitespace-pre-line"
+                  className="text-muted-foreground whitespace-pre-line mb-4"
                 >
                   {data.subtitle}
                 </p>

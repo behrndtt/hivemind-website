@@ -268,7 +268,7 @@ export function CtaSection({ data }: CtaSectionProps) {
   const variant = data.variant || 'boxed';
   const alignment = data.alignment || 'center';
   const titleSize = data.titleSize || 'lg';
-  const subtitleSize = data.subtitleSize || 'md';
+  const subtitleSize = data.subtitleSize || 'lg';
   const cardBackground = data.cardBackground || 'default';
   const padding = data.padding || 'lg';
 
@@ -333,7 +333,7 @@ export function CtaSection({ data }: CtaSectionProps) {
                   <p
                     data-tina-field={tinaField(data, 'subtitle')}
                     className={cn(
-                      "text-muted-foreground max-w-2xl whitespace-pre-line",
+                      "text-muted-foreground max-w-2xl whitespace-pre-line mb-4",
                       subtitleSizeClasses[subtitleSize as keyof typeof subtitleSizeClasses],
                       alignment === 'center' && 'mx-auto'
                     )}
@@ -358,7 +358,7 @@ export function CtaSection({ data }: CtaSectionProps) {
                           size="lg"
                           variant={button?.variant === 'outline' ? 'outline' : 'default'}
                           className={cn(
-                            'rounded-full font-semibold px-8',
+                            'rounded-full font-medium px-8',
                             button?.variant === 'outline'
                               ? 'border-border hover:bg-muted hover:border-primary/50'
                               : 'bg-primary hover:bg-primary/90 text-primary-foreground'
@@ -434,7 +434,7 @@ export function CtaSection({ data }: CtaSectionProps) {
                 <p
                   data-tina-field={tinaField(data, 'subtitle')}
                   className={cn(
-                    "text-muted-foreground whitespace-pre-line",
+                    "text-muted-foreground whitespace-pre-line mb-4",
                     subtitleSizeClasses[subtitleSize as keyof typeof subtitleSizeClasses]
                   )}
                 >
@@ -510,7 +510,7 @@ export function CtaSection({ data }: CtaSectionProps) {
                   <p
                     data-tina-field={tinaField(data, 'subtitle')}
                     className={cn(
-                      "text-muted-foreground whitespace-pre-line",
+                      "text-muted-foreground whitespace-pre-line mb-4",
                       subtitleSizeClasses[subtitleSize as keyof typeof subtitleSizeClasses]
                     )}
                   >

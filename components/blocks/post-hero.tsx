@@ -284,8 +284,23 @@ export function PostHero({
       >
         {/* Animated backgrounds matching page-hero */}
         <div className="absolute inset-0">
-          <HexagonBackground />
-          <OrbsBackground />
+          {post.heroImg ? (
+            <>
+              <img
+                src={post.heroImg}
+                alt=""
+                data-tina-field={tinaField(post, 'heroImg')}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-linear-to-b from-background/90 via-background/75 to-background/95" />
+              <HexagonBackground />
+            </>
+          ) : (
+            <>
+              <HexagonBackground />
+              <OrbsBackground />
+            </>
+          )}
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -329,7 +344,7 @@ export function PostHero({
             {post.excerpt && (
               <p
                 data-tina-field={tinaField(post, 'excerpt')}
-                className="mb-8 max-w-3xl text-lg sm:text-xl text-muted-foreground"
+                className="mb-8 max-w-3xl text-md sm:text-xl text-muted-foreground"
               >
                 {typeof post.excerpt === 'string' 
                   ? post.excerpt 
@@ -397,7 +412,7 @@ export function PostHero({
                     >
                       <data
                         value={result?.value || ''}
-                        className="text-2xl md:text-3xl font-semibold text-primary"
+                        className="text-2xl md:text-3xl font-medium text-primary"
                       >
                         {result?.value}
                       </data>
@@ -412,28 +427,6 @@ export function PostHero({
           </AnimatedGroup>
         </div>
       </section>
-
-      {/* Hero Image */}
-      {post.heroImg && (
-        <section className="bg-background pb-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedGroup
-              preset="blur-slide"
-            >
-              <div
-                data-tina-field={tinaField(post, 'heroImg')}
-                className="relative aspect-video overflow-hidden rounded-2xl shadow-2xl ring-1 ring-border/10"
-              >
-                <img
-                  src={post.heroImg}
-                  alt={post.title || ''}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </AnimatedGroup>
-          </div>
-        </section>
-      )}
     </>
   );
 }
