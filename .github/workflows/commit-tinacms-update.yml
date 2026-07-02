@@ -1,0 +1,45 @@
+name: Commit TinaCMS Dependency Update
+on:
+  workflow_run:
+    workflows: ["Update TinaCMS Dependencies"]
+    types: [completed]
+
+# workflow_run is not subject to the Dependabot/fork token restriction that blocks the
+# upstream push-triggered job, so this GITHUB_TOKEN has real write access. This job never
+# executes any dependency code - it only applies a pre-built patch and commits it.
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Check out branch that triggered the update
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
+
+      - name: Download patch
+        uses: actions/download-artifact@v4
+        with:
+          name: tinacms-update-patch
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Apply patch
+        run: |
+          if [ -s tinacms-update.patch ]; then
+            git apply tinacms-update.patch
+          else
+            echo "No changes to apply"
+          fi
+          rm -f tinacms-update.patch
+
+      - name: Commit changes back to branch
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "Update TinaCMS generated files"
+          committer_name: GitHub Actions
+          committer_email: actions@github.com

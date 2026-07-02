@@ -4,8 +4,12 @@ on:
     branches:
       - dependabot/npm_and_yarn/**
 
+# Workflows triggered by a Dependabot push get a read-only GITHUB_TOKEN and no access to
+# Actions secrets (GitHub treats them like fork PRs). This job intentionally has no write
+# permissions - it only builds the update and hands off a patch via workflow_run to
+# commit-tinacms-update.yml, which runs unrestricted and does the actual push.
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   update-tinacms:
@@ -38,10 +42,16 @@ jobs:
       # "local schema doesn't match remote schema" until someone runs dev locally and pushes it.
       - name: Regenerate tina-lock.json
         run: timeout 90 pnpm exec tinacms dev --noWatch || true
-      # Commit changes
-      - name: Commit changes back to branch
-        uses: EndBug/add-and-commit@v9
+      # Package the changes as a patch instead of committing directly - this job has no
+      # write access, so the commit happens in the privileged workflow_run job below.
+      - name: Create patch of changes
+        run: |
+          git diff --binary > tinacms-update.patch
+          echo "Patch size: $(wc -l < tinacms-update.patch) lines"
+      - name: Upload patch
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
         with:
-          message: "Update TinaCMS generated files"
-          committer_name: GitHub Actions
-          committer_email: actions@github.com
+          name: tinacms-update-patch
+          path: tinacms-update.patch
+          retention-days: 1
