@@ -97,9 +97,6 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
       - name: Build with Next.js
-        # Uses the local, git-backed content and schema instead of validating against
-        # TinaCloud's remote index, since this site is a static export and doesn't need
-        # a live schema check to deploy (see package.json's "build-local" script).
         run: ${{ steps.detect-package-manager.outputs.runner }} build
         env:
           NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID }}
