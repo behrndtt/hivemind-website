@@ -217,7 +217,7 @@ function PricingCard({ plan }: PricingCardProps) {
             {isSpecialPrice ? (
               <data
                 value={plan.price || ''}
-                className={cn('text-4xl sm:text-5xl font-serif font-bold', priceColor)}
+                className={cn('text-4xl sm:text-5xl font-sans font-bold', priceColor)}
               >
                 {plan.price}
               </data>
@@ -229,7 +229,7 @@ function PricingCard({ plan }: PricingCardProps) {
                   </span>
                   <data
                     value={plan.price || ''}
-                    className={cn('text-4xl sm:text-5xl font-serif font-bold mx-1', priceColor)}
+                    className={cn('text-4xl sm:text-5xl font-sans font-bold mx-1', priceColor)}
                   >
                     {plan.price}
                   </data>

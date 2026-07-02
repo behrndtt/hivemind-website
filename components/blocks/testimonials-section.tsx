@@ -44,7 +44,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
         <blockquote
           data-tina-field={tinaField(testimonial, 'quote')}
-          className="text-md text-foreground/80 font-serif font-normal"
+          className="text-md text-foreground/80 font-sans font-normal"
         >
           &ldquo;{testimonial.quote}&rdquo;
         </blockquote>
@@ -59,7 +59,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
             />
           ) : (
             <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
-              <span className="text-primary font-serif font-normal">
+              <span className="text-primary font-sans font-normal">
                 {testimonial.author?.charAt(0) || 'A'}
               </span>
             </div>
@@ -67,7 +67,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
           <div>
             <div
               data-tina-field={tinaField(testimonial, 'author')}
-              className="font-serif font-normal text-foreground"
+              className="font-sans font-normal text-foreground"
             >
               {testimonial.author}
             </div>

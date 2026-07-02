@@ -26,7 +26,7 @@ function StepCard({ step, index }: StepCardProps) {
     <Card className="text-center">
       <CardContent className="text-center">
         <div
-          className="text-4xl font-serif font-bold text-primary/30"
+          className="text-4xl font-sans font-bold text-primary/30"
           aria-hidden="true"
         >
           {String(index + 1).padStart(2, '0')}

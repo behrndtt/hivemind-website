@@ -29,7 +29,7 @@ function InlineStripStat({ stat }: StatItemProps) {
       <data
         value={stat.value || ''}
         data-tina-field={tinaField(stat, 'value')}
-        className="block text-primary font-serif"
+        className="block text-primary font-sans font-semibold"
       >
         {stat.value}
       </data>
@@ -63,7 +63,7 @@ function CardGridStat({ stat }: StatItemProps) {
         <data
           value={stat.value || ''}
           data-tina-field={tinaField(stat, 'value')}
-          className="block text-primary font-serif"
+          className="block text-primary font-sans font-semibold"
         >
           {stat.value}
         </data>

@@ -181,31 +181,31 @@
     @apply bg-background text-foreground;
   }
 
-  /* Heading base styles - font-serif with appropriate weights and sizing */
+  /* Heading base styles - display version of body sans (Inter) with appropriate weights and sizing */
   h1 {
-    @apply font-serif font-normal text-4xl md:text-5xl;
+    @apply font-sans font-semibold tracking-tight text-4xl md:text-5xl;
   }
 
   h2 {
-    @apply font-serif font-normal tracking-tight text-3xl md:text-4xl;
+    @apply font-sans font-semibold tracking-tight text-3xl md:text-4xl;
   }
  
   h3 {
-    @apply font-serif font-light text-xl md:text-2xl;
+    @apply font-sans font-normal text-xl md:text-2xl;
   }
 
   h4 {
-    @apply font-serif font-light text-lg;
+    @apply font-sans font-normal text-lg;
   }
 
   h5,
   h6 {
-    @apply font-serif font-light normal-case text-base;
+    @apply font-sans font-normal normal-case text-base;
   }
 
   /* Data element styling for stats and prices - h2 equivalent sizing */
   data {
-    @apply font-serif font-normal text-3xl md:text-4xl;
+    @apply font-sans font-normal text-3xl md:text-4xl;
   }
 }
 

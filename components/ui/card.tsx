@@ -32,7 +32,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"h3">) {
   return (
     <h3
       data-slot="card-title"
-      className={cn("leading-none tracking-tight font-serif", className)}
+      className={cn("leading-none tracking-tight font-sans", className)}
       {...props}
     />
   )

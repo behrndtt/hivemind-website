@@ -55,7 +55,7 @@ function CompactVariant({ milestone, isLast }: Omit<MilestoneCardProps, 'variant
         {milestone.date && (
           <span
             data-tina-field={tinaField(milestone, 'date')}
-            className="font-serif text-sm font-bold text-primary"
+            className="font-sans text-sm font-bold text-primary"
           >
             {milestone.date}
           </span>
