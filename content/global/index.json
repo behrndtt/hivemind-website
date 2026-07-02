@@ -177,6 +177,13 @@
           }
         ],
         "_template": "links"
+      },
+      {
+        "title": "Accreditations",
+        "badges": [
+          {}
+        ],
+        "_template": "badges"
       }
     ],
     "social": [
