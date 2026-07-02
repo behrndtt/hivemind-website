@@ -56,6 +56,7 @@ export default function CaseStudyClientPage(props: ClientCaseStudyProps) {
               <PostSidebar
                 post={caseStudy}
                 results={sidebarResults}
+                contentType="case-studies"
                 cta={{
                   title: 'Similar Results for Your Business?',
                   description: 'Let us help you achieve similar outcomes with our proven approach.',

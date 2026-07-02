@@ -722,7 +722,6 @@ export const contactCardFields: TinaField[] = [
       { label: 'Email', value: 'email' },
       { label: 'Phone', value: 'phone' },
       { label: 'Address', value: 'address' },
-      { label: 'Hours', value: 'hours' },
       { label: 'Social', value: 'social' },
       { label: 'Other', value: 'other' },
     ],
@@ -733,6 +732,12 @@ export const contactCardFields: TinaField[] = [
     label: 'Icon',
     name: 'icon',
   } as TinaField,
+  {
+    type: 'image',
+    label: 'Image',
+    name: 'image',
+    description: 'Optional image. Replaces the icon when set.',
+  },
   {
     type: 'string',
     label: 'Title',

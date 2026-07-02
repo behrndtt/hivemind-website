@@ -3,6 +3,14 @@
 import type { ReactNode } from 'react';
 
 /**
+ * Escape regex metacharacters so highlight words are matched literally
+ * instead of being interpreted as regex syntax.
+ */
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
  * Render title with highlighted words using primary colour.
  * Uses React elements for safer rendering (no dangerouslySetInnerHTML).
  *
@@ -19,7 +27,7 @@ export function renderTitle(
   const words = highlightWords.split(',').map((w) => w.trim()).filter(Boolean);
   if (words.length === 0) return title;
 
-  const regex = new RegExp(`(${words.join('|')})`, 'gi');
+  const regex = new RegExp(`(${words.map(escapeRegExp).join('|')})`, 'gi');
   const parts = title.split(regex);
 
   return parts.map((part, index) =>

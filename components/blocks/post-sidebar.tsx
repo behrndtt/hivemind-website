@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { tinaField } from 'tinacms/dist/react';
 import { ArrowRight, TrendingUp, Tag } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { getTagBySlug, formatTagSlug } from '@/lib/tags';
 import { InView } from '@/components/motion-primitives/in-view';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -43,6 +44,8 @@ export interface PostSidebarProps {
   results?: PostResult[];
   /** CTA configuration */
   cta?: PostSidebarCta;
+  /** Content type, used to build the correct tag link path */
+  contentType?: 'insights' | 'case-studies';
   /** Custom class name */
   className?: string;
 }
@@ -51,10 +54,12 @@ export function PostSidebar({
   post,
   results,
   cta,
+  contentType = 'insights',
   className,
 }: PostSidebarProps) {
   // Extract tags from post - handle potential undefined/null
   const tags = Array.isArray(post.tags) ? post.tags : [];
+  const tagBasePath = contentType === 'case-studies' ? '/case-studies/tag' : '/insights/tag';
 
   return (
     <div className={cn('space-y-6', className)}>
@@ -113,19 +118,17 @@ export function PostSidebar({
                 className="flex flex-wrap gap-2"
               >
                 {tags.map((tagItem, index) => {
-                  // Handle TinaCMS tag reference structure
-                  const tagRef = tagItem as { tag?: { name?: string; _sys?: { filename?: string } } } | string | null;
-                  const tagName = typeof tagRef === 'string' 
-                    ? tagRef 
-                    : tagRef?.tag?.name || 'Tag';
-                  const tagSlug = typeof tagRef === 'string'
-                    ? tagRef.toLowerCase().replace(/\s+/g, '-')
-                    : tagRef?.tag?._sys?.filename || tagName.toLowerCase().replace(/\s+/g, '-');
-                  
+                  // Tags are stored as { tag: 'slug-string' } (see lib/tags.ts)
+                  const tagRef = tagItem as { tag?: string | null } | string | null;
+                  const tagSlug = typeof tagRef === 'string' ? tagRef : tagRef?.tag;
+                  if (!tagSlug) return null;
+
+                  const tagName = getTagBySlug(tagSlug)?.name ?? formatTagSlug(tagSlug);
+
                   return (
                     <Link
                       key={index}
-                      href={`/tags/${tagSlug}`}
+                      href={`${tagBasePath}/${tagSlug}`}
                     >
                       <Badge
                         variant="secondary"

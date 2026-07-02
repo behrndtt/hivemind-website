@@ -65,24 +65,50 @@ export const Footer = () => {
           </div>
 
           {/* Footer Columns */}
-          {footer.columns?.map((column, idx) => (
-            <div key={idx} data-tina-field={tinaField(column)} className="flex flex-col gap-4">
-              <h3 className="text-foreground font-semibold">{column?.title}</h3>
-              <ul className="space-y-3">
-                {column?.links?.map((link, linkIdx) => (
-                  <li key={linkIdx}>
-                    <Link
-                      href={link?.href || "#"}
-                      className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                      data-tina-field={tinaField(link)}
-                    >
-                      {link?.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {footer.columns?.map((column, idx) => {
+            if (column?.__typename === "GlobalFooterColumnsBadges") {
+              if (!column.badges || column.badges.length === 0) return null;
+              return (
+                <div key={idx} data-tina-field={tinaField(column)} className="flex flex-col gap-4">
+                  {column.title && (
+                    <h3 className="text-foreground font-semibold">{column.title}</h3>
+                  )}
+                  <div className="flex flex-wrap items-center gap-4">
+                    {column.badges.map((badge, badgeIdx) =>
+                      badge?.image ? (
+                        <img
+                          key={badgeIdx}
+                          src={badge.image}
+                          alt={badge.altText || ""}
+                          data-tina-field={tinaField(badge)}
+                          className="h-10 w-auto object-contain"
+                        />
+                      ) : null
+                    )}
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <div key={idx} data-tina-field={tinaField(column)} className="flex flex-col gap-4">
+                <h3 className="text-foreground font-semibold">{column?.title}</h3>
+                <ul className="space-y-3">
+                  {column?.links?.map((link, linkIdx) => (
+                    <li key={linkIdx}>
+                      <Link
+                        href={link?.href || "#"}
+                        className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                        data-tina-field={tinaField(link)}
+                      >
+                        {link?.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
 
         {/* Bottom Bar */}

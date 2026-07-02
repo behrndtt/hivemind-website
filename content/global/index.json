@@ -131,7 +131,8 @@
             "label": "Endpoint Management",
             "href": "/services/support#endpoint"
           }
-        ]
+        ],
+        "_template": "links"
       },
       {
         "title": "Company",
@@ -152,7 +153,8 @@
             "label": "Contact",
             "href": "/contact"
           }
-        ]
+        ],
+        "_template": "links"
       },
       {
         "title": "Specialties",
@@ -173,7 +175,8 @@
             "label": "Entra ID & Security",
             "href": "/services/consulting#identity"
           }
-        ]
+        ],
+        "_template": "links"
       }
     ],
     "social": [

@@ -7,6 +7,7 @@ import { tinaField } from 'tinacms/dist/react';
 import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { renderTitle } from '@/lib/render-title';
 import { Icon } from '@/components/icon';
 import { AnimatedGroup } from '@/components/motion-primitives/animated-group';
 import { InView } from '@/components/motion-primitives/in-view';
@@ -23,27 +24,6 @@ import type {
 
 // Post type union for insights and case studies
 type Post = Insight | CaseStudy;
-
-/**
- * Render title with highlighted words
- */
-function renderTitle(title: string, highlightWords?: string) {
-  if (!highlightWords) return title;
-
-  const words = highlightWords.split(',').map((w) => w.trim());
-  const regex = new RegExp(`(${words.join('|')})`, 'gi');
-  const parts = title.split(regex);
-
-  return parts.map((part, index) =>
-    words.some((w) => w.toLowerCase() === part.toLowerCase()) ? (
-      <span key={index} className="text-primary">
-        {part}
-      </span>
-    ) : (
-      part
-    )
-  );
-}
 
 /**
  * Format date for display
@@ -288,9 +268,15 @@ export function PostsGrid({ data, posts = [], sidebarContent, tags }: PostsGridP
       return dateB - dateA;
     });
     
-    // If there's a featured post, put it first, then all posts
+    // If there's a featured post, put it first, then the remaining posts
+    // (excluding the featured post itself, otherwise it renders twice)
     if (newestFeatured) {
-      return [newestFeatured, ...allPostsByDate];
+      const remainingPosts = allPostsByDate.filter(
+        (post) =>
+          !newestFeatured._sys?.filename ||
+          post._sys?.filename !== newestFeatured._sys.filename
+      );
+      return [newestFeatured, ...remainingPosts];
     }
     
     return allPostsByDate;
@@ -384,7 +370,7 @@ export function PostsGrid({ data, posts = [], sidebarContent, tags }: PostsGridP
               {data.subtitle && (
                 <p
                   data-tina-field={tinaField(data, 'subtitle')}
-                  className="text-muted-foreground"
+                  className="text-muted-foreground whitespace-pre-line"
                 >
                   {data.subtitle}
                 </p>

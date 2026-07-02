@@ -103,7 +103,7 @@ export function EmptyState({ data }: EmptyStateProps) {
           {data.description && (
             <p
               data-tina-field={tinaField(data, 'description')}
-              className="max-w-md text-muted-foreground"
+              className="max-w-md text-muted-foreground whitespace-pre-line"
             >
               {data.description}
             </p>

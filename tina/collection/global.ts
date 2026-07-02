@@ -138,6 +138,89 @@ const navDropdownTemplate: Template = {
   ],
 };
 
+// Template for a footer column of simple links
+const footerLinksTemplate: Template = {
+  name: "links",
+  label: "Links Column",
+  ui: {
+    itemProps: (item) => ({ label: item?.title || "Links Column" }),
+    defaultItem: {
+      title: "Column",
+    },
+  },
+  fields: [
+    {
+      type: "string",
+      label: "Title",
+      name: "title",
+    },
+    {
+      type: "object",
+      label: "Links",
+      name: "links",
+      list: true,
+      ui: {
+        itemProps: (item) => ({ label: item?.label }),
+      },
+      fields: [
+        {
+          type: "string",
+          label: "Label",
+          name: "label",
+        },
+        {
+          type: "string",
+          label: "Link",
+          name: "href",
+        },
+      ],
+    },
+  ],
+};
+
+// Template for a footer column of partner/accreditation badge images (decorative, non-clickable)
+const footerBadgesTemplate: Template = {
+  name: "badges",
+  label: "Badges Column",
+  ui: {
+    itemProps: (item) => ({ label: item?.title || "Badges Column" }),
+    defaultItem: {
+      title: "Accreditations",
+    },
+  },
+  fields: [
+    {
+      type: "string",
+      label: "Title",
+      name: "title",
+    },
+    {
+      type: "object",
+      label: "Badges",
+      name: "badges",
+      list: true,
+      ui: {
+        itemProps: (item) => ({ label: item?.altText || "Badge" }),
+      },
+      fields: [
+        {
+          type: "image",
+          label: "Image",
+          name: "image",
+          uploadDir: () => "footer-badges",
+          required: true,
+        },
+        {
+          type: "string",
+          label: "Alt Text",
+          name: "altText",
+          required: true,
+        },
+      ],
+    },
+  ],
+};
+
 const Global: Collection = {
   label: "Global",
   name: "global",
@@ -230,37 +313,7 @@ const Global: Collection = {
           label: "Footer Columns",
           name: "columns",
           list: true,
-          ui: {
-            itemProps: (item) => ({ label: item?.title }),
-          },
-          fields: [
-            {
-              type: "string",
-              label: "Title",
-              name: "title",
-            },
-            {
-              type: "object",
-              label: "Links",
-              name: "links",
-              list: true,
-              ui: {
-                itemProps: (item) => ({ label: item?.label }),
-              },
-              fields: [
-                {
-                  type: "string",
-                  label: "Label",
-                  name: "label",
-                },
-                {
-                  type: "string",
-                  label: "Link",
-                  name: "href",
-                },
-              ],
-            },
-          ],
+          templates: [footerLinksTemplate, footerBadgesTemplate],
         },
         {
           type: "object",

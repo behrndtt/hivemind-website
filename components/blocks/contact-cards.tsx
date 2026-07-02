@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import type { Template } from 'tinacms';
 import { tinaField } from 'tinacms/dist/react';
-import { Mail, Phone, MapPin, Clock, ExternalLink, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, ExternalLink, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { renderTitle } from '@/lib/render-title';
 import { Icon } from '@/components/icon';
 import { AnimatedGroup } from '@/components/motion-primitives/animated-group';
 import { InView } from '@/components/motion-primitives/in-view';
@@ -19,23 +20,6 @@ import type {
 } from '@/tina/__generated__/types';
 
 /**
- * Render title with highlighted words
- */
-function renderTitle(title: string, highlightWords?: string) {
-  if (!highlightWords) return title;
-
-  const words = highlightWords.split(',').map((w) => w.trim());
-  let result = title;
-
-  words.forEach((word) => {
-    const regex = new RegExp(`(${word})`, 'gi');
-    result = result.replace(regex, '<span class="text-primary">$1</span>');
-  });
-
-  return <span dangerouslySetInnerHTML={{ __html: result }} />;
-}
-
-/**
  * Get icon component based on contact type
  */
 function getContactIcon(type?: string | null) {
@@ -46,8 +30,6 @@ function getContactIcon(type?: string | null) {
       return Phone;
     case 'address':
       return MapPin;
-    case 'hours':
-      return Clock;
     default:
       return Mail;
   }
@@ -84,13 +66,22 @@ function CardVariant({ card }: Omit<ContactCardProps, 'variant'>) {
       data-tina-field={tinaField(card)}
     >
       <CardContent className="flex flex-col items-center text-center">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
-          {card.icon ? (
-            <Icon data={card.icon} className="h-7 w-7 text-primary" />
-          ) : (
-            <IconComponent className="h-7 w-7 text-primary" />
-          )}
-        </div>
+        {card.image ? (
+          <img
+            src={card.image}
+            alt={card.title || ''}
+            className="h-14 w-14 rounded-full object-cover"
+            data-tina-field={tinaField(card, 'image')}
+          />
+        ) : (
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+            {card.icon ? (
+              <Icon data={card.icon} className="h-7 w-7 text-primary" />
+            ) : (
+              <IconComponent className="h-7 w-7 text-primary" />
+            )}
+          </div>
+        )}
         <div className="flex flex-col gap-1">
           <h3
             data-tina-field={tinaField(card, 'title')}
@@ -147,13 +138,22 @@ function ListVariant({ card }: Omit<ContactCardProps, 'variant'>) {
       data-tina-field={tinaField(card)}
       className="flex items-start gap-4 py-4 border-b border-border last:border-0"
     >
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-        {card.icon ? (
-          <Icon data={card.icon} className="h-5 w-5 text-primary" />
-        ) : (
-          <IconComponent className="h-5 w-5 text-primary" />
-        )}
-      </div>
+      {card.image ? (
+        <img
+          src={card.image}
+          alt={card.title || ''}
+          className="h-10 w-10 shrink-0 rounded-lg object-cover"
+          data-tina-field={tinaField(card, 'image')}
+        />
+      ) : (
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+          {card.icon ? (
+            <Icon data={card.icon} className="h-5 w-5 text-primary" />
+          ) : (
+            <IconComponent className="h-5 w-5 text-primary" />
+          )}
+        </div>
+      )}
       <div className="flex-1">
         <h3
           data-tina-field={tinaField(card, 'title')}
@@ -204,7 +204,14 @@ function MinimalVariant({ card }: Omit<ContactCardProps, 'variant'>) {
       data-tina-field={tinaField(card)}
       className="flex items-center gap-3"
     >
-      {card.icon ? (
+      {card.image ? (
+        <img
+          src={card.image}
+          alt={card.title || ''}
+          className="h-5 w-5 rounded object-cover"
+          data-tina-field={tinaField(card, 'image')}
+        />
+      ) : card.icon ? (
         <Icon data={card.icon} className="h-5 w-5 text-primary" />
       ) : (
         <IconComponent className="h-5 w-5 text-primary" />
@@ -241,6 +248,122 @@ function MinimalVariant({ card }: Omit<ContactCardProps, 'variant'>) {
   );
 }
 
+const imageTextRatioClasses: Record<string, { image: string; text: string }> = {
+  '50-50': { image: 'lg:w-1/2', text: 'lg:w-1/2' },
+  '60-40': { image: 'lg:w-3/5', text: 'lg:w-2/5' },
+  '40-60': { image: 'lg:w-2/5', text: 'lg:w-3/5' },
+  '66-33': { image: 'lg:w-2/3', text: 'lg:w-1/3' },
+  '33-66': { image: 'lg:w-1/3', text: 'lg:w-2/3' },
+};
+
+const imageTextAlignClasses: Record<string, string> = {
+  start: 'items-start',
+  center: 'items-center',
+  end: 'items-end',
+};
+
+interface ImageTextVariantProps {
+  card: PageBlocksContactCardsCards;
+  columnRatio: string;
+  imagePosition: 'left' | 'right';
+  verticalAlign: string;
+}
+
+/**
+ * Image + Text row - image on one side, contact details on the other.
+ * Column ratio, image position, and vertical alignment are configurable per block.
+ */
+function ImageTextVariant({ card, columnRatio, imagePosition, verticalAlign }: ImageTextVariantProps) {
+  const IconComponent = getContactIcon(card.type);
+  const href = getContactHref(card.type, card.value);
+  const widths = imageTextRatioClasses[columnRatio] || imageTextRatioClasses['50-50'];
+
+  return (
+    <div
+      data-tina-field={tinaField(card)}
+      className={cn(
+        'flex flex-col lg:flex-row gap-8 lg:gap-12',
+        imageTextAlignClasses[verticalAlign] || imageTextAlignClasses.start,
+        imagePosition === 'right' && 'lg:flex-row-reverse'
+      )}
+    >
+      <div className={cn('w-full', widths.image)}>
+        {card.image ? (
+          <img
+            src={card.image}
+            alt={card.title || ''}
+            className="aspect-square w-full rounded-lg object-cover"
+            data-tina-field={tinaField(card, 'image')}
+          />
+        ) : (
+          <div className="flex aspect-square w-full items-center justify-center rounded-lg bg-primary/10">
+            {card.icon ? (
+              <Icon data={card.icon} className="h-12 w-12 text-primary" />
+            ) : (
+              <IconComponent className="h-12 w-12 text-primary" />
+            )}
+          </div>
+        )}
+      </div>
+      <div className={cn('flex w-full flex-col gap-2', widths.text)}>
+        <h3
+          data-tina-field={tinaField(card, 'title')}
+          className="text-xl text-foreground"
+        >
+          {card.title}
+        </h3>
+        {card.contactDescription && (
+          <p
+            data-tina-field={tinaField(card, 'contactDescription')}
+            className="text-muted-foreground"
+          >
+            {card.contactDescription}
+          </p>
+        )}
+        {card.value && (
+          href ? (
+            <Link
+              href={href}
+              target={card.type === 'address' ? '_blank' : undefined}
+              rel={card.type === 'address' ? 'noopener noreferrer' : undefined}
+              className="inline-flex items-center gap-1 text-primary hover:underline"
+              data-tina-field={tinaField(card, 'value')}
+            >
+              {card.value}
+              {card.type === 'address' && <ExternalLink className="h-3 w-3" />}
+            </Link>
+          ) : (
+            <span
+              data-tina-field={tinaField(card, 'value')}
+              className="font-serif text-foreground"
+            >
+              {card.value}
+            </span>
+          )
+        )}
+        {card.href && card.action && (
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="mt-2 w-fit rounded-full border-border text-muted-foreground hover:border-primary hover:text-foreground"
+          >
+            <Link
+              href={card.href}
+              target={card.href.startsWith('http') ? '_blank' : undefined}
+              rel={card.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              data-tina-field={tinaField(card, 'action')}
+            >
+              {card.action}
+              <ArrowRight className="ml-2 h-3 w-3" />
+            </Link>
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function ContactCard({ card, variant }: ContactCardProps) {
   switch (variant) {
     case 'list':
@@ -257,12 +380,15 @@ export interface ContactCardsProps {
   data: PageBlocksContactCards;
 }
 
-type ContactVariant = 'list' | 'cards' | 'minimal';
+type ContactVariant = 'list' | 'cards' | 'minimal' | 'imageText';
 
 export function ContactCards({ data }: ContactCardsProps) {
   const variant = (data.variant || 'cards') as ContactVariant;
   const columns = data.columns || 3;
   const cards = data.cards || [];
+  const columnRatio = data.columnRatio || '50-50';
+  const imagePosition = (data.imagePosition || 'left') as 'left' | 'right';
+  const verticalAlign = data.verticalAlign || 'start';
 
   const columnClasses = {
     2: 'grid-cols-1 md:grid-cols-2',
@@ -307,7 +433,7 @@ export function ContactCards({ data }: ContactCardsProps) {
               {data.subtitle && (
                 <p
                   data-tina-field={tinaField(data, 'subtitle')}
-                  className="text-muted-foreground"
+                  className="text-muted-foreground whitespace-pre-line"
                 >
                   {data.subtitle}
                 </p>
@@ -325,6 +451,18 @@ export function ContactCards({ data }: ContactCardsProps) {
               <div key={index} className="h-full">
                 <ContactCard card={card!} variant={variant} />
               </div>
+            ))}
+          </AnimatedGroup>
+        ) : variant === 'imageText' ? (
+          <AnimatedGroup preset="blur-slide" className="space-y-12">
+            {cards.map((card, index) => (
+              <ImageTextVariant
+                key={index}
+                card={card!}
+                columnRatio={columnRatio}
+                imagePosition={imagePosition}
+                verticalAlign={verticalAlign}
+              />
             ))}
           </AnimatedGroup>
         ) : variant === 'list' ? (
@@ -375,13 +513,48 @@ export const contactCardsBlockSchema: Template = {
         { value: 'cards', label: 'Cards Grid' },
         { value: 'list', label: 'List View' },
         { value: 'minimal', label: 'Minimal Inline' },
+        { value: 'imageText', label: 'Image + Text Rows' },
       ],
     },
     {
       type: 'number',
       label: 'Columns',
       name: 'columns',
-      description: 'Number of columns (2-4). Only applies to cards variant.',
+      description: 'Number of columns (2-4). Only applies to Cards Grid variant.',
+    },
+    {
+      type: 'string',
+      label: 'Image/Text Column Ratio',
+      name: 'columnRatio',
+      options: [
+        { value: '50-50', label: '50 / 50' },
+        { value: '60-40', label: '60 / 40' },
+        { value: '40-60', label: '40 / 60' },
+        { value: '66-33', label: '66 / 33' },
+        { value: '33-66', label: '33 / 66' },
+      ],
+      description: 'Width split between image and text. Only applies to Image + Text Rows variant.',
+    },
+    {
+      type: 'string',
+      label: 'Image Position',
+      name: 'imagePosition',
+      options: [
+        { value: 'left', label: 'Left' },
+        { value: 'right', label: 'Right' },
+      ],
+      description: 'Side the image appears on. Only applies to Image + Text Rows variant.',
+    },
+    {
+      type: 'string',
+      label: 'Vertical Alignment',
+      name: 'verticalAlign',
+      options: [
+        { value: 'start', label: 'Top' },
+        { value: 'center', label: 'Center' },
+        { value: 'end', label: 'Bottom' },
+      ],
+      description: 'Vertical alignment of image and text. Only applies to Image + Text Rows variant.',
     },
     badgeField as any,
     {

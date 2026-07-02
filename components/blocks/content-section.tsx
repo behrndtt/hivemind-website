@@ -7,6 +7,7 @@ import { tinaField } from 'tinacms/dist/react';
 import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { renderTitle } from '@/lib/render-title';
 import { Icon } from '@/components/icon';
 import { InView } from '@/components/motion-primitives/in-view';
 import { Badge } from '@/components/ui/badge';
@@ -16,27 +17,6 @@ import { highlightWordsField, badgeField } from '@/tina/fields/shared';
 import { iconSchema } from '@/tina/fields/icon';
 import { components } from '@/components/mdx-components';
 import type { PageBlocksContentSection } from '@/tina/__generated__/types';
-
-/**
- * Render title with highlighted words
- */
-function renderTitle(title: string, highlightWords?: string) {
-  if (!highlightWords) return title;
-
-  const words = highlightWords.split(',').map((w) => w.trim());
-  const regex = new RegExp(`(${words.join('|')})`, 'gi');
-  const parts = title.split(regex);
-
-  return parts.map((part, index) =>
-    words.some((w) => w.toLowerCase() === part.toLowerCase()) ? (
-      <span key={index} className="text-primary">
-        {part}
-      </span>
-    ) : (
-      part
-    )
-  );
-}
 
 export interface ContentSectionProps {
   data: PageBlocksContentSection;
@@ -79,7 +59,7 @@ export function ContentSection({ data }: ContentSectionProps) {
       {data.subtitle && (
         <p
           data-tina-field={tinaField(data, 'subtitle')}
-          className="text-muted-foreground text-lg mb-6"
+          className="text-muted-foreground text-lg mb-6 whitespace-pre-line"
         >
           {data.subtitle}
         </p>

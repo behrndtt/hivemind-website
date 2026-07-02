@@ -47,6 +47,7 @@ export default function InsightClientPage(props: ClientInsightProps) {
             <div className="lg:col-span-1">
               <PostSidebar
                 post={insight}
+                contentType="insights"
                 cta={{
                   title: 'Need Expert Guidance?',
                   description: 'Our team can help you implement these strategies in your organisation.',

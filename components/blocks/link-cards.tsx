@@ -152,7 +152,7 @@ export function LinkCards({ data }: LinkCardsProps) {
             {data.subtitle && (
               <p
                 data-tina-field={tinaField(data, 'subtitle')}
-                className="text-xs text-muted-foreground mt-1"
+                className="text-xs text-muted-foreground mt-1 whitespace-pre-line"
               >
                 {data.subtitle}
               </p>

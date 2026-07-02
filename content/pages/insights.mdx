@@ -8,37 +8,31 @@ blocks:
     highlightWords: Insights
     subtitle: 'What we’re working on, what’s changing, and what we’re seeing across Microsoft environments.'
     _template: pageHero
-  - columnRatio: 60-40
+  - variant: list
+    contentType: insights
+    columns: 1
+    limit: 6
+    showSidebar: true
+    title: ''
+    subtitle: ''
+    _template: postsGrid
+  - background: bg-muted/50
+    variant: compact
+    columns: 1
     gap: md
-    padding: md
-    verticalAlign: start
-    leftColumn:
-      - variant: featured
-        contentType: insights
-        columns: 1
-        limit: 1
-        showSidebar: false
-        title: ''
-        subtitle: ''
-        _template: postsGrid
-    rightColumn:
-      - background: bg-muted/50
-        variant: compact
-        columns: 1
-        gap: md
-        title: Quick Links
-        subtitle: Explore our offerings.
-        cards:
-          - title: Link Title
-            description: ''
-            href: /
-          - title: Link Title
-            description: ''
-            href: /
-          - title: Link Title
-            description: ''
-            href: /
-        _template: linkCards
+    title: Quick Links
+    subtitle: Explore our offerings.
+    cards:
+      - title: Link Title
+        description: ''
+        href: /
+      - title: Link Title
+        description: ''
+        href: /
+      - title: Link Title
+        description: ''
+        href: /
+    _template: linkCards
       - variant: compact
         alignment: center
         cardBackground: ''

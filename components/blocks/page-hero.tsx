@@ -6,6 +6,7 @@ import { tinaField } from 'tinacms/dist/react';
 import { motion, useMotionValue, useSpring, useTransform, Transition } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { renderTitle } from '@/lib/render-title';
 import { Icon } from '@/components/icon';
 import { AnimatedGroup } from '@/components/motion-primitives/animated-group';
 import { TextEffect } from '@/components/motion-primitives/text-effect';
@@ -422,25 +423,6 @@ function RadialBackground() {
   );
 }
 
-/**
- * Render title with highlighted words
- */
-function renderTitle(title: string, highlightWords?: string) {
-  if (!highlightWords) return title;
-
-  const parts = title.split(new RegExp(`(${highlightWords})`, 'gi'));
-
-  return parts.map((part, index) =>
-    part.toLowerCase() === highlightWords.toLowerCase() ? (
-      <span key={index} className="text-primary">
-        {part}
-      </span>
-    ) : (
-      part
-    )
-  );
-}
-
 export interface PageHeroProps {
   data: PageBlocksPageHero;
 }
@@ -532,7 +514,7 @@ export function PageHero({ data }: PageHeroProps) {
             <p
               data-tina-field={tinaField(data, 'subtitle')}
               className={cn(
-                'text-muted-foreground mb-8',
+                'text-muted-foreground mb-8 whitespace-pre-line',
                 isFullVariant ? 'text-lg sm:text-xl max-w-2xl' : 'text-lg max-w-2xl',
                 data.align === 'center' && 'mx-auto'
               )}
