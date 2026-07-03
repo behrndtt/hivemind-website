@@ -72,7 +72,7 @@ export default function RootLayout({
       "Adelaide-based Microsoft cloud consulting specialists. Expert solutions for Microsoft 365, Azure, Intune & Entra ID.",
     url: "https://hivemindsolutions.com.au",
     email: "hello@hivemindsolutions.com.au",
-    telephone: "+61881234567",
+    telephone: "+61871181919",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Adelaide",
