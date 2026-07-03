@@ -1,4 +1,4 @@
-import type { Variants } from "motion/react";
+import type { TargetAndTransition, Variants } from "motion/react";
 
 /**
  * Motion animation variants for consistent animations across the site.
@@ -179,6 +179,19 @@ export const hoverScale = {
 // Hover lift animation (subtle y movement)
 export const hoverLift = {
   whileHover: { y: -4 },
+  transition: { type: "spring", stiffness: 400, damping: 17 },
+};
+
+// Button hover/tap micro-interaction — subtle scale + lift for whileHover/whileTap props
+export const buttonHover: TargetAndTransition = {
+  scale: 1.02,
+  y: -1,
+  transition: { type: "spring", stiffness: 400, damping: 17 },
+};
+
+export const buttonTap: TargetAndTransition = {
+  scale: 0.98,
+  y: 0,
   transition: { type: "spring", stiffness: 400, damping: 17 },
 };
 

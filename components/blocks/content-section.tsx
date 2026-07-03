@@ -85,7 +85,7 @@ export function ContentSection({ data }: ContentSectionProps) {
                 className={cn(
                   'rounded-full px-8 font-medium',
                   action?.type === 'link'
-                    ? 'text-primary hover:text-primary/80 hover:bg-transparent px-0'
+                    ? 'text-primary bg-transparent hover:text-primary/80 hover:bg-transparent px-0'
                     : 'bg-primary hover:bg-primary/90 text-primary-foreground'
                 )}
               >

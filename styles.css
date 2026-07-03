@@ -207,6 +207,12 @@
   data {
     @apply font-heading font-bold text-3xl md:text-4xl;
   }
+
+  /* Tailwind v4 defaults button cursor to `default` - restore pointer for clickable affordance */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
 /* Smooth scrolling */

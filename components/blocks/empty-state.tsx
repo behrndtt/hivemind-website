@@ -115,8 +115,8 @@ export function EmptyState({ data }: EmptyStateProps) {
               {data.secondaryCta && (
                 <Button
                   asChild
-                  variant="outline"
-                  className="gap-2 rounded-full border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                  variant="ghost"
+                  className="gap-2 rounded-full border border-transparent text-muted-foreground hover:border-primary/50 hover:text-foreground"
                 >
                   <Link
                     href={data.secondaryCta.href || '#'}

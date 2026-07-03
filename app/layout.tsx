@@ -64,9 +64,39 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const localBusinessJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Hivemind Solutions",
+    description:
+      "Adelaide-based Microsoft cloud consulting specialists. Expert solutions for Microsoft 365, Azure, Intune & Entra ID.",
+    url: "https://hivemindsolutions.com.au",
+    email: "hello@hivemindsolutions.com.au",
+    telephone: "+61881234567",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Adelaide",
+      addressRegion: "SA",
+      addressCountry: "AU",
+    },
+    areaServed: "AU",
+    sameAs: ["https://www.linkedin.com/company/hivemind-solutions"],
+    knowsAbout: [
+      "Microsoft 365",
+      "Microsoft Azure",
+      "Microsoft Intune",
+      "Microsoft Entra ID",
+    ],
+  };
+
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${urbanist.variable} min-h-screen bg-background font-sans antialiased flex flex-col text-foreground`}>
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
         <VideoDialogProvider>
           {children}
           <VideoDialog />

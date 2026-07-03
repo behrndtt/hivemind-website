@@ -89,7 +89,7 @@ function CardVariant({ post, contentType }: Omit<PostCardProps, 'variant'>) {
         )}
       </CardContent>
       <CardFooter>
-        <Button variant="ghost" className="text-primary p-0 hover:bg-transparent" asChild>
+        <Button variant="ghost" className="text-primary bg-transparent p-0 hover:bg-transparent" asChild>
           <Link href={url}>
             Read more <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
