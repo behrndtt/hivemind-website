@@ -56,33 +56,6 @@ export function PostContent({ post, className }: PostContentProps) {
         viewOptions={{ once: true }}
         className="flex flex-col gap-8"
       >
-        {/* Case Study Client Info */}
-        {isCaseStudy && caseStudy.client && (
-          <div className="flex flex-col gap-2 rounded-lg border border-border bg-card/50 p-6">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <Building2 className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <span className="text-sm text-muted-foreground">Client</span>
-                <h3
-                  data-tina-field={tinaField(post, 'client')}
-                  className="text-lg text-foreground"
-                >
-                  {caseStudy.client}
-                </h3>
-              </div>
-            </div>
-            {caseStudy.industry && (
-              <div
-                data-tina-field={tinaField(post, 'industry')}
-                className="text-sm text-muted-foreground"
-              >
-                Industry: {caseStudy.industry}
-              </div>
-            )}
-          </div>
-        )}
 
         {/* Main Body Content */}
         {post._body && (
