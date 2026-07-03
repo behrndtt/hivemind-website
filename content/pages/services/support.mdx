@@ -15,8 +15,8 @@ blocks:
       - label: Discuss Your Needs
         href: /contact
         variant: primary
-      - label: Read Client Stories
-        href: '#plans'
+      - label: View Support Plans
+        href: '#helpdesk'
         variant: outline
     _template: pageHero
   - background: bg-card
@@ -147,14 +147,29 @@ blocks:
           Whether you need specialist escalation, ongoing administration, security uplift, cloud support, or regular advisory input, we shape the support model around your environment, your governance requirements, and the capability you already have in place.
         _template: contentSection
     rightColumn:
-      - layout: textOnly
-        align: left
-        padding: md
-        title: ''
-        subtitle: ''
-        body: |
-          test 
-        _template: contentSection
+      - variant: boxed
+        alignment: left
+        cardBackground: primary
+        padding: sm
+        title: Looking for senior backup?
+        subtitle: 'We design flexible, transparent support and advisory plans around the way your organisation operates.'
+        features:
+          - icon:
+              name: BiCheckCircle
+            text: Direct access to consultants
+          - icon:
+              name: BiCheckCircle
+            text: Local Adelaide-based specialists
+          - icon:
+              name: BiCheckCircle
+            text: Focus on capability transfer
+        buttons:
+          - label: Discuss Support Plans
+            href: '#helpdesk'
+            variant: default
+            icon:
+              color: white
+        _template: ctaSection
     _template: twoColumn
   - background: bg-transparent
     variant: full-width

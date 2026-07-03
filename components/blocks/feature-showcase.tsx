@@ -29,6 +29,22 @@ interface ShowcaseCardProps {
  * Implements the HorizontalCard pattern for detailed feature presentation.
  */
 function ShowcaseCard({ card }: ShowcaseCardProps) {
+  const getCardId = (title?: string | null) => {
+    if (!title) return undefined;
+    const t = title.toLowerCase();
+    if (t.includes('architecture')) return 'cloud-architecture';
+    if (t.includes('migration') || t.includes('deployment')) return 'migration';
+    if (t.includes('copilot') || t.includes('ai')) return 'copilot';
+    if (t.includes('entra') || t.includes('identity')) return 'identity';
+    if (t.includes('intune') || t.includes('endpoint')) return 'endpoint';
+    if (t.includes('essential eight') || t.includes('security')) return 'security';
+    if (t.includes('monitoring') || t.includes('oversight')) return 'monitoring';
+    if (t.includes('plans') || t.includes('helpdesk')) return 'helpdesk';
+    return undefined;
+  };
+
+  const cardId = getCardId(card.title);
+
   const cardContent = (
     <Card className="overflow-hidden">
       <div className="grid md:grid-cols-3 gap-6">
@@ -76,7 +92,8 @@ function ShowcaseCard({ card }: ShowcaseCardProps) {
     return (
       <Link
         href={card.href}
-        className="block h-full group"
+        className="block h-full group scroll-mt-24"
+        id={cardId}
         aria-label={card.title || 'Feature showcase'}
       >
         {cardContent}
@@ -84,7 +101,7 @@ function ShowcaseCard({ card }: ShowcaseCardProps) {
     );
   }
 
-  return <div className="block h-full">{cardContent}</div>;
+  return <div id={cardId} className="block h-full scroll-mt-24">{cardContent}</div>;
 }
 
 export interface FeatureShowcaseProps {
