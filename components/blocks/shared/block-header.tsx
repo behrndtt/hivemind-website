@@ -103,7 +103,7 @@ export function BlockHeader({
         <HeadingTag
           data-tina-field={tinaField(data, 'title')}
           className={cn(
-            'tracking-tight text-foreground',
+            'text-foreground',
             titleClassName
           )}
         >

@@ -362,7 +362,7 @@ export function PostsGrid({ data, posts = [], sidebarContent, tags }: PostsGridP
               {data.title && (
                 <h2
                   data-tina-field={tinaField(data, 'title')}
-                  className="mb-4 text-3xl tracking-tight md:text-4xl text-foreground"
+                  className="mb-4 text-3xl md:text-4xl text-foreground"
                 >
                   {renderTitle(data.title, data.highlightWords || undefined)}
                 </h2>

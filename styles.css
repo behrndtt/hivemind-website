@@ -7,9 +7,9 @@
 
 @theme inline {
   --font-dm-sans: "DM Sans", sans-serif;
-  --font-bebas-neue: "Bebas Neue", sans-serif;
+  --font-urbanist: "Urbanist", sans-serif;
   --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-bebas-neue), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-urbanist), ui-sans-serif, system-ui, sans-serif;
   /* Custom spacing for glow effects and large nav dropdowns */
   --spacing-100: 25rem;
   --spacing-112: 28rem;
@@ -181,13 +181,13 @@
     @apply bg-background text-foreground;
   }
 
-  /* Heading base styles - Bebas Neue across all levels */
+  /* Heading base styles - Urbanist across all levels */
   h1 {
-    @apply font-heading font-bold tracking-tight text-4xl md:text-5xl;
+    @apply font-heading font-bold text-4xl md:text-5xl;
   }
 
   h2 {
-    @apply font-heading font-bold tracking-tight text-3xl md:text-4xl;
+    @apply font-heading font-bold text-3xl md:text-4xl;
   }
  
   h3 {

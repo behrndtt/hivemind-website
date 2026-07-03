@@ -321,7 +321,7 @@ export function CtaSection({ data }: CtaSectionProps) {
                   <h2
                     data-tina-field={tinaField(data, 'title')}
                     className={cn(
-                      "mb-4 tracking-tight text-foreground",
+                      "mb-4 text-foreground",
                       titleSizeClasses[titleSize as keyof typeof titleSizeClasses]
                     )}
                   >
@@ -422,7 +422,7 @@ export function CtaSection({ data }: CtaSectionProps) {
                 <h2
                   data-tina-field={tinaField(data, 'title')}
                   className={cn(
-                    "mb-4 tracking-tight text-foreground",
+                    "mb-4 text-foreground",
                     titleSizeClasses[titleSize as keyof typeof titleSizeClasses]
                   )}
                 >

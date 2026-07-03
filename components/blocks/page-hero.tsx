@@ -500,7 +500,7 @@ export function PageHero({ data }: PageHeroProps) {
             <h1
               data-tina-field={tinaField(data, 'title')}
               className={cn(
-                'tracking-tight mb-6',
+                'mb-6',
                 isFullVariant
                   ? 'text-4xl sm:text-5xl lg:text-7xl'
                   : 'text-3xl sm:text-4xl md:text-5xl'

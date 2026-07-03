@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import { Bebas_Neue, DM_Sans } from "next/font/google";
+import { DM_Sans, Urbanist } from "next/font/google";
 import { VideoDialogProvider } from "@/components/ui/VideoDialogContext";
 import VideoDialog from "@/components/ui/VideoDialog";
 
@@ -14,10 +14,10 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const bebasNeue = Bebas_Neue({
+const urbanist = Urbanist({
   subsets: ["latin"],
-  variable: "--font-bebas-neue",
-  weight: "400",
+  variable: "--font-urbanist",
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -66,7 +66,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${dmSans.variable} ${bebasNeue.variable} min-h-screen bg-background font-sans antialiased flex flex-col text-foreground`}>
+      <body className={`${dmSans.variable} ${urbanist.variable} min-h-screen bg-background font-sans antialiased flex flex-col text-foreground`}>
         <VideoDialogProvider>
           {children}
           <VideoDialog />
