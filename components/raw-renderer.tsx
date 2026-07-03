@@ -74,7 +74,7 @@ export const RawRenderer = ({ rawData, parentColor }) => {
                 </pre>
                 <button
                   type='button'
-                  className='flex-0 font-medium text-md transition duration-150 ease-out opacity-80 hover:opacity-100'
+                  className='flex-0 font-medium text-base transition duration-150 ease-out opacity-80 hover:opacity-100'
                   onClick={closeModal}
                 >
                   Great, thanks!

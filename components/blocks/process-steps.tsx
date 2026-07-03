@@ -36,7 +36,7 @@ function StepCard({ step, index }: StepCardProps) {
           className="text-foreground"
         >
           <span className="sr-only">Step {index + 1}: </span>
-          <h3>{step.title}</h3>
+          {step.title}
         </CardTitle>
         {step.description && (
           <div

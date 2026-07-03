@@ -148,7 +148,7 @@ export const components: Components<{
           <div className="flex gap-4">
             <Quote className="h-8 w-8 shrink-0 text-primary/50" />
             <div className="flex-1">
-              <p className="mb-4 text-md italic text-foreground/80">
+              <p className='mb-4 text-base italic text-foreground/80'>
                 "{props.quote}"
               </p>
               <div className="flex items-center gap-3">

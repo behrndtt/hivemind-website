@@ -59,7 +59,7 @@ export function ContentSection({ data }: ContentSectionProps) {
       {data.subtitle && (
         <p
           data-tina-field={tinaField(data, 'subtitle')}
-          className="text-muted-foreground text-md mb-6 whitespace-pre-line"
+          className="text-muted-foreground text-base sm:text-lg mb-6 whitespace-pre-line"
         >
           {data.subtitle}
         </p>

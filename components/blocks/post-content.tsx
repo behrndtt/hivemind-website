@@ -134,7 +134,7 @@ export function PostTestimonial({
     <Card className={cn('border-primary/20 bg-card/50', className)}>
       <CardContent className="p-6 lg:p-8">
         <Quote className="h-8 w-8 text-primary/50 mb-4" />
-        <blockquote className="mb-4 font-sans text-md text-foreground/80 leading-relaxed">
+        <blockquote className="mb-4 font-sans text-base text-foreground/80 leading-relaxed">
           &ldquo;{quote}&rdquo;
         </blockquote>
         <div className="flex items-center gap-3">

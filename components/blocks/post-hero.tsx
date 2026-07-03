@@ -344,7 +344,7 @@ export function PostHero({
             {post.excerpt && (
               <p
                 data-tina-field={tinaField(post, 'excerpt')}
-                className="mb-8 max-w-3xl text-md sm:text-xl text-muted-foreground"
+                className="mb-8 max-w-3xl text-base sm:text-lg lg:text-xl text-muted-foreground"
               >
                 {typeof post.excerpt === 'string' 
                   ? post.excerpt 
