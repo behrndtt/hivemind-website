@@ -1,22 +1,23 @@
 import React from "react";
 import { Metadata } from "next";
-import { Inter, Merriweather } from "next/font/google";
+import { DM_Sans, Space_Grotesk } from "next/font/google";
 import { VideoDialogProvider } from "@/components/ui/VideoDialogContext";
 import VideoDialog from "@/components/ui/VideoDialog";
 
 import "@/styles.css";
 import { TailwindIndicator } from "@/components/ui/breakpoint-indicator";
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-dm-sans",
+  weight: ["400", "500"],
   display: "swap",
 });
 
-const merriweather = Merriweather({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-merriweather",
-  weight: ["300", "400", "700"],
+  variable: "--font-space-grotesk",
+  weight: "variable",
   display: "swap",
 });
 
@@ -65,7 +66,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${inter.variable} ${merriweather.variable} min-h-screen bg-background font-sans antialiased flex flex-col text-foreground`}>
+      <body className={`${dmSans.variable} ${spaceGrotesk.variable} min-h-screen bg-background font-sans antialiased flex flex-col text-foreground`}>
         <VideoDialogProvider>
           {children}
           <VideoDialog />

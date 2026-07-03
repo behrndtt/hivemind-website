@@ -45,7 +45,7 @@ function TeamMemberCard({ member }: TeamMemberCardProps) {
             data-tina-field={tinaField(member, 'image')}
           />
         ) : (
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-linear-to-br from-primary to-primary/70 text-2xl font-bold text-primary-foreground">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-linear-to-br from-primary to-primary/70 text-2xl font-semibold text-primary-foreground">
             {getInitials(member.name || 'TM')}
           </div>
         )}

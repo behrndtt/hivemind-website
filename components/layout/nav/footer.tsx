@@ -71,7 +71,7 @@ export const Footer = () => {
               return (
                 <div key={idx} data-tina-field={tinaField(column)} className="flex flex-col gap-4">
                   {column.title && (
-                    <h3 className="text-foreground font-medium">{column.title}</h3>
+                    <h3 className="text-foreground">{column.title}</h3>
                   )}
                   <div className="flex flex-wrap items-center gap-4">
                     {column.badges.map((badge, badgeIdx) =>
@@ -92,7 +92,7 @@ export const Footer = () => {
 
             return (
               <div key={idx} data-tina-field={tinaField(column)} className="flex flex-col gap-4">
-                <h3 className="text-foreground font-medium">{column?.title}</h3>
+                <h3 className="text-foreground">{column?.title}</h3>
                 <ul className="space-y-3">
                   {column?.links?.map((link, linkIdx) => (
                     <li key={linkIdx}>

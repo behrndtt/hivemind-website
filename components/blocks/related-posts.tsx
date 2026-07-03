@@ -119,7 +119,7 @@ export function RelatedPosts({
                     >
                       {getCategoryLabel(post, contentType)}
                     </Badge>
-                    <h3 className="font-light text-foreground group-hover:text-primary transition-colors">
+                    <h3 className="text-foreground group-hover:text-primary transition-colors">
                       {post.title}
                     </h3>
                     {post.excerpt && (

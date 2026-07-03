@@ -6,10 +6,10 @@
 @plugin "@tailwindcss/forms";
 
 @theme inline {
-  --font-inter: "Inter", sans-serif;
-  --font-merriweather: "Merriweather", serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-merriweather), ui-serif, Georgia, serif;
+  --font-dm-sans: "DM Sans", sans-serif;
+  --font-space-grotesk: "Space Grotesk", sans-serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   /* Custom spacing for glow effects and large nav dropdowns */
   --spacing-100: 25rem;
   --spacing-112: 28rem;
@@ -181,31 +181,31 @@
     @apply bg-background text-foreground;
   }
 
-  /* Heading base styles - display version of body sans (Inter) with appropriate weights and sizing */
+  /* Heading base styles - Space Grotesk Bold across all levels */
   h1 {
-    @apply font-sans font-medium tracking-tight text-4xl md:text-5xl;
+    @apply font-heading font-bold tracking-tight text-4xl md:text-5xl;
   }
 
   h2 {
-    @apply font-sans font-medium tracking-tight text-3xl md:text-4xl;
+    @apply font-heading font-bold tracking-tight text-3xl md:text-4xl;
   }
  
   h3 {
-    @apply font-sans font-normal text-xl md:text-2xl;
+    @apply font-heading font-bold text-xl md:text-2xl;
   }
 
   h4 {
-    @apply font-sans font-normal text-lg;
+    @apply font-heading font-bold text-lg;
   }
 
   h5,
   h6 {
-    @apply font-sans font-normal normal-case text-base;
+    @apply font-heading font-bold normal-case text-base;
   }
 
   /* Data element styling for stats and prices - h2 equivalent sizing */
   data {
-    @apply font-sans font-normal text-3xl md:text-4xl;
+    @apply font-heading font-bold text-3xl md:text-4xl;
   }
 }
 

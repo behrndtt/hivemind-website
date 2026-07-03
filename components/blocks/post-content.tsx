@@ -67,7 +67,7 @@ export function PostContent({ post, className }: PostContentProps) {
                 <span className="text-sm text-muted-foreground">Client</span>
                 <h3
                   data-tina-field={tinaField(post, 'client')}
-                  className="text-lg font-medium text-foreground"
+                  className="text-lg text-foreground"
                 >
                   {caseStudy.client}
                 </h3>
@@ -90,8 +90,8 @@ export function PostContent({ post, className }: PostContentProps) {
             data-tina-field={tinaField(post, '_body')}
             className="prose dark:prose-invert prose-zinc max-w-none
               prose-headings:text-foreground
-              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:font-medium
-              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:font-normal
+              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:font-bold
+              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:font-bold
               prose-p:text-muted-foreground prose-p:leading-relaxed
               prose-a:text-primary prose-a:no-underline hover:prose-a:underline
               prose-strong:text-foreground
@@ -138,7 +138,7 @@ export function PostTestimonial({
           &ldquo;{quote}&rdquo;
         </blockquote>
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
             {getInitials(author)}
           </div>
           <div>

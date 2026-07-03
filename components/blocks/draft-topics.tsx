@@ -85,7 +85,7 @@ function DraftTopicCard({ item, index }: DraftTopicCardProps) {
       className="border-border bg-card/50 hover:border-primary/50 transition-all duration-300"
     >
       <CardContent className="flex items-start gap-3 p-4">
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-primary/10 text-sm font-bold text-primary">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-primary/10 text-sm font-semibold text-primary">
           {String(index + 1).padStart(2, '0')}
         </div>
         <div>

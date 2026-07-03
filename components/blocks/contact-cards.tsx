@@ -101,7 +101,7 @@ function CardVariant({ card }: Omit<ContactCardProps, 'variant'>) {
         {card.value && (
           <p
             data-tina-field={tinaField(card, 'value')}
-            className="py-2 font-serif text-foreground"
+            className="py-2 font-sans text-foreground"
           >
             {card.value}
           </p>
@@ -184,7 +184,7 @@ function ListVariant({ card }: Omit<ContactCardProps, 'variant'>) {
           ) : (
             <span
               data-tina-field={tinaField(card, 'value')}
-              className="text-foreground font-serif block mt-1"
+              className="text-foreground font-sans block mt-1"
             >
               {card.value}
             </span>
@@ -335,7 +335,7 @@ function ImageTextVariant({ card, columnRatio, imagePosition, verticalAlign }: I
           ) : (
             <span
               data-tina-field={tinaField(card, 'value')}
-              className="font-serif text-foreground"
+              className="font-sans text-foreground"
             >
               {card.value}
             </span>
