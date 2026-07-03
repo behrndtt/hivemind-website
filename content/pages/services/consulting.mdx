@@ -95,40 +95,8 @@ blocks:
           - text: Budget planning
           - text: Executive stakeholder alignment
     _template: featureShowcase
-  - columns: 5
-    gap: md
+  - background: bg-card/50
     badge:
-      text: ''
-    title: How We Work
-    subtitle: 'Clear, structured delivery that holds up in practice.'
-    steps:
-      - title: Understand
-        description: |
-          We build a clear picture of your environment, constraints, and priorities.
-
-          This gives us the context needed to make decisions that fit how your organisation actually operates.
-      - title: Assess
-        description: |
-          We review your current setup and identify where improvements will have the most impact.
-
-          The focus is on practical changes that move things forward, not unnecessary analysis.
-      - title: Design
-        description: |
-          We define a clear path forward, including architecture, approach, and key decisions.
-
-          Everything is documented and explained so your team has full visibility.
-      - title: Deliver
-        description: |
-          We implement in a controlled and predictable way, working closely with your team.
-
-          The result is a clean, well-structured environment that’s ready to run.
-      - title: Refine
-        description: |
-          We support ongoing improvement and knowledge transfer as your environment evolves.
-
-          This keeps things aligned, maintainable, and ready for what comes next.
-    _template: processSteps
-  - badge:
       text: ''
     title: Consulting that carries through to delivery
     highlightWords: delivery
@@ -141,7 +109,8 @@ blocks:
     padding: ''
     verticalAlign: start
     leftColumn:
-      - itemLayout: horizontal
+      - background: bg-transparent
+        itemLayout: horizontal
         cardWrapper: false
         iconStyle: square
         gap: md
@@ -192,6 +161,40 @@ blocks:
               color: white
         _template: ctaSection
     _template: twoColumn
+  - background: border-b border-border
+    columns: 5
+    gap: md
+    badge:
+      text: ''
+    title: How We Work
+    subtitle: 'Clear, structured delivery that holds up in practice.'
+    steps:
+      - title: Understand
+        description: |
+          We build a clear picture of your environment, constraints, and priorities.
+
+          This gives us the context needed to make decisions that fit how your organisation actually operates.
+      - title: Assess
+        description: |
+          We review your current setup and identify where improvements will have the most impact.
+
+          The focus is on practical changes that move things forward, not unnecessary analysis.
+      - title: Design
+        description: |
+          We define a clear path forward, including architecture, approach, and key decisions.
+
+          Everything is documented and explained so your team has full visibility.
+      - title: Deliver
+        description: |
+          We implement in a controlled and predictable way, working closely with your team.
+
+          The result is a clean, well-structured environment that’s ready to run.
+      - title: Refine
+        description: |
+          We support ongoing improvement and knowledge transfer as your environment evolves.
+
+          This keeps things aligned, maintainable, and ready for what comes next.
+    _template: processSteps
   - background: bg-transparent
     variant: full-width
     backgroundStyle: ''
