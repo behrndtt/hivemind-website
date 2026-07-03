@@ -62,7 +62,7 @@ export const components: Components<{
   }) => {
     return (
       <div>
-        <blockquote>
+        <blockquote className="prose dark:prose-invert max-w-none">
           <TinaMarkdown content={props.children} />
           {props.authorName}
         </blockquote>
@@ -89,7 +89,7 @@ export const components: Components<{
     return (
       <div className='bg-white'>
         <div className='max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8'>
-          <div className=''>
+          <div className='prose dark:prose-invert max-w-none'>
             <TinaMarkdown content={props.children} />
           </div>
           <div className='mt-8 '>
@@ -115,7 +115,7 @@ export const components: Components<{
                 </button>
               </div>
             </form>
-            <div className='mt-3 text-sm text-muted-foreground'>{props.disclaimer && <TinaMarkdown content={props.disclaimer} />}</div>
+            <div className='mt-3 text-sm text-muted-foreground prose dark:prose-invert prose-sm max-w-none'>{props.disclaimer && <TinaMarkdown content={props.disclaimer} />}</div>
           </div>
         </div>
       </div>

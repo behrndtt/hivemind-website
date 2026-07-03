@@ -51,7 +51,7 @@ function LinkCard({ card }: LinkCardProps) {
               {card.description && (
                 <div
                   data-tina-field={tinaField(card, 'description')}
-                  className="text-sm text-muted-foreground"
+                  className="text-sm text-muted-foreground prose dark:prose-invert prose-sm max-w-none"
                 >
                   <TinaMarkdown content={card.description} components={components} />
                 </div>
@@ -99,7 +99,7 @@ function CompactLinkCard({ card }: LinkCardProps) {
         {card.description && (
           <div
             data-tina-field={tinaField(card, 'description')}
-            className="text-xs text-muted-foreground line-clamp-1"
+            className="text-xs text-muted-foreground line-clamp-1 prose dark:prose-invert prose-sm max-w-none"
           >
             <TinaMarkdown content={card.description} components={components} />
           </div>

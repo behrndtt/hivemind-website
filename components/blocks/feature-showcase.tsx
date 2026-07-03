@@ -68,7 +68,7 @@ function ShowcaseCard({ card }: ShowcaseCardProps) {
           {card.description && (
             <div
               data-tina-field={tinaField(card, 'description')}
-              className="text-muted-foreground prose dark:prose-invert"
+              className="text-muted-foreground prose dark:prose-invert prose-sm max-w-none"
             >
               <TinaMarkdown content={card.description} components={components} />
             </div>
