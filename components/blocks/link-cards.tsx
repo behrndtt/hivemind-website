@@ -29,7 +29,6 @@ function LinkCard({ card }: LinkCardProps) {
     <Link
       href={card.href || '#'}
       className="group block"
-      aria-label={card.title || 'Link card'}
     >
       <Card>
         <CardContent className="flex flex-row items-center justify-between">
@@ -81,7 +80,6 @@ function CompactLinkCard({ card }: LinkCardProps) {
     <Link
       href={card.href || '#'}
       className="group flex items-center gap-3 rounded-lg p-3 hover:bg-muted/50 transition-colors"
-      aria-label={card.title || 'Link card'}
     >
       {card.icon && (
         <div

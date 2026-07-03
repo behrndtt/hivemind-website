@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, wrapFieldsWithMeta } from 'tinacms';
 import { BiChevronRight } from 'react-icons/bi';
 import { GoCircleSlash } from 'react-icons/go';
-import { Icon, IconOptions } from '../../components/icon';
+import { Icon, coreIconOptions } from '../../components/icon';
 import { Popover, PopoverButton, Transition, PopoverPanel } from '@headlessui/react';
 import { ColorPickerInput } from './color';
 
@@ -16,18 +16,21 @@ const parseIconName = (name: string) => {
   }
 };
 
+// Icons already saved to content (e.g. BoxIcons picked before the bundle split)
+// still need to preview/label correctly even though they're no longer enumerable below.
+const isKnownIconName = (name: string) => Boolean((coreIconOptions as Record<string, unknown>)[name]) || /^Bi[A-Z]/.test(name);
+
 export const IconPickerInput = wrapFieldsWithMeta(({ input }) => {
   const [filter, setFilter] = React.useState('');
   const filteredBlocks = React.useMemo(() => {
-    return Object.keys(IconOptions).filter((name) => {
+    return Object.keys(coreIconOptions).filter((name) => {
       return name.toLowerCase().includes(filter.toLowerCase());
     });
   }, [filter]);
 
-  const inputLabel = Object.keys(IconOptions).includes(input.value) ? parseIconName(input.value) : 'Select Icon';
+  const inputLabel = isKnownIconName(input.value) ? parseIconName(input.value) : 'Select Icon';
 
-  //@ts-ignore
-  const InputIcon = IconOptions[input.value] ? IconOptions[input.value] : null;
+  const hasInputIcon = isKnownIconName(input.value);
 
   return (
     <div className='relative z-[1000]'>
@@ -36,10 +39,15 @@ export const IconPickerInput = wrapFieldsWithMeta(({ input }) => {
         {({ open }) => (
           <>
             <PopoverButton>
-              <Button className={`text-sm h-11 px-4 ${InputIcon ? 'h-11' : 'h-10'}`} size='custom' rounded='full' variant={open ? 'secondary' : 'white'}>
-                {InputIcon && <InputIcon className='w-7 mr-1 h-auto fill-current text-blue-500' />}
+              <Button className={`text-sm h-11 px-4 ${hasInputIcon ? 'h-11' : 'h-10'}`} size='custom' rounded='full' variant={open ? 'secondary' : 'white'}>
+                {hasInputIcon && (
+                  <Icon
+                    data={{ name: input.value, size: 'custom', color: 'blue' }}
+                    className='w-7 mr-1 h-auto fill-current text-blue-500'
+                  />
+                )}
                 {inputLabel}
-                {!InputIcon && <BiChevronRight className='w-5 h-auto fill-current opacity-70 ml-1' />}
+                {!hasInputIcon && <BiChevronRight className='w-5 h-auto fill-current opacity-70 ml-1' />}
               </Button>
             </PopoverButton>
             <div className='absolute w-full min-w-[192px] max-w-2xl -bottom-2 left-0 translate-y-full' style={{ zIndex: 1000 }}>

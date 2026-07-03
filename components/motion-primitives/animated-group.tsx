@@ -199,7 +199,7 @@ function AnimatedGroup({
   return (
     <MotionComponent
       ref={ref as React.Ref<unknown>}
-      initial='hidden'
+      initial={triggerOnMount ? false : 'hidden'}
       animate={shouldAnimate ? 'visible' : 'hidden'}
       onAnimationComplete={() => {
         if (once && (isInView || triggerOnMount)) setHasAnimated(true);

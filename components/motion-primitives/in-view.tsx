@@ -22,6 +22,8 @@ interface InViewProps {
   as?: "div" | "span" | "section" | "article" | "main" | "header" | "footer";
   /** Only animate once when entering viewport */
   once?: boolean;
+  /** Trigger animation immediately on mount (for above-fold content) */
+  triggerOnMount?: boolean;
 }
 
 const defaultVariants = {
@@ -37,6 +39,7 @@ export function InView({
   viewOptions = { once: true, amount: 0.2 },
   as = "div",
   once = true,
+  triggerOnMount = false,
 }: InViewProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, viewOptions);
@@ -79,8 +82,8 @@ export function InView({
   return (
     <MotionComponent
       ref={ref}
-      initial="hidden"
-      animate={(isInView || isViewed) ? "visible" : "hidden"}
+      initial={triggerOnMount || isInView ? false : "hidden"}
+      animate={(isInView || isViewed || triggerOnMount) ? "visible" : "hidden"}
       onAnimationComplete={() => {
         if (once && isInView) setIsViewed(true);
       }}

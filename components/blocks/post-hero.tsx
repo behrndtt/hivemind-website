@@ -342,6 +342,7 @@ export function PostHero({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <AnimatedGroup
             preset="blur-slide"
+            triggerOnMount
             className="max-w-4xl"
           >
             {/* Back link */}

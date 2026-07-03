@@ -1,7 +1,7 @@
 'use client';
 //TODO: Fix Types in this file
 //
-import * as BoxIcons from 'react-icons/bi';
+import dynamic from 'next/dynamic';
 import { FaFacebookF, FaGithub, FaLinkedin, FaXTwitter, FaYoutube } from 'react-icons/fa6';
 import { AiFillInstagram } from 'react-icons/ai';
 import {
@@ -43,7 +43,23 @@ import {
 import React from 'react';
 import { useLayout } from './layout/layout-context';
 
-export const IconOptions = {
+// react-icons/bi ships ~1000 icons - load it lazily so pages that don't
+// reference a BoxIcons icon never download the package.
+const LazyBiIcon = dynamic(
+  () =>
+    import('./bi-icons').then((mod) => {
+      const BiIconRenderer = ({ name, ...props }: { name: string; className?: string }) => {
+        const BiIconComponent = (mod as Record<string, React.ComponentType<any>>)[name];
+        return BiIconComponent ? <BiIconComponent {...props} /> : null;
+      };
+      return BiIconRenderer;
+    }),
+  { loading: () => null }
+);
+
+const isBiIconName = (name: string) => /^Bi[A-Z]/.test(name);
+
+export const coreIconOptions = {
   Tina: (props: any) => (
     <svg {...props} viewBox='0 0 66 80' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <title>Tina</title>
@@ -57,8 +73,6 @@ export const IconOptions = {
       />
     </svg>
   ),
-  // BoxIcons (react-icons/bi)
-  ...BoxIcons,
   // Social media icons
   FaFacebookF,
   FaGithub,
@@ -178,15 +192,16 @@ export const Icon = ({ data, parentColor = '', className = '', tinaField = '' })
     return null;
   }
 
-  //@ts-ignore
-  if (IconOptions[data.name] === null || IconOptions[data.name] === undefined) {
-    return null;
-  }
-
   const { name, color, size = 'medium', style = 'regular' } = data;
 
   //@ts-ignore
-  const IconSVG = IconOptions[name];
+  const CoreIconSVG = coreIconOptions[name];
+  //@ts-ignore
+  const IconSVG = CoreIconSVG || (isBiIconName(name) ? (props: any) => <LazyBiIcon name={name} {...props} /> : null);
+
+  if (!IconSVG) {
+    return null;
+  }
 
   // Default to 'primary' if no valid color is found
   const iconColor = color || 'primary';

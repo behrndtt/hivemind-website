@@ -9,7 +9,6 @@ import { cn } from '@/lib/utils';
 import { renderTitle } from '@/lib/render-title';
 import { Icon } from '@/components/icon';
 import { AnimatedGroup } from '@/components/motion-primitives/animated-group';
-import { TextEffect } from '@/components/motion-primitives/text-effect';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { sectionBlockSchemaField } from '@/components/layout/section';
@@ -469,6 +468,7 @@ export function PageHero({ data }: PageHeroProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <AnimatedGroup
           preset="blur-slide"
+          triggerOnMount
           className={cn(
             'max-w-4xl',
             data.align === 'left' ? 'text-left' : 'mx-auto text-center'

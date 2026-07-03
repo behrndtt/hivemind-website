@@ -41,6 +41,10 @@ function TeamMemberCard({ member }: TeamMemberCardProps) {
           <img
             src={member.image}
             alt={member.name || ''}
+            width={80}
+            height={80}
+            loading="lazy"
+            decoding="async"
             className="h-20 w-20 rounded-full object-cover"
             data-tina-field={tinaField(member, 'image')}
           />

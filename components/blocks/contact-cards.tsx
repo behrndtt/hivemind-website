@@ -70,6 +70,10 @@ function CardVariant({ card }: Omit<ContactCardProps, 'variant'>) {
           <img
             src={card.image}
             alt={card.title || ''}
+            width={56}
+            height={56}
+            loading="lazy"
+            decoding="async"
             className="h-14 w-14 rounded-full object-cover"
             data-tina-field={tinaField(card, 'image')}
           />
@@ -142,6 +146,10 @@ function ListVariant({ card }: Omit<ContactCardProps, 'variant'>) {
         <img
           src={card.image}
           alt={card.title || ''}
+          width={40}
+          height={40}
+          loading="lazy"
+          decoding="async"
           className="h-10 w-10 shrink-0 rounded-lg object-cover"
           data-tina-field={tinaField(card, 'image')}
         />
@@ -208,6 +216,10 @@ function MinimalVariant({ card }: Omit<ContactCardProps, 'variant'>) {
         <img
           src={card.image}
           alt={card.title || ''}
+          width={20}
+          height={20}
+          loading="lazy"
+          decoding="async"
           className="h-5 w-5 rounded object-cover"
           data-tina-field={tinaField(card, 'image')}
         />
