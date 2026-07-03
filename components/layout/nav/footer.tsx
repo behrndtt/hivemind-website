@@ -22,7 +22,7 @@ export const Footer = () => {
           {/* Brand Column */}
           <div className="lg:col-span-1 flex flex-col gap-6">
             <Link href="/" className="inline-block">
-              <Logo className="h-9 w-auto text-foreground" />
+              <Logo className="h-8 w-auto text-foreground" />
             </Link>
             {footer.tagline && (
               <p 
