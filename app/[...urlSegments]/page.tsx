@@ -76,7 +76,9 @@ export async function generateStaticParams() {
       urlSegments: edge?.node?._sys.breadcrumbs || [],
     }))
     .filter((x) => x.urlSegments.length >= 1)
-    .filter((x) => !x.urlSegments.every((x) => x === 'home')); // exclude the home page
+    .filter((x) => !x.urlSegments.every((x) => x === 'home')) // exclude the home page
+    // exclude routes with their own dedicated page under app/, to avoid static route collisions
+    .filter((x) => !['case-studies', 'insights'].includes(x.urlSegments[0]));
 
   return params;
   } catch (error) {
