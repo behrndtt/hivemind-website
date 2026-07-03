@@ -1,9 +1,24 @@
 import React from 'react';
+import { Metadata } from 'next';
 import client from '@/tina/__generated__/client';
 import Layout from '@/components/layout/layout';
 import InsightsClientPage from './client-page';
 import type { Insight } from '@/tina/__generated__/types';
 import { extractTagsFromPosts, type TagInfo } from '@/lib/tags';
+
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const data = await client.queries.page({ relativePath: 'insights.mdx' });
+    const title = data.data?.page?.title;
+    return {
+      title: title ? { absolute: title } : undefined,
+    };
+  } catch {
+    return {
+      title: 'Insights | Hivemind Solutions',
+    };
+  }
+}
 
 export default async function InsightsPage() {
   let pageData = null;

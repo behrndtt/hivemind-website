@@ -48,6 +48,12 @@ const Page: Collection = {
   },
   fields: [
     {
+      type: 'string',
+      name: 'title',
+      label: 'Page Title',
+      description: 'Used for browser tab and SEO title',
+    },
+    {
       type: 'object',
       list: true,
       name: 'blocks',

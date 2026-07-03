@@ -1,8 +1,23 @@
+import { Metadata } from 'next';
 import Layout from '@/components/layout/layout';
 import client from '@/tina/__generated__/client';
 import CaseStudiesClientPage from './client-page';
 import type { CaseStudy } from '@/tina/__generated__/types';
 import { extractTagsFromPosts, type TagInfo } from '@/lib/tags';
+
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const data = await client.queries.page({ relativePath: 'case-studies.mdx' });
+    const title = data.data?.page?.title;
+    return {
+      title: title ? { absolute: title } : undefined,
+    };
+  } catch {
+    return {
+      title: 'Case Studies | Hivemind Solutions',
+    };
+  }
+}
 
 export default async function CaseStudiesPage() {
   let pageData = null;

@@ -1,8 +1,38 @@
 import React from 'react';
+import { Metadata } from 'next';
 import client from '@/tina/__generated__/client';
 import Layout from '@/components/layout/layout';
 import InsightClientPage from './client-page';
 import type { Insight, InsightQuery } from '@/tina/__generated__/types';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ urlSegments: string[] }>;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const filepath = resolvedParams.urlSegments.join('/');
+
+  try {
+    const data = await client.queries.insight({
+      relativePath: `${filepath}.mdx`,
+    });
+    const title = data.data?.insight?.title;
+    const excerpt = data.data?.insight?.excerpt;
+    const description = typeof excerpt === 'string'
+      ? excerpt
+      : (excerpt as any)?.children?.[0]?.children?.[0]?.text || undefined;
+
+    return {
+      title: title ? `${title} | Insight` : undefined,
+      description: description,
+    };
+  } catch {
+    return {
+      title: 'Insight | Hivemind Solutions',
+    };
+  }
+}
 
 type InsightPost = InsightQuery['insight'];
 

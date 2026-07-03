@@ -1,8 +1,38 @@
 import React from 'react';
+import { Metadata } from 'next';
 import client from '@/tina/__generated__/client';
 import Layout from '@/components/layout/layout';
 import CaseStudyClientPage from './client-page';
 import type { CaseStudy, CaseStudyQuery } from '@/tina/__generated__/types';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ urlSegments: string[] }>;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const filepath = resolvedParams.urlSegments.join('/');
+
+  try {
+    const data = await client.queries.caseStudy({
+      relativePath: `${filepath}.mdx`,
+    });
+    const title = data.data?.caseStudy?.title;
+    const excerpt = data.data?.caseStudy?.excerpt;
+    const description = typeof excerpt === 'string'
+      ? excerpt
+      : (excerpt as any)?.children?.[0]?.children?.[0]?.text || undefined;
+
+    return {
+      title: title ? `${title} | Case Study` : undefined,
+      description: description,
+    };
+  } catch {
+    return {
+      title: 'Case Study | Hivemind Solutions',
+    };
+  }
+}
 
 type CaseStudyPost = CaseStudyQuery['caseStudy'];
 

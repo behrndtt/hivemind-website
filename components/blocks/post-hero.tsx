@@ -32,12 +32,48 @@ function formatDate(dateString?: string | null): string {
 }
 
 /**
- * Estimate reading time from content length
+ * Estimate reading time from a TinaCMS AST body structure (TinaMarkdownContent) or regular text.
  */
-function estimateReadingTime(content?: string | null): number {
-  if (!content) return 5;
+function estimateReadingTime(bodyNode?: any): number {
+  if (!bodyNode) return 1;
+  
+  let wordCount = 0;
+
+  // Helper to count words in a string
+  const countWords = (text: string) => {
+    return text.trim().split(/\s+/).filter(Boolean).length;
+  };
+
+  // Helper to recursively traverse AST
+  const traverse = (node: any) => {
+    if (!node) return;
+    if (typeof node === 'string') {
+      wordCount += countWords(node);
+      return;
+    }
+    if (node.text && typeof node.text === 'string') {
+      wordCount += countWords(node.text);
+    }
+    if (node.value && typeof node.value === 'string') {
+      wordCount += countWords(node.value);
+    }
+    if (node.children && Array.isArray(node.children)) {
+      node.children.forEach(traverse);
+    }
+  };
+
+  if (bodyNode.children && Array.isArray(bodyNode.children)) {
+    bodyNode.children.forEach(traverse);
+  } else if (typeof bodyNode === 'string') {
+    wordCount = countWords(bodyNode);
+  }
+
+  // If wordCount estimation is extremely small or zero, fallback to a sensible page default
+  if (wordCount === 0) {
+    return 3;
+  }
+
   const wordsPerMinute = 200;
-  const wordCount = content.split(/\s+/).length;
   return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
 }
 
@@ -368,7 +404,7 @@ export function PostHero({
               {/* Reading time */}
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                <span>{estimateReadingTime(post.title)} min read</span>
+                <span>{estimateReadingTime((post as any)._body)} min read</span>
               </div>
 
               {/* Client (case studies only) */}
