@@ -25,12 +25,12 @@ function StepCard({ step, index }: StepCardProps) {
   return (
     <Card className="text-center">
       <CardContent className="text-center">
-        <div
-          className="text-4xl font-sans font-medium text-primary/30"
+        <h1
+          className="text-primary/30"
           aria-hidden="true"
         >
           {String(index + 1).padStart(2, '0')}
-        </div>
+        </h1>
         <CardTitle
           data-tina-field={tinaField(step, 'title')}
           className="text-foreground"

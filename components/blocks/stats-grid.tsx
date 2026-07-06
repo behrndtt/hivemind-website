@@ -29,7 +29,7 @@ function InlineStripStat({ stat }: StatItemProps) {
       <data
         value={stat.value || ''}
         data-tina-field={tinaField(stat, 'value')}
-        className="block text-primary font-sans font-medium"
+        className="block text-primary"
       >
         {stat.value}
       </data>
@@ -39,6 +39,14 @@ function InlineStripStat({ stat }: StatItemProps) {
       >
         {stat.label}
       </div>
+      {stat.statDescription && (
+        <p
+          data-tina-field={tinaField(stat, 'statDescription')}
+          className="text-xs text-muted-foreground"
+        >
+          {stat.statDescription}
+        </p>
+      )}
     </div>
   );
 }
@@ -63,7 +71,7 @@ function CardGridStat({ stat }: StatItemProps) {
         <data
           value={stat.value || ''}
           data-tina-field={tinaField(stat, 'value')}
-          className="block text-primary font-sans font-medium"
+          className="block text-primary"
         >
           {stat.value}
         </data>
