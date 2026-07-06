@@ -34,7 +34,7 @@ export function ContentSection({ data }: ContentSectionProps) {
 
   // Render the text content block
   const renderTextContent = () => (
-    <div className={cn(hasImage ? 'lg:w-1/2' : 'max-w-3xl mx-auto', !hasImage && data.align === 'center' && 'text-center')}>
+    <div className={cn(hasImage ? 'w-full lg:flex-1 lg:min-w-0' : 'max-w-3xl mx-auto', !hasImage && data.align === 'center' && 'text-center')}>
       {data.badge?.text && (
         <div data-tina-field={tinaField(data, 'badge')} className="mb-4">
           <Badge
@@ -109,8 +109,8 @@ export function ContentSection({ data }: ContentSectionProps) {
     if (!data.image?.src) return null;
 
     return (
-      <div className="lg:w-1/2" data-tina-field={tinaField(data, 'image')}>
-        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted">
+      <div className="w-full lg:flex-1 lg:min-w-0" data-tina-field={tinaField(data, 'image')}>
+        <div className="relative aspect-auto rounded-2xl overflow-hidden bg-muted">
           <Image
             src={data.image.src}
             alt={data.image.alt || ''}
@@ -141,7 +141,7 @@ export function ContentSection({ data }: ContentSectionProps) {
         >
           {hasImage ? (
             <div className={cn(
-              'flex flex-col lg:flex-row gap-12 lg:gap-16 items-center',
+              'flex flex-col lg:flex-row gap-12 lg:gap-16 items-start lg:items-center',
               layout === 'imageLeft' && 'lg:flex-row-reverse'
             )}>
               {renderTextContent()}
