@@ -110,7 +110,7 @@ export function ContentSection({ data }: ContentSectionProps) {
 
     return (
       <div className="lg:w-1/2" data-tina-field={tinaField(data, 'image')}>
-        <div className="relative aspect-square rounded-2xl overflow-hidden bg-muted">
+        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted">
           <Image
             src={data.image.src}
             alt={data.image.alt || ''}
