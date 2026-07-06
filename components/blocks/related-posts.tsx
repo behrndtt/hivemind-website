@@ -103,7 +103,7 @@ export function RelatedPosts({
                   className="block h-full"
                 >
                   {post.heroImg && (
-                    <div className="relative aspect-video overflow-hidden rounded-t-lg">
+                    <div className="relative aspect-square overflow-hidden rounded-t-lg">
                       <img
                         src={post.heroImg}
                         alt={post.title || ''}

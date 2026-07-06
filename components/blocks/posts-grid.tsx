@@ -59,7 +59,7 @@ function CardVariant({ post, contentType }: Omit<PostCardProps, 'variant'>) {
   return (
     <Card className="overflow-hidden">
       {post.heroImg && (
-        <div className="relative aspect-video overflow-hidden">
+        <div className="relative aspect-square overflow-hidden">
           <img
             src={post.heroImg}
             alt={post.title || ''}
@@ -142,7 +142,7 @@ function FeaturedVariant({ post, contentType }: Omit<PostCardProps, 'variant'>) 
     <Card className="group col-span-full border-border bg-card/50 hover:border-primary/50 transition-all duration-500 overflow-hidden">
       <div className="grid md:grid-cols-2 gap-6">
         {post.heroImg && (
-          <div className="relative aspect-video md:aspect-auto overflow-hidden">
+          <div className="relative aspect-square overflow-hidden">
             <img
               src={post.heroImg}
               alt={post.title || ''}

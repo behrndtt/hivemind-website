@@ -22,7 +22,7 @@ const VideoDialog = () => {
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: "100%", opacity: 0 }}
                         transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                        className="relative mx-4 aspect-video w-full max-w-4xl md:mx-0"
+                        className="relative mx-4 aspect-square w-full max-w-4xl md:mx-0"
                     >
                         <motion.button
                             onClick={closeVideo}
