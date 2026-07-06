@@ -62,12 +62,6 @@
                 "description": "Proactive 24/7 monitoring, health checks, and performance tuning",
                 "href": "/services/support#monitoring",
                 "icon": "Cloud"
-              },
-              {
-                "title": "Helpdesk & Support Plans",
-                "description": "Flexible support packages from ad-hoc to fully managed",
-                "href": "/services/support#helpdesk",
-                "icon": "Headphones"
               }
             ]
           }
