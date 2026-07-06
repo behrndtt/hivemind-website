@@ -110,13 +110,11 @@ export function ContentSection({ data }: ContentSectionProps) {
 
     return (
       <div className="w-full lg:flex-1 lg:min-w-0" data-tina-field={tinaField(data, 'image')}>
-        <div className="relative aspect-auto rounded-2xl overflow-hidden bg-muted">
-          <Image
+        <div className="w-full min-h-[280px] overflow-hidden rounded-2xl bg-muted md:min-h-[360px]">
+          <img
             src={data.image.src}
             alt={data.image.alt || ''}
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
+            className="h-full w-full object-cover"
           />
         </div>
       </div>
