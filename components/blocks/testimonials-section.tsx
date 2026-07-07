@@ -44,7 +44,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
         <blockquote
           data-tina-field={tinaField(testimonial, 'quote')}
-          className="text-base sm:text-lg text-foreground/80 font-sans font-normal leading-relaxed"
+          className="text-foreground/80 font-sans font-normal leading-relaxed"
         >
           &ldquo;{testimonial.quote}&rdquo;
         </blockquote>

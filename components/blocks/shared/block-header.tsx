@@ -114,7 +114,7 @@ export function BlockHeader({
       {data.subtitle && (
         <p
           data-tina-field={tinaField(data, 'subtitle')}
-          className={cn('text-base sm:text-lg text-muted-foreground whitespace-pre-line', subtitleClassName)}
+          className={cn('text-muted-foreground whitespace-pre-line', subtitleClassName)}
         >
           {data.subtitle}
         </p>

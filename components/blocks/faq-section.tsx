@@ -36,12 +36,12 @@ function FaqItem({ item, index, isOpen, onToggle }: FaqItemProps) {
         aria-expanded={isOpen}
         aria-controls={`faq-answer-${index}`}
       >
-        <span
+        <h4
           data-tina-field={tinaField(item, 'question')}
-          className="text-lg font-medium text-foreground pr-4"
+          className="text-foreground pr-4"
         >
           {item.question}
-        </span>
+        </h4>
         <ChevronDown
           className={cn(
             'h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300',

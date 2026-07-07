@@ -56,7 +56,7 @@ export function DraftTopics({ data }: DraftTopicsProps) {
           {data.title && (
             <h3
               data-tina-field={tinaField(data, 'title')}
-              className="mb-6 text-lg font-medium text-foreground"
+              className="mb-6 font-medium text-foreground"
             >
               {data.title}
             </h3>

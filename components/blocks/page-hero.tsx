@@ -514,8 +514,7 @@ export function PageHero({ data }: PageHeroProps) {
             <p
               data-tina-field={tinaField(data, 'subtitle')}
               className={cn(
-                'text-muted-foreground mb-8 whitespace-pre-line',
-                isFullVariant ? 'text-base sm:text-lg md:text-xl max-w-2xl' : 'text-base md:text-lg max-w-2xl',
+                'text-muted-foreground mb-8 whitespace-pre-line max-w-2xl',
                 data.align === 'center' && 'mx-auto'
               )}
             >

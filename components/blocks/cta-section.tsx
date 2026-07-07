@@ -334,7 +334,6 @@ export function CtaSection({ data }: CtaSectionProps) {
                     data-tina-field={tinaField(data, 'subtitle')}
                     className={cn(
                       "text-muted-foreground max-w-2xl whitespace-pre-line mb-4",
-                      subtitleSizeClasses[subtitleSize as keyof typeof subtitleSizeClasses],
                       alignment === 'center' && 'mx-auto'
                     )}
                   >
@@ -434,8 +433,7 @@ export function CtaSection({ data }: CtaSectionProps) {
                 <p
                   data-tina-field={tinaField(data, 'subtitle')}
                   className={cn(
-                    "text-muted-foreground whitespace-pre-line mb-4",
-                    subtitleSizeClasses[subtitleSize as keyof typeof subtitleSizeClasses]
+                    "text-muted-foreground whitespace-pre-line mb-4"
                   )}
                 >
                   {data.subtitle}

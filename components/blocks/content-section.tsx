@@ -59,7 +59,7 @@ export function ContentSection({ data }: ContentSectionProps) {
       {data.subtitle && (
         <p
           data-tina-field={tinaField(data, 'subtitle')}
-          className="text-muted-foreground text-base sm:text-lg mb-6 whitespace-pre-line"
+          className="text-muted-foreground mb-6 whitespace-pre-line"
         >
           {data.subtitle}
         </p>
@@ -68,7 +68,7 @@ export function ContentSection({ data }: ContentSectionProps) {
       {data.body && (
         <div
           data-tina-field={tinaField(data, 'body')}
-          className="prose dark:prose-invert prose-lg max-w-none"
+          className="prose dark:prose-invert max-w-none"
         >
           <TinaMarkdown content={data.body} components={components} />
         </div>
