@@ -35,14 +35,14 @@ function InlineStripStat({ stat }: StatItemProps) {
       </data>
       <div
         data-tina-field={tinaField(stat, 'label')}
-        className="text-sm text-muted-foreground"
+        className="text-muted-foreground"
       >
         {stat.label}
       </div>
       {stat.statDescription && (
         <p
           data-tina-field={tinaField(stat, 'statDescription')}
-          className="text-xs text-muted-foreground"
+          className="text-sm text-muted-foreground"
         >
           {stat.statDescription}
         </p>
@@ -77,14 +77,14 @@ function CardGridStat({ stat }: StatItemProps) {
         </data>
         <div
           data-tina-field={tinaField(stat, 'label')}
-          className="text-sm text-muted-foreground"
+          className="text-muted-foreground"
         >
           {stat.label}
         </div>
         {stat.statDescription && (
           <p
             data-tina-field={tinaField(stat, 'statDescription')}
-            className="text-xs text-muted-foreground"
+            className="text-sm text-muted-foreground"
           >
             {stat.statDescription}
           </p>

@@ -96,7 +96,7 @@ function CardVariant({ card }: Omit<ContactCardProps, 'variant'>) {
           {card.contactDescription && (
             <p
               data-tina-field={tinaField(card, 'contactDescription')}
-              className="text-sm text-muted-foreground"
+              className="text-muted-foreground"
             >
               {card.contactDescription}
             </p>
@@ -172,7 +172,7 @@ function ListVariant({ card }: Omit<ContactCardProps, 'variant'>) {
         {card.contactDescription && (
           <p
             data-tina-field={tinaField(card, 'contactDescription')}
-            className="text-sm text-muted-foreground"
+            className="text-muted-foreground"
           >
             {card.contactDescription}
           </p>
@@ -231,7 +231,7 @@ function MinimalVariant({ card }: Omit<ContactCardProps, 'variant'>) {
       <div>
         <span
           data-tina-field={tinaField(card, 'title')}
-          className="text-sm text-muted-foreground mr-2"
+          className="text-muted-foreground mr-2"
         >
           {card.title}:
         </span>

@@ -92,7 +92,7 @@ function CompactLinkCard({ card }: LinkCardProps) {
       <div className="flex-1 min-w-0">
         <span
           data-tina-field={tinaField(card, 'title')}
-          className="block text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate"
+          className="block font-medium text-foreground group-hover:text-primary transition-colors truncate"
         >
           {card.title}
         </span>
@@ -140,12 +140,12 @@ export function LinkCards({ data }: LinkCardsProps) {
         {(data.title || data.subtitle) && (
           <div className="mb-3 px-3">
             {data.title && (
-              <h3
+              <h4
                 data-tina-field={tinaField(data, 'title')}
-                className="text-sm font-medium text-foreground"
+                className="text-foreground"
               >
                 {data.title}
-              </h3>
+              </h4>
             )}
             {data.subtitle && (
               <p

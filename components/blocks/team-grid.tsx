@@ -63,7 +63,7 @@ function TeamMemberCard({ member }: TeamMemberCardProps) {
 
         <p
           data-tina-field={tinaField(member, 'role')}
-          className="text-sm font-medium text-primary"
+          className="font-medium text-primary"
         >
           {member.role}
         </p>

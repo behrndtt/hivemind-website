@@ -117,7 +117,7 @@ export const Header = () => {
                                   <div key={colIdx} data-tina-field={tinaField(column)}>
                                     <Link
                                       href={column?.href || "#"}
-                                      className="mb-4 block text-sm font-medium text-primary hover:underline"
+                                      className="mb-4 block font-medium text-primary hover:underline"
                                     >
                                       {column?.title} →
                                     </Link>
@@ -136,10 +136,10 @@ export const Header = () => {
                                                   <IconComponent className="h-5 w-5 text-primary mt-0.5 shrink-0" />
                                                 )}
                                                 <div>
-                                                  <div className="text-sm font-medium text-foreground/90 group-hover:text-primary transition-colors">
+                                                  <p className="font-medium text-foreground/90 group-hover:text-primary transition-colors">
                                                     {subItem?.title}
-                                                  </div>
-                                                  <p className="text-sm text-muted-foreground line-clamp-2">
+                                                  </p>
+                                                  <p className="text-muted-foreground line-clamp-2">
                                                     {subItem?.description}
                                                   </p>
                                                 </div>
@@ -165,7 +165,7 @@ export const Header = () => {
                           <NavigationMenuLink asChild>
                             <Link
                               href={item.href || "#"}
-                              className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted/50 hover:text-foreground focus:bg-muted/50 focus:text-foreground focus:outline-none"
+                              className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 font-medium text-foreground/80 transition-colors hover:bg-muted/50 hover:text-foreground focus:bg-muted/50 focus:text-foreground focus:outline-none"
                               data-tina-field={tinaField(item)}
                             >
                               {item.label}

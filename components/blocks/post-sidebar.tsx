@@ -160,7 +160,7 @@ export function PostSidebar({
               <h2 className="mb-2 text-foreground">
                 {cta.title}
               </h2>
-              <p className="mb-4 text-sm text-muted-foreground">{cta.description}</p>
+              <p className="mb-4 text-muted-foreground">{cta.description}</p>
               <Button
                 asChild
                 className="w-full rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90"

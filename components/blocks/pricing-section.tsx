@@ -251,7 +251,7 @@ function PricingCard({ plan }: PricingCardProps) {
           {plan.planDescription && (
             <p
               data-tina-field={tinaField(plan, 'planDescription')}
-              className="text-sm sm:text-base text-muted-foreground mt-4"
+              className="text-muted-foreground mt-4"
             >
               {plan.planDescription}
             </p>

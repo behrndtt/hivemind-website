@@ -51,7 +51,7 @@ function ServiceCard({ card }: ServiceCardProps) {
           </div>
         )}
         {card.href && (
-          <div className="flex items-center text-primary text-sm font-medium">
+          <div className="flex items-center text-primary font-medium">
             {card.action || 'Learn More'}
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
           </div>

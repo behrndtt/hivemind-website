@@ -123,11 +123,11 @@ export function RelatedPosts({
                       {post.title}
                     </h3>
                     {post.excerpt && (
-                      <p className="text-sm text-muted-foreground line-clamp-2">
+                      <p className="text-muted-foreground line-clamp-2">
                         {getExcerptText(post.excerpt)}
                       </p>
                     )}
-                    <div className="flex items-center text-primary text-sm font-medium">
+                    <div className="flex items-center text-primary font-medium">
                       Read more
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </div>

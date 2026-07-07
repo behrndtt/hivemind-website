@@ -26,7 +26,7 @@ export const Footer = () => {
             </Link>
             {footer.tagline && (
               <p 
-                className="text-muted-foreground text-sm leading-relaxed"
+                className="text-muted-foreground leading-relaxed"
                 data-tina-field={tinaField(footer, "tagline")}
               >
                 {footer.tagline}
@@ -39,7 +39,7 @@ export const Footer = () => {
                 {footer.contact.email && (
                   <a 
                     href={`mailto:${footer.contact.email}`}
-                    className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
                   >
                     <Mail className="h-4 w-4" />
                     {footer.contact.email}
@@ -48,14 +48,14 @@ export const Footer = () => {
                 {footer.contact.phone && (
                   <a 
                     href={`tel:${footer.contact.phone}`}
-                    className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
                   >
                     <Phone className="h-4 w-4" />
                     {footer.contact.phone}
                   </a>
                 )}
                 {footer.contact.address && (
-                  <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                  <div className="flex items-center gap-2 text-muted-foreground">
                     <MapPin className="h-4 w-4" />
                     {footer.contact.address}
                   </div>
@@ -98,7 +98,7 @@ export const Footer = () => {
                     <li key={linkIdx}>
                       <Link
                         href={link?.href || "#"}
-                        className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                        className="text-muted-foreground hover:text-primary transition-colors"
                         data-tina-field={tinaField(link)}
                       >
                         {link?.label}

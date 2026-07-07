@@ -37,12 +37,12 @@ export function TagsSidebar({ data, tags, basePath = '/insights/tag' }: TagsSide
     <div className="rounded-xl border border-border bg-card/50 p-4">
       <div className="mb-4 flex items-center gap-2 px-2">
         <Tag className="h-4 w-4 text-primary" aria-hidden="true" />
-        <h3
+        <h4
           data-tina-field={tinaField(data, 'title')}
-          className="text-sm font-medium text-foreground"
+          className="text-foreground"
         >
           {title}
-        </h3>
+        </h4>
       </div>
 
       {displayTags.length > 0 ? (
@@ -71,7 +71,7 @@ export function TagsSidebar({ data, tags, basePath = '/insights/tag' }: TagsSide
           ))}
         </nav>
       ) : (
-        <p className="px-2 text-sm text-muted-foreground">
+        <p className="px-2 text-muted-foreground">
           No tags available
         </p>
       )}
@@ -79,7 +79,7 @@ export function TagsSidebar({ data, tags, basePath = '/insights/tag' }: TagsSide
       {data.showAllLink && (
         <Link
           href={data.allTagsHref || basePath}
-          className="mt-4 block px-2 text-sm text-primary hover:underline"
+          className="mt-4 block px-2 text-primary hover:underline"
         >
           View all tags →
         </Link>

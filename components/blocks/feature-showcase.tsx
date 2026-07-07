@@ -76,7 +76,7 @@ function ShowcaseCard({ card }: ShowcaseCardProps) {
           {card.features && card.features.length > 0 && (
             <ul className="grid gap-2 sm:grid-cols-2" aria-label="Features">
               {card.features.map((feature: PageBlocksFeatureShowcaseCardsFeatures | null, i: number) => (
-                <li key={i} className="flex items-center gap-2 text-sm text-foreground/80">
+                <li key={i} className="flex items-center gap-2 text-foreground/80">
                   <CheckCircle2 className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
                   <span data-tina-field={tinaField(feature, 'text')}>{feature?.text}</span>
                 </li>
