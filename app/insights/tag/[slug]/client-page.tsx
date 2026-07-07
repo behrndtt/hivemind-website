@@ -63,7 +63,7 @@ export default function TagClientPage({
             </Badge>
           </div>
 
-          <h1 className="text-3xl md:text-4xl text-foreground mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl text-foreground mb-4">
             Insights tagged with "{tagName}"
           </h1>
 

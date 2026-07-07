@@ -75,10 +75,10 @@ export function PostSidebar({
         >
           <Card className="border-primary/20 bg-card/50">
             <CardContent className="p-6">
-              <h2 className="mb-4 flex items-center gap-2 text-foreground">
+              <h3 className="mb-4 flex items-center gap-2 text-foreground">
                 <TrendingUp className="h-5 w-5 text-primary" />
                 Key Results
-              </h2>
+              </h3>
               <div className="grid grid-cols-2 gap-4">
                 {results.map((result, index) => (
                   <div
@@ -109,10 +109,10 @@ export function PostSidebar({
         >
           <Card className="border-border bg-card/50">
             <CardContent className="p-6">
-              <h2 className="mb-4 flex items-center gap-2 text-foreground">
+              <h3 className="mb-4 flex items-center gap-2 text-foreground">
                 <Tag className="h-5 w-5 text-primary" />
                 Tags
-              </h2>
+              </h3>
               <div
                 data-tina-field={tinaField(post, 'tags')}
                 className="flex flex-wrap gap-2"
@@ -157,9 +157,9 @@ export function PostSidebar({
         >
           <Card className="border-2 border-primary/20 bg-linear-to-br from-primary/10 to-background/50">
             <CardContent className="p-6">
-              <h2 className="mb-2 text-foreground">
+              <h3 className="mb-2 text-foreground">
                 {cta.title}
-              </h2>
+              </h3>
               <p className="mb-4 text-muted-foreground">{cta.description}</p>
               <Button
                 asChild

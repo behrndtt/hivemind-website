@@ -372,7 +372,7 @@ export function PostHero({
             {/* Title - matching page-hero typography */}
             <h1
               data-tina-field={tinaField(post, 'title')}
-              className="mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground"
+              className="mb-6 text-3xl sm:text-4xl md:text-5xl text-foreground"
             >
               {post.title}
             </h1>
