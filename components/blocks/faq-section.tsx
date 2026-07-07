@@ -59,7 +59,7 @@ function FaqItem({ item, index, isOpen, onToggle }: FaqItemProps) {
       >
         <div
           data-tina-field={tinaField(item, 'answer')}
-          className="pb-5 prose dark:prose-invert prose-sm max-w-none text-muted-foreground"
+          className="pb-5 prose dark:prose-invert max-w-none text-muted-foreground"
         >
           <TinaMarkdown content={item.answer} components={components} />
         </div>

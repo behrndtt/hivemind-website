@@ -83,7 +83,7 @@ function CardVariant({ post, contentType }: Omit<PostCardProps, 'variant'>) {
       </CardHeader>
       <CardContent>
         {post.excerpt && (
-          <div className="text-muted-foreground prose dark:prose-invert prose-sm max-w-none line-clamp-3">
+          <div className="text-muted-foreground prose dark:prose-invert max-w-none line-clamp-3">
             <TinaMarkdown content={post.excerpt} />
           </div>
         )}
@@ -126,7 +126,7 @@ function ListVariant({ post, contentType }: Omit<PostCardProps, 'variant'>) {
           <Link href={url}>{post.title}</Link>
         </h3>
         {post.excerpt && (
-          <div className="text-muted-foreground prose dark:prose-invert prose-sm max-w-none line-clamp-2">
+          <div className="text-muted-foreground prose dark:prose-invert max-w-none line-clamp-2">
             <TinaMarkdown content={post.excerpt} />
           </div>
         )}
@@ -167,7 +167,7 @@ function FeaturedVariant({ post, contentType }: Omit<PostCardProps, 'variant'>) 
             <Link href={url}>{post.title}</Link>
           </h3>
           {post.excerpt && (
-            <div className="mb-6 text-muted-foreground prose dark:prose-invert prose-sm max-w-none">
+            <div className="mb-6 text-muted-foreground prose dark:prose-invert max-w-none">
               <TinaMarkdown content={post.excerpt} />
             </div>
           )}

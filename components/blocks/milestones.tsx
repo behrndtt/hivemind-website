@@ -127,7 +127,7 @@ function TimelineVariant({ milestone, index, isLast }: Omit<MilestoneCardProps, 
         {milestone.description && (
           <div
             data-tina-field={tinaField(milestone, 'description')}
-            className="mt-2 prose dark:prose-invert prose-sm max-w-none text-muted-foreground"
+            className="mt-2 prose dark:prose-invert max-w-none text-muted-foreground"
           >
             <TinaMarkdown content={milestone.description} components={components} />
           </div>
@@ -186,7 +186,7 @@ function CardVariant({ milestone, index }: Omit<MilestoneCardProps, 'variant' | 
       {milestone.description && (
         <div
           data-tina-field={tinaField(milestone, 'description')}
-          className="prose dark:prose-invert prose-sm max-w-none text-muted-foreground"
+          className="prose dark:prose-invert max-w-none text-muted-foreground"
         >
           <TinaMarkdown content={milestone.description} components={components} />
         </div>

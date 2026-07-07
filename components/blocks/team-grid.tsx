@@ -71,7 +71,7 @@ function TeamMemberCard({ member }: TeamMemberCardProps) {
         {member.description && (
           <div
             data-tina-field={tinaField(member, 'description')}
-            className="text-sm text-muted-foreground prose dark:prose-invert prose-sm max-w-none"
+            className="text-muted-foreground prose dark:prose-invert max-w-none"
           >
             <TinaMarkdown content={member.description} components={components} />
           </div>

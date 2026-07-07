@@ -41,7 +41,7 @@ function StepCard({ step, index }: StepCardProps) {
         {step.description && (
           <div
             data-tina-field={tinaField(step, 'description')}
-            className="text-sm text-muted-foreground prose dark:prose-invert prose-sm max-w-none"
+            className="text-muted-foreground prose dark:prose-invert max-w-none"
           >
             <TinaMarkdown content={step.description} components={components} />
           </div>
