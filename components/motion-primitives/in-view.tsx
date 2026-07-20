@@ -27,9 +27,14 @@ interface InViewProps {
 }
 
 const defaultVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: { opacity: 1 },
 };
+
+function keepContentVisible(variant: Variant | undefined): Variant | undefined {
+  if (!variant || typeof variant !== "object") return variant;
+  return { ...variant, opacity: 1, filter: "none" };
+}
 
 export function InView({
   children,
@@ -51,19 +56,6 @@ export function InView({
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  // Fallback timer to ensure elements become visible even if intersection observer fails
-  useEffect(() => {
-    if (!isMounted || isViewed || prefersReducedMotion) return;
-
-    const timer = setTimeout(() => {
-      if (!isViewed) {
-        setIsViewed(true);
-      }
-    }, 1500); // Fallback after 1.5 seconds
-
-    return () => clearTimeout(timer);
-  }, [isMounted, isViewed, prefersReducedMotion]);
 
   // Skip animations for reduced motion preference
   if (prefersReducedMotion) {
@@ -87,7 +79,10 @@ export function InView({
       onAnimationComplete={() => {
         if (once && isInView) setIsViewed(true);
       }}
-      variants={variants}
+      variants={{
+        ...variants,
+        hidden: keepContentVisible(variants.hidden),
+      }}
       transition={transition}
       className={className}
     >

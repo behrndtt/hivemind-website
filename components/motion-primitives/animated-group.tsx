@@ -104,7 +104,7 @@ const presetVariants: Record<PresetType, Variants> = {
 };
 
 const addDefaultVariants = (variants: Variants) => ({
-  hidden: { ...defaultItemVariants.hidden, ...variants.hidden },
+  hidden: { ...defaultItemVariants.hidden, ...variants.hidden, opacity: 1, filter: 'none' },
   visible: { ...defaultItemVariants.visible, ...variants.visible },
 });
 
@@ -130,19 +130,6 @@ function AnimatedGroup({
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  // Fallback timer to ensure elements become visible even if intersection observer fails
-  useEffect(() => {
-    if (!isMounted || hasAnimated || prefersReducedMotion) return;
-
-    const timer = setTimeout(() => {
-      if (!hasAnimated) {
-        setHasAnimated(true);
-      }
-    }, 1500); // Fallback after 1.5 seconds
-
-    return () => clearTimeout(timer);
-  }, [isMounted, hasAnimated, prefersReducedMotion]);
 
   const selectedVariants = {
     item: addDefaultVariants(preset ? presetVariants[preset] : {}),

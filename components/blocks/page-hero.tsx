@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import type { Template } from 'tinacms';
 import { tinaField } from 'tinacms/dist/react';
-import { motion, useMotionValue, useSpring, useTransform, Transition } from 'motion/react';
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { renderTitle } from '@/lib/render-title';
@@ -16,34 +16,6 @@ import { iconSchema } from '@/tina/fields/icon';
 import { highlightWordsField, buttonsListField, badgeField } from '@/tina/fields/shared';
 import type { PageBlocksPageHero } from '@/tina/__generated__/types';
 import { useEffect, useState, useRef } from 'react';
-
-const transitionVariants = {
-  container: {
-    visible: {
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.75,
-      },
-    },
-  },
-  item: {
-    hidden: {
-      opacity: 0,
-      filter: 'blur(12px)',
-      y: 12,
-    },
-    visible: {
-      opacity: 1,
-      filter: 'blur(0px)',
-      y: 0,
-      transition: {
-        type: 'spring',
-        bounce: 0.3,
-        duration: 1.5,
-      } as Transition,
-    },
-  },
-};
 
 /**
  * Hexagon SVG pattern background
@@ -77,6 +49,35 @@ function HexagonBackground() {
  */
 function OrbsBackground({ intense = false }: { intense?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const [isRuntimeReady, setIsRuntimeReady] = useState(false);
+  const [isInViewport, setIsInViewport] = useState(true);
+  const [isPageVisible, setIsPageVisible] = useState(true);
+  const isAnimationActive = isRuntimeReady && isInViewport && isPageVisible && !prefersReducedMotion;
+
+  useEffect(() => {
+    let secondFrame = 0;
+    const firstFrame = requestAnimationFrame(() => {
+      secondFrame = requestAnimationFrame(() => setIsRuntimeReady(true));
+    });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInViewport(entry.isIntersecting),
+      { rootMargin: '200px' }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+
+    const handleVisibilityChange = () => setIsPageVisible(document.visibilityState === 'visible');
+    handleVisibilityChange();
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      cancelAnimationFrame(firstFrame);
+      cancelAnimationFrame(secondFrame);
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
   
   // Raw mouse position (0-1 normalized)
   const mouseX = useMotionValue(0.5);
@@ -151,6 +152,8 @@ function OrbsBackground({ intense = false }: { intense?: boolean }) {
 
   // Mouse tracking
   useEffect(() => {
+    if (!isAnimationActive || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
@@ -162,10 +165,12 @@ function OrbsBackground({ intense = false }: { intense?: boolean }) {
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
+  }, [isAnimationActive, mouseX, mouseY]);
 
   // Organic drift animation - creates wandering motion with unpredictable noise
   useEffect(() => {
+    if (!isAnimationActive) return;
+
     let animationId: number;
     let time = 0;
     
@@ -228,10 +233,12 @@ function OrbsBackground({ intense = false }: { intense?: boolean }) {
     
     animate();
     return () => cancelAnimationFrame(animationId);
-  }, [drift1X, drift1Y, drift2X, drift2Y, drift3X, drift3Y]);
+  }, [drift1X, drift1Y, drift2X, drift2Y, drift3X, drift3Y, isAnimationActive]);
 
   // Random morphing for shape and scale - with variable timing
   useEffect(() => {
+    if (!isAnimationActive) return;
+
     let timeoutId: NodeJS.Timeout;
     
     const scheduleNextMorph = () => {
@@ -265,7 +272,7 @@ function OrbsBackground({ intense = false }: { intense?: boolean }) {
     
     scheduleNextMorph();
     return () => clearTimeout(timeoutId);
-  }, []);
+  }, [isAnimationActive]);
 
   return (
     <div ref={containerRef} className="absolute inset-0 overflow-hidden">
@@ -281,13 +288,13 @@ function OrbsBackground({ intense = false }: { intense?: boolean }) {
           x: orb1X,
           y: orb1Y,
         }}
-        animate={{
+        animate={isAnimationActive ? {
           opacity: [0.5, 0.9, 0.6, 1, 0.5],
           scaleX: morphState.orb1.scaleX,
           scaleY: morphState.orb1.scaleY,
           rotate: morphState.orb1.rotate,
           borderRadius: morphState.orb1.borderRadius,
-        }}
+        } : { opacity: 0.6, scaleX: 1, scaleY: 1, rotate: 0 }}
         transition={{
           opacity: { duration: 16, repeat: Infinity, ease: "easeInOut" },
           scaleX: { duration: 8, ease: "easeInOut" },
@@ -309,13 +316,13 @@ function OrbsBackground({ intense = false }: { intense?: boolean }) {
           x: orb2X,
           y: orb2Y,
         }}
-        animate={{
+        animate={isAnimationActive ? {
           opacity: [0.4, 0.8, 0.5, 0.9, 0.4],
           scaleX: morphState.orb2.scaleX,
           scaleY: morphState.orb2.scaleY,
           rotate: morphState.orb2.rotate,
           borderRadius: morphState.orb2.borderRadius,
-        }}
+        } : { opacity: 0.5, scaleX: 1, scaleY: 1, rotate: 0 }}
         transition={{
           opacity: { duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 },
           scaleX: { duration: 9, ease: "easeInOut" },
@@ -339,13 +346,13 @@ function OrbsBackground({ intense = false }: { intense?: boolean }) {
           marginLeft: intense ? "-350px" : "-300px",
           marginTop: intense ? "-350px" : "-300px",
         }}
-        animate={{
+        animate={isAnimationActive ? {
           opacity: [0.3, 0.7, 0.4, 0.8, 0.3],
           scaleX: morphState.orb3.scaleX,
           scaleY: morphState.orb3.scaleY,
           rotate: morphState.orb3.rotate,
           borderRadius: morphState.orb3.borderRadius,
-        }}
+        } : { opacity: 0.4, scaleX: 1, scaleY: 1, rotate: 0 }}
         transition={{
           opacity: { duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 },
           scaleX: { duration: 10, ease: "easeInOut" },
@@ -358,7 +365,7 @@ function OrbsBackground({ intense = false }: { intense?: boolean }) {
       {/* Floating accent orb 1 */}
       <motion.div
         className="absolute size-64 bg-primary/12 blur-[70px]"
-        animate={{
+        animate={isAnimationActive ? {
           x: [0, 120, 60, -80, -40, 0],
           y: [0, -60, 80, 40, -30, 0],
           opacity: [0.2, 0.5, 0.3, 0.6, 0.4, 0.2],
@@ -370,7 +377,7 @@ function OrbsBackground({ intense = false }: { intense?: boolean }) {
             "30% 70% 60% 40% / 60% 40% 50% 60%",
             "40% 60% 70% 30% / 40% 50% 60% 50%",
           ],
-        }}
+        } : { x: 0, y: 0, opacity: 0.3, scale: 1 }}
         transition={{
           duration: 30,
           repeat: Infinity,
@@ -382,7 +389,7 @@ function OrbsBackground({ intense = false }: { intense?: boolean }) {
       {/* Floating accent orb 2 */}
       <motion.div
         className="absolute size-44 bg-primary/10 blur-[60px]"
-        animate={{
+        animate={isAnimationActive ? {
           x: [0, -100, -50, 70, 30, 0],
           y: [0, 70, -50, -30, 60, 0],
           opacity: [0.15, 0.4, 0.25, 0.5, 0.3, 0.15],
@@ -394,7 +401,7 @@ function OrbsBackground({ intense = false }: { intense?: boolean }) {
             "60% 40% 40% 60% / 40% 60% 60% 40%",
             "70% 30% 50% 50% / 30% 70% 50% 50%",
           ],
-        }}
+        } : { x: 0, y: 0, opacity: 0.25, scale: 1 }}
         transition={{
           duration: 36,
           repeat: Infinity,

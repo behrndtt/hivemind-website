@@ -2,17 +2,12 @@
 
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
-import { motion, useReducedMotion } from "motion/react"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-import { buttonHover, buttonTap } from "@/lib/motion"
-
-const MotionButton = motion.create("button")
-const MotionSlot = motion.create(Slot)
 
 const buttonVariants = cva(
-  "group inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-[color,background-color,border-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 shrink-0",
+  "group inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-[color,background-color,border-color,box-shadow,transform] duration-200 hover:-translate-y-px hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 shrink-0 motion-reduce:transform-none",
   {
     variants: {
       variant: {
@@ -51,26 +46,18 @@ function Button({
   ...props
 }: Omit<
   React.ComponentProps<"button">,
-  "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart" | "onAnimationEnd" | "onAnimationIteration"
+  "onAnimationStart" | "onAnimationEnd" | "onAnimationIteration"
 > &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean
   }) {
-  const shouldReduceMotion = useReducedMotion()
-  const Comp = asChild ? MotionSlot : MotionButton
-
-  // Skip the hover/tap motion entirely for disabled buttons and when the user prefers reduced motion
-  const motionProps =
-    !disabled && !shouldReduceMotion
-      ? { whileHover: buttonHover, whileTap: buttonTap }
-      : {}
+  const Comp = asChild ? Slot : "button"
 
   return (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       disabled={disabled}
-      {...motionProps}
       {...props}
     />
   )
