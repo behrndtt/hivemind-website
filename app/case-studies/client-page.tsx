@@ -15,11 +15,16 @@ interface CaseStudiesClientPageProps {
 }
 
 export default function CaseStudiesClientPage({ pageData, posts, tags }: CaseStudiesClientPageProps) {
-  // Handle null pageData during local builds
   if (!pageData) {
     return <Blocks posts={posts} tags={tags} />;
   }
 
+  return <CaseStudiesPage pageData={pageData} posts={posts} tags={tags} />;
+}
+
+function CaseStudiesPage({ pageData, posts, tags }: Omit<CaseStudiesClientPageProps, 'pageData'> & {
+  pageData: NonNullable<CaseStudiesClientPageProps['pageData']>;
+}) {
   const { data } = useTina({
     query: pageData.query,
     variables: pageData.variables,

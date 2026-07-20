@@ -20,7 +20,6 @@ export interface InsightsClientPageProps {
 }
 
 export default function InsightsClientPage({ pageData, posts, tags }: InsightsClientPageProps) {
-  // Handle null pageData during local builds
   if (!pageData) {
     return (
       <ErrorBoundary>
@@ -29,6 +28,12 @@ export default function InsightsClientPage({ pageData, posts, tags }: InsightsCl
     );
   }
 
+  return <InsightsPage pageData={pageData} posts={posts} tags={tags} />;
+}
+
+function InsightsPage({ pageData, posts, tags }: Omit<InsightsClientPageProps, 'pageData'> & {
+  pageData: NonNullable<InsightsClientPageProps['pageData']>;
+}) {
   const { data } = useTina({ ...pageData });
 
   return (

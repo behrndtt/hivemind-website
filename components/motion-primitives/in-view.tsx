@@ -31,8 +31,8 @@ const defaultVariants = {
   visible: { opacity: 1 },
 };
 
-function keepContentVisible(variant: Variant | undefined): Variant | undefined {
-  if (!variant || typeof variant !== "object") return variant;
+function keepContentVisible(variant: Variant): Variant {
+  if (typeof variant !== "object") return variant;
   return { ...variant, opacity: 1, filter: "none" };
 }
 
@@ -81,7 +81,7 @@ export function InView({
       }}
       variants={{
         ...variants,
-        hidden: keepContentVisible(variants.hidden),
+        hidden: keepContentVisible(variants.hidden ?? defaultVariants.hidden),
       }}
       transition={transition}
       className={className}
