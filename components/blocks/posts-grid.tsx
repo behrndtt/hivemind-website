@@ -73,6 +73,19 @@ function PostDate({ date }: { date?: string | null }) {
 }
 
 function PostImage({ post }: { post: Post }) {
+  if (!post.heroImg) {
+    return (
+      <div
+        aria-hidden="true"
+        className="flex aspect-[16/10] h-full w-full items-center justify-center bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/.18),transparent_42%),linear-gradient(135deg,hsl(var(--card)),hsl(var(--background)))]"
+      >
+        <span className="font-heading text-sm font-semibold uppercase tracking-[0.18em] text-primary/70">
+          Hivemind Solutions
+        </span>
+      </div>
+    );
+  }
+
   return (
     <img
       src={post.heroImg || ''}
@@ -163,13 +176,13 @@ function TopicFilter({ tags, basePath, allPostsPath, activeTagSlug }: TopicFilte
   if (tags.length === 0) return null;
   return (
     <nav aria-label="Filter posts by topic" className="mb-10 border-y border-border py-4">
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex items-center gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <span className="shrink-0 text-sm font-medium text-foreground">Topics</span>
         <Link
           href={allPostsPath}
           aria-current={!activeTagSlug ? 'page' : undefined}
           className={cn(
-            'rounded-full border px-3 py-1.5 text-sm transition-colors',
+            'min-h-11 shrink-0 rounded-full border px-3 py-2 text-sm transition-colors',
             !activeTagSlug ? 'border-primary bg-primary text-primary-foreground' : 'border-border text-muted-foreground hover:border-primary hover:text-foreground'
           )}
         >
@@ -183,7 +196,7 @@ function TopicFilter({ tags, basePath, allPostsPath, activeTagSlug }: TopicFilte
               href={`${basePath}/${tag.slug}`}
               aria-current={isActive ? 'page' : undefined}
               className={cn(
-                'rounded-full border px-3 py-1.5 text-sm transition-colors',
+                'min-h-11 shrink-0 rounded-full border px-3 py-2 text-sm transition-colors',
                 isActive ? 'border-primary bg-primary text-primary-foreground' : 'border-border text-muted-foreground hover:border-primary hover:text-foreground'
               )}
             >

@@ -199,7 +199,7 @@ export const Header = () => {
             {/* Desktop CTA */}
             {cta && (
               <div className="hidden lg:flex items-center" data-tina-field={tinaField(header, "cta")}>
-                <Button asChild className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6">
+                <Button asChild className="bg-primary px-6 text-primary-foreground hover:bg-primary/90">
                   <Link href={cta.href || "/contact"}>{cta.label || "Contact Us"}</Link>
                 </Button>
               </div>
@@ -211,13 +211,13 @@ export const Header = () => {
         <div
           id="mobile-navigation"
           className={cn(
-            "lg:hidden overflow-hidden transition-all duration-300 ease-in-out",
+            "lg:hidden overflow-hidden transition-[max-height,opacity] duration-200 ease-in-out",
             menuState 
-              ? "max-h-[500px] opacity-100" 
+              ? "max-h-[calc(100svh-72px)] overflow-y-auto opacity-100" 
               : "max-h-0 opacity-0"
           )}
         >
-          <div className="mx-4 mb-4 p-6 bg-card border border-border rounded-xl shadow-xl">
+          <div className="mx-4 mb-4 rounded-lg border border-border bg-card p-6 shadow-xl">
             <div className="space-y-6">
               {navItems.map((item, idx) => {
                 // Dropdown: show section header + column titles only (no feature/icon items)
@@ -264,7 +264,7 @@ export const Header = () => {
               {/* Mobile CTA */}
               {cta && (
                 <div className="pt-4 border-t border-border">
-                  <Button asChild className="w-full rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium">
+                  <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
                     <Link href={cta.href || "/contact"} onClick={() => setMenuState(false)}>
                       {cta.label || "Contact Us"}
                     </Link>

@@ -121,7 +121,7 @@ function FeaturesList({ features, alignment = 'left' }: FeaturesListProps) {
   if (!features || features.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-3 mt-6 mb-8">
+    <div className="flex w-full max-w-2xl flex-col gap-3 mt-6 mb-8">
       {features.map((feature, index) => (
         feature && <FeatureItem key={index} feature={feature} alignment={alignment} />
       ))}
@@ -195,9 +195,9 @@ export function CtaSection({ data }: CtaSectionProps) {
               <div className="absolute inset-y-0 left-0 w-1 bg-primary" />
               <HoneycombBackground />
 
-              <div className="relative z-10 grid gap-8 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-center">
+              <div className="relative z-10 grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-center">
                 <div className={cn(
-                  "flex flex-col",
+                  "row-start-1 flex min-w-0 w-full flex-col xl:col-start-1",
                   alignmentClasses[alignment as keyof typeof alignmentClasses]
                 )}>
                 {data.icon && (
@@ -230,7 +230,7 @@ export function CtaSection({ data }: CtaSectionProps) {
                   <p
                     data-tina-field={tinaField(data, 'subtitle')}
                     className={cn(
-                      "text-muted-foreground max-w-2xl whitespace-pre-line mb-4",
+                      "w-full max-w-2xl text-muted-foreground whitespace-pre-line mb-4",
                       alignment === 'center' && 'mx-auto'
                     )}
                   >
@@ -246,7 +246,7 @@ export function CtaSection({ data }: CtaSectionProps) {
 
                 {data.buttons && data.buttons.length > 0 && (
                   <div className={cn(
-                    "flex flex-col sm:flex-row gap-4 xl:mt-0",
+                    "col-span-full row-start-2 flex w-full flex-col gap-4 sm:flex-row xl:col-span-1 xl:col-start-2 xl:row-start-1 xl:w-auto",
                     buttonAlignmentClasses[alignment as keyof typeof buttonAlignmentClasses]
                   )}>
                     {data.buttons.map((button, index) => (

@@ -439,40 +439,36 @@ export function PageHero({ data }: PageHeroProps) {
   const backgroundComponent = () => {
     switch (data.backgroundStyle) {
       case 'hexagon':
-        return (
-          <>
-            <HexagonBackground />
-            <OrbsBackground intense={isFullVariant} />
-          </>
-        );
+        return <HexagonBackground />;
       case 'orbs':
-        return <OrbsBackground intense={isFullVariant} />;
+        return isFullVariant ? <OrbsBackground intense /> : <RadialBackground />;
       case 'radial':
         return <RadialBackground />;
       case 'hexagon-orbs':
-      default:
-        // Default to hexagon-orbs for best visual effect
-        return (
+        return isFullVariant ? (
           <>
             <HexagonBackground />
-            <OrbsBackground intense={isFullVariant} />
+            <OrbsBackground intense />
           </>
-        );
+        ) : <HexagonBackground />;
+      case 'none':
+      default:
+        return null;
     }
   };
+  const background = backgroundComponent();
 
   return (
     <section
       className={cn(
         'relative overflow-hidden bg-background',
-        isFullVariant ? 'min-h-[90vh] flex items-center justify-center' : 'py-20 md:py-32',
+        isFullVariant ? 'flex min-h-[clamp(34rem,72svh,48rem)] items-center justify-center py-16 md:py-24' : 'py-16 md:py-24',
         data.background && data.background !== 'bg-background' && data.background
       )}
     >
-      {/* Always show animated backgrounds */}
-      <div className="absolute inset-0">{backgroundComponent()}</div>
+      {background && <div className="absolute inset-0">{background}</div>}
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimatedGroup
           preset="blur-slide"
           triggerOnMount
@@ -509,8 +505,8 @@ export function PageHero({ data }: PageHeroProps) {
               className={cn(
                 'mb-6',
                 isFullVariant
-                  ? 'text-4xl font-semibold leading-[1.05] tracking-[-1.2px] sm:text-5xl sm:tracking-[-1.8px] lg:text-7xl lg:tracking-[-2.8px]'
-                  : 'text-3xl font-bold leading-tight tracking-[-0.3px] sm:text-4xl sm:tracking-[-0.6px] md:text-5xl md:tracking-[-1.8px]'
+                  ? 'max-w-[58ch] text-4xl font-semibold leading-[1.08] tracking-[-1.2px] text-balance sm:text-5xl sm:tracking-[-1.8px] lg:text-7xl lg:tracking-[-2.8px]'
+                  : 'max-w-[58ch] text-3xl font-bold leading-tight text-balance sm:text-4xl md:text-5xl'
               )}
             >
               {renderTitle(data.title, data.highlightWords || undefined)}
@@ -521,9 +517,7 @@ export function PageHero({ data }: PageHeroProps) {
             <p
               data-tina-field={tinaField(data, 'subtitle')}
               className={cn(
-                isFullVariant
-                  ? 'mb-8 max-w-2xl whitespace-pre-line text-lg font-normal tracking-[-0.15px] text-muted-foreground'
-                  : 'mb-8 max-w-2xl whitespace-pre-line text-lg font-medium tracking-[-0.15px] text-muted-foreground [font-variation-settings:normal]',
+                  'mb-8 max-w-[58ch] whitespace-pre-line text-lg leading-7 text-muted-foreground',
                 data.align === 'center' && 'mx-auto'
               )}
             >
@@ -534,7 +528,7 @@ export function PageHero({ data }: PageHeroProps) {
           {data.buttons && data.buttons.length > 0 && (
             <div
               className={cn(
-                'flex flex-col sm:flex-row gap-4',
+                'flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4',
                 data.align === 'center' && 'justify-center'
               )}
             >
@@ -545,7 +539,7 @@ export function PageHero({ data }: PageHeroProps) {
                     size="lg"
                     variant={button?.variant === 'outline' ? 'outline' : 'default'}
                     className={cn(
-                      'rounded-full px-8 font-medium',
+                      'min-h-11 px-6 font-medium',
                       button?.variant === 'outline'
                         ? 'border-border hover:bg-muted hover:border-primary/50'
                         : 'bg-primary hover:bg-primary/90 text-primary-foreground'
@@ -553,7 +547,7 @@ export function PageHero({ data }: PageHeroProps) {
                   >
                     <Link href={button?.href || '/'}>
                       {button?.icon && <Icon data={button.icon} className="w-4 h-4" />}
-                      <span className="text-nowrap">{button?.label}</span>
+                      <span>{button?.label}</span>
                       {button?.variant !== 'outline' && (
                         <ArrowRight className="ml-2 w-4 h-4" />
                       )}
