@@ -23,7 +23,7 @@ import { useEffect, useState, useRef } from 'react';
 function HexagonBackground() {
   return (
     <svg
-      className="absolute inset-0 h-full w-full opacity-[0.06]"
+      className="absolute inset-0 h-full w-full text-foreground opacity-[0.06]"
       xmlns="http://www.w3.org/2000/svg"
       style={{
         maskImage: 'radial-gradient(ellipse at center, black 0%, transparent 70%)',
@@ -33,7 +33,7 @@ function HexagonBackground() {
       <defs>
         <pattern id="hexagons" width="28" height="49" patternUnits="userSpaceOnUse">
           <g fillRule="evenodd">
-            <g fill="white" fillRule="nonzero">
+            <g fill="currentColor" fillRule="nonzero">
               <path d="M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z" />
             </g>
           </g>
@@ -509,8 +509,8 @@ export function PageHero({ data }: PageHeroProps) {
               className={cn(
                 'mb-6',
                 isFullVariant
-                  ? 'text-4xl sm:text-5xl lg:text-7xl'
-                  : 'text-3xl sm:text-4xl md:text-5xl'
+                  ? 'text-4xl font-semibold leading-[1.05] tracking-[-1.2px] sm:text-5xl sm:tracking-[-1.8px] lg:text-7xl lg:tracking-[-2.8px]'
+                  : 'text-3xl font-bold leading-tight tracking-[-0.3px] sm:text-4xl sm:tracking-[-0.6px] md:text-5xl md:tracking-[-1.8px]'
               )}
             >
               {renderTitle(data.title, data.highlightWords || undefined)}
@@ -521,7 +521,9 @@ export function PageHero({ data }: PageHeroProps) {
             <p
               data-tina-field={tinaField(data, 'subtitle')}
               className={cn(
-                'text-muted-foreground mb-8 whitespace-pre-line max-w-2xl',
+                isFullVariant
+                  ? 'mb-8 max-w-2xl whitespace-pre-line text-lg font-normal tracking-[-0.15px] text-muted-foreground'
+                  : 'mb-8 max-w-2xl whitespace-pre-line text-lg font-medium tracking-[-0.15px] text-muted-foreground [font-variation-settings:normal]',
                 data.align === 'center' && 'mx-auto'
               )}
             >

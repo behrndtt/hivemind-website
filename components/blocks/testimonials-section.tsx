@@ -39,17 +39,17 @@ interface TestimonialCardProps {
 function TestimonialCard({ testimonial }: TestimonialCardProps) {
   return (
     <Card>
-      <CardContent>
+      <CardContent className="h-full p-6 sm:p-8">
         <StarRating />
 
         <blockquote
           data-tina-field={tinaField(testimonial, 'quote')}
-          className="text-foreground/80 font-sans font-normal leading-relaxed"
+          className="font-sans text-base font-normal leading-7 text-foreground/80 md:text-xl md:leading-8"
         >
           &ldquo;{testimonial.quote}&rdquo;
         </blockquote>
 
-        <div className="flex items-center gap-4">
+        <div className="mt-auto flex items-center gap-4 pt-2">
           {testimonial.avatar ? (
             <img
               src={testimonial.avatar}
@@ -67,11 +67,11 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
           <div>
             <div
               data-tina-field={tinaField(testimonial, 'author')}
-              className="font-sans font-normal text-foreground"
+              className="font-sans text-base font-normal text-foreground"
             >
               {testimonial.author}
             </div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-muted-foreground">
               {testimonial.role && (
                 <span data-tina-field={tinaField(testimonial, 'role')}>
                   {testimonial.role}
@@ -110,7 +110,7 @@ export function TestimonialsSection({ data }: TestimonialsSectionProps) {
         <BlockHeader data={data} />
 
         <AnimatedGroup
-          preset="scale"
+          preset="fade"
           className={cn('grid gap-6 sm:gap-8', columnClasses[columns as keyof typeof columnClasses] || 'grid-cols-1 md:grid-cols-2')}
         >
           {data.items?.map((testimonial, index) => (

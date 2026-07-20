@@ -49,9 +49,9 @@ export default function InsightClientPage(props: ClientInsightProps) {
                 post={insight}
                 contentType="insights"
                 cta={{
-                  title: 'Need Expert Guidance?',
-                  description: 'Our team can help you implement these strategies in your organisation.',
-                  buttonText: 'Get in Touch',
+                  title: 'Apply This Guidance',
+                  description: 'Discuss how this advice fits your current Microsoft environment, risks and priorities.',
+                  buttonText: 'Discuss Your Environment',
                   buttonHref: '/contact',
                 }}
               />

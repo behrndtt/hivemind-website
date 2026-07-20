@@ -2,7 +2,7 @@
 
 import { tinaField } from 'tinacms/dist/react';
 import { TinaMarkdown } from 'tinacms/dist/rich-text';
-import { Building2, CheckCircle2, Quote, TrendingUp } from 'lucide-react';
+import { Building2, CheckCircle2, TrendingUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { InView } from '@/components/motion-primitives/in-view';
 import { Card, CardContent } from '@/components/ui/card';
@@ -37,14 +37,6 @@ export interface PostContentProps {
 }
 
 export function PostContent({ post, className }: PostContentProps) {
-  // Check if this is a case study
-  const isCaseStudy = 'client' in post || 'industry' in post;
-  const caseStudy = post as CaseStudyPost;
-
-  // Extract challenge and solution from case study if available
-  // These would come from structured fields or the body
-  const hasStructuredContent = isCaseStudy && (caseStudy.client || caseStudy.industry);
-
   return (
     <div className={cn('flex flex-col gap-8 lg:col-span-2', className)}>
       <InView
@@ -56,24 +48,39 @@ export function PostContent({ post, className }: PostContentProps) {
         viewOptions={{ once: true }}
         className="flex flex-col gap-8"
       >
+        {post.executiveSummary && (
+          <section
+            data-tina-field={tinaField(post, 'executiveSummary')}
+            className="border-l-4 border-primary bg-muted/40 px-6 py-5"
+            aria-labelledby="executive-summary-heading"
+          >
+            <h2 id="executive-summary-heading" className="mb-3 text-xl font-bold text-foreground">
+              Executive Summary
+            </h2>
+            <p className="text-base leading-relaxed text-muted-foreground">
+              {post.executiveSummary}
+            </p>
+          </section>
+        )}
 
         {/* Main Body Content */}
         {post._body && (
           <div
             data-tina-field={tinaField(post, '_body')}
-            className="prose dark:prose-invert prose-zinc max-w-none
+            className={cn(
+              `prose dark:prose-invert prose-zinc max-w-none
               prose-headings:text-foreground
               prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:font-bold
               prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:font-bold
               prose-p:text-muted-foreground prose-p:leading-relaxed
-              prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+              prose-a:text-primary prose-a:no-underline prose-a:hover:underline
               prose-strong:text-foreground
               prose-code:text-primary prose-code:bg-card prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
               prose-pre:bg-card prose-pre:border prose-pre:border-border
               prose-blockquote:border-primary prose-blockquote:text-foreground/80
               prose-li:text-muted-foreground
-              prose-img:rounded-xl
-            "
+              prose-img:rounded-xl`,
+            )}
           >
             <TinaMarkdown content={post._body} components={components} />
           </div>
@@ -105,17 +112,16 @@ export function PostTestimonial({
 }: PostTestimonialProps) {
   return (
     <Card className={cn('border-primary/20 bg-card/50', className)}>
-      <CardContent className="p-6 lg:p-8">
-        <Quote className="h-8 w-8 text-primary/50 mb-4" />
-        <blockquote className="mb-4 font-sans text-base text-foreground/80 leading-relaxed">
+      <CardContent className="flex h-full flex-col gap-3 p-6 sm:p-8">
+        <blockquote className="mb-4 mt-auto flex font-sans leading-relaxed text-foreground/80">
           &ldquo;{quote}&rdquo;
         </blockquote>
-        <div className="flex items-center gap-3">
+        <div className="mt-auto flex items-center gap-4 pt-2">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
             {getInitials(author)}
           </div>
           <div>
-            <div className="font-medium text-foreground">{author}</div>
+            <div className="text-base font-medium text-foreground">{author}</div>
             <div className="text-sm text-muted-foreground">{role}</div>
           </div>
         </div>

@@ -76,108 +76,6 @@ const paddingClasses = {
 };
 
 /**
- * Overlay opacity class mappings
- */
-const overlayOpacityClasses = {
-  none: '',
-  light: 'bg-background/30',
-  medium: 'bg-background/50',
-  heavy: 'bg-background/70',
-  dark: 'bg-background/90',
-};
-
-/**
- * Hexagon SVG pattern background for full-width
- */
-function HexagonBackground() {
-  return (
-    <svg
-      className="absolute inset-0 h-full w-full opacity-[0.06]"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{
-        maskImage: 'radial-gradient(ellipse at center, black 0%, transparent 70%)',
-        WebkitMaskImage: 'radial-gradient(ellipse at center, black 0%, transparent 70%)',
-      }}
-    >
-      <defs>
-        <pattern id="cta-hexagons-fullwidth" width="28" height="49" patternUnits="userSpaceOnUse">
-          <g fillRule="evenodd">
-            <g fill="white" fillRule="nonzero">
-              <path d="M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z" />
-            </g>
-          </g>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#cta-hexagons-fullwidth)" />
-    </svg>
-  );
-}
-
-/**
- * Animated orbs background
- */
-function OrbsBackground() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Primary orb - top right */}
-      <div
-        className="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 rounded-full bg-linear-to-br from-primary/20 via-primary/10 to-transparent blur-3xl"
-        style={{ animation: 'float 8s ease-in-out infinite' }}
-      />
-      {/* Secondary orb - bottom left */}
-      <div
-        className="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 rounded-full bg-linear-to-tr from-secondary/20 via-secondary/10 to-transparent blur-3xl"
-        style={{ animation: 'float 10s ease-in-out infinite reverse' }}
-      />
-      {/* Accent orb - center */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-1/3 rounded-full bg-linear-to-r from-accent/15 to-transparent blur-2xl"
-        style={{ animation: 'pulse 6s ease-in-out infinite' }}
-      />
-    </div>
-  );
-}
-
-/**
- * Radial gradient background
- */
-function RadialBackground() {
-  return (
-    <div
-      className="absolute inset-0 opacity-30"
-      style={{
-        background: 'radial-gradient(ellipse at center, var(--primary) 0%, transparent 70%)',
-      }}
-    />
-  );
-}
-
-/**
- * Background style renderer
- */
-function BackgroundRenderer({ style }: { style?: string | null }) {
-  if (!style || style === 'none') return null;
-  
-  switch (style) {
-    case 'hexagon':
-      return <HexagonBackground />;
-    case 'orbs':
-      return <OrbsBackground />;
-    case 'radial':
-      return <RadialBackground />;
-    case 'hexagon-orbs':
-      return (
-        <>
-          <HexagonBackground />
-          <OrbsBackground />
-        </>
-      );
-    default:
-      return null;
-  }
-}
-
-/**
  * Feature item type definition
  */
 interface FeatureItemData {
@@ -231,33 +129,36 @@ function FeaturesList({ features, alignment = 'left' }: FeaturesListProps) {
   );
 }
 
-/**
- * Hexagon SVG pattern background for CTA
- */
-function HexagonPattern() {
+function HoneycombBackground({ className = '' }: { className?: string }) {
   return (
     <svg
-      className="absolute inset-0 w-full h-full opacity-[0.03]"
+      aria-hidden="true"
+      className={cn('pointer-events-none absolute inset-0 h-full w-full text-foreground opacity-[0.06]', className)}
       xmlns="http://www.w3.org/2000/svg"
       style={{
-        maskImage:
-          "linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)",
-        WebkitMaskImage:
-          "linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)",
+        maskImage: 'radial-gradient(ellipse at center, black 0%, transparent 70%)',
+        WebkitMaskImage: 'radial-gradient(ellipse at center, black 0%, transparent 70%)',
       }}
     >
       <defs>
-        <pattern id="cta-hexagons" width="28" height="49" patternUnits="userSpaceOnUse">
+        <pattern id="cta-honeycomb" width="28" height="49" patternUnits="userSpaceOnUse">
           <g fillRule="evenodd">
-            <g fill="white" fillRule="nonzero">
+            <g fill="currentColor" fillRule="nonzero">
               <path d="M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z" />
             </g>
           </g>
         </pattern>
       </defs>
-      <rect width="100%" height="100%" fill="url(#cta-hexagons)" />
+      <rect width="100%" height="100%" fill="url(#cta-honeycomb)" />
     </svg>
   );
+}
+
+function getButtonVariant(variant?: string | null) {
+  if (variant === 'outline') return 'outline' as const;
+  if (variant === 'ghost' || variant === 'link') return 'ghost' as const;
+  if (variant === 'secondary') return 'secondary' as const;
+  return 'default' as const;
 }
 
 export interface CtaSectionProps {
@@ -286,23 +187,19 @@ export function CtaSection({ data }: CtaSectionProps) {
             viewOptions={{ once: true, margin: '-100px' }}
           >
             <div className={cn(
-              "relative overflow-hidden rounded-lg border border-border",
+              "relative overflow-hidden rounded-2xl border border-border/80 bg-card shadow-2xl shadow-black/20",
               paddingClasses[padding as keyof typeof paddingClasses],
               cardBackgroundClasses[cardBackground as keyof typeof cardBackgroundClasses],
               alignmentClasses[alignment as keyof typeof alignmentClasses]
             )}>
-              {/* Background effects */}
-              {cardBackground === 'default' && (
-                <>
-                  <div className="absolute inset-0 bg-linear-to-r from-primary/10 via-primary/5 to-primary/10" />
-                  <HexagonPattern />
-                </>
-              )}
+              <div className="absolute inset-y-0 left-0 w-1 bg-primary" />
+              <HoneycombBackground />
 
-              <div className={cn(
-                "relative z-10 flex flex-col",
-                alignmentClasses[alignment as keyof typeof alignmentClasses]
-              )}>
+              <div className="relative z-10 grid gap-8 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-center">
+                <div className={cn(
+                  "flex flex-col",
+                  alignmentClasses[alignment as keyof typeof alignmentClasses]
+                )}>
                 {data.icon && (
                   <div
                     data-tina-field={tinaField(data, 'icon')}
@@ -345,9 +242,11 @@ export function CtaSection({ data }: CtaSectionProps) {
                   <FeaturesList features={data.features} alignment={alignment} />
                 )}
 
+                </div>
+
                 {data.buttons && data.buttons.length > 0 && (
                   <div className={cn(
-                    "flex flex-col sm:flex-row gap-4 mt-8",
+                    "flex flex-col sm:flex-row gap-4 xl:mt-0",
                     buttonAlignmentClasses[alignment as keyof typeof buttonAlignmentClasses]
                   )}>
                     {data.buttons.map((button, index) => (
@@ -355,18 +254,17 @@ export function CtaSection({ data }: CtaSectionProps) {
                         <Button
                           asChild
                           size="lg"
-                          variant={button?.variant === 'outline' ? 'outline' : 'default'}
+                          variant={getButtonVariant(button?.variant)}
                           className={cn(
-                            'rounded-full font-medium px-8',
-                            button?.variant === 'outline'
-                              ? 'border-border hover:bg-muted hover:border-primary/50'
-                              : 'bg-primary hover:bg-primary/90 text-primary-foreground'
+                            'rounded-full px-7 font-medium',
+                            button?.variant === 'outline' && 'border-border hover:border-primary/50 hover:bg-muted',
+                            (button?.variant === 'ghost' || button?.variant === 'link') && 'text-foreground hover:bg-muted'
                           )}
                         >
                           <Link href={button?.href || '/'}>
                             {button?.icon && <Icon data={button.icon} className="w-4 h-4" />}
                             {button?.label}
-                            {button?.variant !== 'outline' && (
+                            {(!button?.variant || button?.variant === 'default' || button?.variant === 'primary') && (
                               <ArrowRight className="ml-2 w-4 h-4" />
                             )}
                           </Link>
@@ -385,10 +283,6 @@ export function CtaSection({ data }: CtaSectionProps) {
 
   // Full-width variant
   if (variant === 'full-width') {
-    const backgroundStyle = (data as Record<string, unknown>).backgroundStyle as string || 'hexagon';
-    const overlayOpacity = (data as Record<string, unknown>).overlayOpacity as string || 'none';
-    const overlayClass = overlayOpacityClasses[overlayOpacity as keyof typeof overlayOpacityClasses] || '';
-    
     return (
       <section
         className={cn(
@@ -396,13 +290,8 @@ export function CtaSection({ data }: CtaSectionProps) {
           data.background || 'bg-card'
         )}
       >
-        {/* Background style */}
-        <BackgroundRenderer style={backgroundStyle} />
-        
-        {/* Overlay */}
-        {overlayClass && (
-          <div className={cn('absolute inset-0 z-1', overlayClass)} />
-        )}
+        <HoneycombBackground className="opacity-[0.08]" />
+        <div className="absolute inset-0 bg-linear-to-r from-primary/[0.04] via-transparent to-primary/[0.04]" />
         
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <InView
@@ -454,12 +343,18 @@ export function CtaSection({ data }: CtaSectionProps) {
                       <Button
                         asChild
                         size="lg"
-                        variant={button?.variant === 'outline' ? 'outline' : 'default'}
-                        className="rounded-full px-8"
+                        variant={getButtonVariant(button?.variant)}
+                        className={cn(
+                          'rounded-full px-8',
+                          (button?.variant === 'ghost' || button?.variant === 'link') && 'text-foreground hover:bg-muted'
+                        )}
                       >
                         <Link href={button?.href || '/'}>
                           {button?.icon && <Icon data={button.icon} className="w-4 h-4" />}
                           {button?.label}
+                          {(!button?.variant || button?.variant === 'default' || button?.variant === 'primary') && (
+                            <ArrowRight className="ml-2 w-4 h-4" />
+                          )}
                         </Link>
                       </Button>
                     </div>
@@ -526,7 +421,7 @@ export function CtaSection({ data }: CtaSectionProps) {
                     <div key={index} data-tina-field={tinaField(button)}>
                       <Button
                         asChild
-                        variant={button?.variant === 'outline' ? 'outline' : 'default'}
+                        variant={getButtonVariant(button?.variant)}
                       >
                         <Link href={button?.href || '/'}>
                           {button?.icon && <Icon data={button.icon} className="w-4 h-4" />}
@@ -643,32 +538,6 @@ export const ctaSectionBlockSchema: Template = {
         { label: 'Medium', value: 'md' },
         { label: 'Large', value: 'lg' },
         { label: 'Extra Large', value: 'xl' },
-      ],
-    },
-    {
-      type: 'string',
-      label: 'Background Style',
-      name: 'backgroundStyle',
-      description: 'Background style for full-width variant',
-      options: [
-        { label: 'None', value: 'none' },
-        { label: 'Hexagon Pattern', value: 'hexagon' },
-        { label: 'Orbs', value: 'orbs' },
-        { label: 'Radial Gradient', value: 'radial' },
-        { label: 'Hexagon + Orbs', value: 'hexagon-orbs' },
-      ],
-    },
-    {
-      type: 'string',
-      label: 'Overlay Opacity',
-      name: 'overlayOpacity',
-      description: 'Overlay opacity for full-width variant (darkens/lightens background)',
-      options: [
-        { label: 'None', value: 'none' },
-        { label: 'Light (30%)', value: 'light' },
-        { label: 'Medium (50%)', value: 'medium' },
-        { label: 'Heavy (70%)', value: 'heavy' },
-        { label: 'Dark (90%)', value: 'dark' },
       ],
     },
     {

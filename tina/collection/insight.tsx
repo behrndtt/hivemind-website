@@ -24,8 +24,31 @@ const Insight: Collection = {
       type: 'image',
       name: 'heroImg',
       label: 'Hero Image',
+      required: true,
       // @ts-ignore
       uploadDir: () => 'insights',
+    },
+    {
+      type: 'string',
+      label: 'Author',
+      name: 'author',
+      required: true,
+    },
+    {
+      type: 'string',
+      label: 'Topic',
+      name: 'topic',
+      required: true,
+      options: ['Azure', 'Copilot', 'Microsoft 365', 'Security'],
+    },
+    {
+      type: 'string',
+      label: 'Executive Summary',
+      name: 'executiveSummary',
+      required: true,
+      ui: {
+        component: 'textarea',
+      },
     },
     {
       type: 'rich-text',
@@ -39,6 +62,15 @@ const Insight: Collection = {
       type: 'datetime',
       label: 'Published Date',
       name: 'date',
+      ui: {
+        dateFormat: 'MMMM DD YYYY',
+        timeFormat: 'hh:mm A',
+      },
+    },
+    {
+      type: 'datetime',
+      label: 'Updated Date',
+      name: 'updatedDate',
       ui: {
         dateFormat: 'MMMM DD YYYY',
         timeFormat: 'hh:mm A',
@@ -115,41 +147,6 @@ const Insight: Collection = {
               options: ['utc', 'iso', 'local'],
             },
           ],
-        },
-        {
-          name: 'NewsletterSignup',
-          label: 'Newsletter Sign Up',
-          fields: [
-            {
-              name: 'children',
-              label: 'CTA',
-              type: 'rich-text',
-            },
-            {
-              name: 'placeholder',
-              label: 'Placeholder',
-              type: 'string',
-            },
-            {
-              name: 'buttonText',
-              label: 'Button Text',
-              type: 'string',
-            },
-            {
-              name: 'disclaimer',
-              label: 'Disclaimer',
-              type: 'rich-text',
-              overrides: {
-                toolbar: ['bold', 'italic', 'link'],
-              },
-            },
-          ],
-          ui: {
-            defaultItem: {
-              placeholder: 'Enter your email',
-              buttonText: 'Notify Me',
-            },
-          },
         },
         {
           name: 'Testimonial',

@@ -37,20 +37,18 @@ export async function generateMetadata({
 type InsightPost = InsightQuery['insight'];
 
 /**
- * Extract tag filenames from a post's tags array
- * Tags are stored as string references like "content/tags/azure.mdx"
+ * Extract tag slugs from a post's tags array.
  */
-function getTagFilenames(tags: InsightPost['tags']): string[] {
+function getTagSlugs(tags: InsightPost['tags']): string[] {
   if (!tags) return [];
   return tags
     .map((t) => {
       const tagRef = t?.tag;
       if (!tagRef) return null;
-      // Extract filename from path like "content/tags/azure.mdx" -> "azure"
       const match = tagRef.match(/([^/]+)\.(mdx?|json)$/);
-      return match ? match[1] : null;
+      return match ? match[1] : tagRef;
     })
-    .filter((filename): filename is string => Boolean(filename));
+    .filter((slug): slug is string => Boolean(slug));
 }
 
 /**
@@ -61,8 +59,8 @@ async function getRelatedInsights(
   currentTags: InsightPost['tags'],
   limit = 3
 ): Promise<InsightPost[]> {
-  const tagFilenames = getTagFilenames(currentTags);
-  if (tagFilenames.length === 0) return [];
+  const tagSlugs = getTagSlugs(currentTags);
+  if (tagSlugs.length === 0) return [];
 
   try {
     const allInsights = await client.queries.insightConnection({ first: 20 });
@@ -73,8 +71,8 @@ async function getRelatedInsights(
       .filter((edge) => {
         const insight = edge?.node;
         if (!insight || insight._sys?.filename === currentFilename) return false;
-        const postTags = getTagFilenames(insight.tags);
-        return postTags.some((tag) => tagFilenames.includes(tag));
+        const postTags = getTagSlugs(insight.tags);
+        return postTags.some((tag) => tagSlugs.includes(tag));
       })
       .slice(0, limit)
       .map((edge) => edge?.node as InsightPost);

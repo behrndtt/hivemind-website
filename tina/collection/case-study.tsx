@@ -24,8 +24,18 @@ const CaseStudy: Collection = {
       type: 'image',
       name: 'heroImg',
       label: 'Hero Image',
+      required: true,
       // @ts-ignore
       uploadDir: () => 'case-studies',
+    },
+    {
+      type: 'string',
+      label: 'Executive Summary',
+      name: 'executiveSummary',
+      required: true,
+      ui: {
+        component: 'textarea',
+      },
     },
     {
       type: 'string',
@@ -78,6 +88,27 @@ const CaseStudy: Collection = {
       label: 'Featured Post',
       name: 'featured',
       description: 'Mark this case study as featured to highlight it at the top of post grids',
+    },
+    {
+      type: 'string',
+      label: 'Client Approval',
+      name: 'approvalStatus',
+      required: true,
+      options: [
+        { label: 'Pending client approval', value: 'pending' },
+        { label: 'Approved for publication', value: 'approved' },
+        { label: 'Internal review required', value: 'internal-review' },
+      ],
+    },
+    {
+      type: 'datetime',
+      label: 'Approval Date',
+      name: 'approvalDate',
+      description: 'Date written client approval was recorded',
+      ui: {
+        dateFormat: 'MMMM DD YYYY',
+        timeFormat: 'hh:mm A',
+      },
     },
     tagsFieldSchema,
     {
@@ -144,41 +175,6 @@ const CaseStudy: Collection = {
               options: ['utc', 'iso', 'local'],
             },
           ],
-        },
-        {
-          name: 'NewsletterSignup',
-          label: 'Newsletter Sign Up',
-          fields: [
-            {
-              name: 'children',
-              label: 'CTA',
-              type: 'rich-text',
-            },
-            {
-              name: 'placeholder',
-              label: 'Placeholder',
-              type: 'string',
-            },
-            {
-              name: 'buttonText',
-              label: 'Button Text',
-              type: 'string',
-            },
-            {
-              name: 'disclaimer',
-              label: 'Disclaimer',
-              type: 'rich-text',
-              overrides: {
-                toolbar: ['bold', 'italic', 'link'],
-              },
-            },
-          ],
-          ui: {
-            defaultItem: {
-              placeholder: 'Enter your email',
-              buttonText: 'Notify Me',
-            },
-          },
         },
         {
           name: 'Testimonial',

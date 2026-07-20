@@ -1,5 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import client from '@/tina/__generated__/client';
 import Layout from '@/components/layout/layout';
 import CaseStudyClientPage from './client-page';
@@ -14,9 +15,7 @@ export async function generateMetadata({
   const filepath = resolvedParams.urlSegments.join('/');
 
   try {
-    const data = await client.queries.caseStudy({
-      relativePath: `${filepath}.mdx`,
-    });
+    const data = await getCaseStudy(filepath);
     const title = data.data?.caseStudy?.title;
     const excerpt = data.data?.caseStudy?.excerpt;
     const description = typeof excerpt === 'string'
@@ -36,21 +35,40 @@ export async function generateMetadata({
 
 type CaseStudyPost = CaseStudyQuery['caseStudy'];
 
+async function getCaseStudy(filepath: string) {
+  try {
+    return await client.queries.caseStudy({
+      relativePath: `${filepath}.mdx`,
+    });
+  } catch {
+    const caseStudies = await client.queries.caseStudyConnection({ first: 100 });
+    const matchingCaseStudy = caseStudies.data?.caseStudyConnection.edges?.find(
+      (edge) => edge?.node?._sys.breadcrumbs?.join('/').toLowerCase() === filepath.toLowerCase()
+    );
+
+    if (!matchingCaseStudy?.node?._sys.filename) {
+      throw new Error(`Case study not found: ${filepath}`);
+    }
+
+    return await client.queries.caseStudy({
+      relativePath: `${matchingCaseStudy.node._sys.filename}.mdx`,
+    });
+  }
+}
+
 /**
- * Extract tag filenames from a post's tags array
- * Tags are stored as string references like "content/tags/azure.mdx"
+ * Extract tag slugs from a post's tags array.
  */
-function getTagFilenames(tags: CaseStudyPost['tags']): string[] {
+function getTagSlugs(tags: CaseStudyPost['tags']): string[] {
   if (!tags) return [];
   return tags
     .map((t) => {
       const tagRef = t?.tag;
       if (!tagRef) return null;
-      // Extract filename from path like "content/tags/azure.mdx" -> "azure"
       const match = tagRef.match(/([^/]+)\.(mdx?|json)$/);
-      return match ? match[1] : null;
+      return match ? match[1] : tagRef;
     })
-    .filter((filename): filename is string => Boolean(filename));
+    .filter((slug): slug is string => Boolean(slug));
 }
 
 /**
@@ -62,7 +80,7 @@ async function getRelatedCaseStudies(
   currentIndustry: string | null | undefined,
   limit = 3
 ): Promise<CaseStudyPost[]> {
-  const tagFilenames = getTagFilenames(currentTags);
+  const tagSlugs = getTagSlugs(currentTags);
 
   try {
     const allCaseStudies = await client.queries.caseStudyConnection({ first: 20 });
@@ -78,8 +96,8 @@ async function getRelatedCaseStudies(
         if (currentIndustry && caseStudy.industry === currentIndustry) return true;
 
         // Match by tags
-        const postTags = getTagFilenames(caseStudy.tags);
-        return postTags.some((tag) => tagFilenames.includes(tag));
+        const postTags = getTagSlugs(caseStudy.tags);
+        return postTags.some((tag) => tagSlugs.includes(tag));
       })
       .slice(0, limit)
       .map((edge) => edge?.node as CaseStudyPost);
@@ -97,9 +115,13 @@ export default async function CaseStudyPage({
 }) {
   const resolvedParams = await params;
   const filepath = resolvedParams.urlSegments.join('/');
-  const data = await client.queries.caseStudy({
-    relativePath: `${filepath}.mdx`,
-  });
+  let data;
+
+  try {
+    data = await getCaseStudy(filepath);
+  } catch {
+    notFound();
+  }
 
   // Fetch related posts by tags or industry
   const caseStudy = data.data?.caseStudy;

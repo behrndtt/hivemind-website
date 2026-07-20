@@ -17,25 +17,25 @@
             "items": [
               {
                 "title": "Cloud Architecture & Design",
-                "description": "Strategic planning and architecture for Microsoft 365, Azure, and hybrid environments",
+                "description": "Make Microsoft 365 and Azure easier to govern and operate",
                 "href": "/services/consulting#cloud-architecture",
                 "icon": "Cloud"
               },
               {
                 "title": "Migration & Deployment",
-                "description": "Seamless transitions to cloud platforms with zero disruption",
+                "description": "Plan and deliver migrations with clear scope and handover",
                 "href": "/services/consulting#migration",
                 "icon": "Building2"
               },
               {
                 "title": "Copilot & AI Integration",
-                "description": "Harness Microsoft Copilot to transform productivity across your organisation",
+                "description": "Assess Copilot readiness, governance, and practical use cases",
                 "href": "/services/consulting#copilot",
                 "icon": "MonitorCog"
               },
               {
                 "title": "Identity & Entra ID",
-                "description": "Secure, streamlined identity management and Zero Trust architecture",
+                "description": "Strengthen identity and access controls your team can maintain",
                 "href": "/services/consulting#identity",
                 "icon": "Shield"
               }
@@ -47,20 +47,20 @@
             "items": [
               {
                 "title": "Endpoint Management (Intune)",
-                "description": "Modern device management across Windows, macOS, iOS, and Android",
+                "description": "Improve Intune and endpoint decisions with specialist advice",
                 "href": "/services/support#endpoint",
                 "icon": "MonitorCog"
               },
               {
                 "title": "Security & Compliance",
-                "description": "Essential Eight maturity and Microsoft Defender implementation",
+                "description": "Improve identity, endpoint, and Essential Eight alignment",
                 "href": "/services/support#security",
                 "icon": "Shield"
               },
               {
-                "title": "Monitoring & Optimisation",
-                "description": "Proactive 24/7 monitoring, health checks, and performance tuning",
-                "href": "/services/support#monitoring",
+                "title": "Complex Issue Escalation",
+                "description": "Investigate difficult Microsoft issues and plan practical remediation",
+                "href": "/services/support",
                 "icon": "Cloud"
               }
             ]
@@ -90,12 +90,12 @@
       }
     ],
     "cta": {
-      "label": "Book a Free Assessment",
+      "label": "Discuss Your Environment",
       "href": "/contact"
     }
   },
   "footer": {
-    "tagline": "Microsoft consulting for organisations that have outgrown generic IT support.",
+    "tagline": "Adelaide-based Microsoft consulting and specialist support for growing organisations and internal IT teams.",
     "contact": {
       "email": "hello@hivemindsolutions.com.au",
       "phone": "+61 8 7118 1919",

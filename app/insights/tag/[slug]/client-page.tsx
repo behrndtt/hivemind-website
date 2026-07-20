@@ -3,10 +3,7 @@
 import Link from 'next/link';
 import { ArrowLeft, Tag } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { PostsGrid } from '@/components/blocks/posts-grid';
-import { TagsSidebar } from '@/components/blocks/tags-sidebar';
-import { CtaSection } from '@/components/blocks/cta-section';
 import type { Insight } from '@/tina/__generated__/types';
 
 interface TagClientPageProps {
@@ -24,25 +21,6 @@ export default function TagClientPage({
   tags,
   totalPosts,
 }: TagClientPageProps) {
-  // Sidebar content
-  const sidebarContent = (
-    <>
-      <TagsSidebar
-        data={{ title: 'All Topics', contentType: 'insights' } as any}
-        tags={tags}
-        basePath="/insights/tag"
-      />
-      <CtaSection
-        data={{
-          variant: 'compact',
-          title: 'Need Expert Help?',
-          subtitle: 'Get in touch with our team for personalized guidance.',
-          buttons: [{ label: 'Contact Us', href: '/contact', variant: 'default' }],
-        } as any}
-      />
-    </>
-  );
-
   return (
     <>
       {/* Header section */}
@@ -73,10 +51,10 @@ export default function TagClientPage({
         </div>
       </section>
 
-      {/* Posts grid with sidebar */}
+      {/* Filtered insights */}
       <PostsGrid
         data={{
-          variant: 'card',
+          variant: 'grid',
           columns: 2,
           contentType: 'insights',
           limit: 50,
@@ -84,22 +62,9 @@ export default function TagClientPage({
         } as any}
         posts={posts}
         tags={tags}
-        sidebarContent={sidebarContent}
+        activeTagSlug={tagSlug}
       />
 
-      {/* Empty state */}
-      {posts.length === 0 && (
-        <section className="py-16 bg-background">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-muted-foreground mb-6">
-              No articles found with this tag.
-            </p>
-            <Button asChild>
-              <Link href="/insights">View all insights</Link>
-            </Button>
-          </div>
-        </section>
-      )}
     </>
   );
 }

@@ -81,7 +81,7 @@
   --secondary: oklch(0.21 0.006 285.885);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.21 0.006 285.885);
-  --muted-foreground: oklch(0.705 0.015 286.067);
+  --muted-foreground: oklch(0.78 0.015 286.067);
   --accent: oklch(0.21 0.006 285.885);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
@@ -151,7 +151,7 @@
   --secondary: oklch(0.21 0.006 285.885);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.21 0.006 285.885);
-  --muted-foreground: oklch(0.58 0.016 285.938);
+  --muted-foreground: oklch(0.72 0.016 285.938);
   --accent: oklch(0.21 0.006 285.885);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
@@ -178,24 +178,24 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground text-base font-normal tracking-normal;
   }
 
-  /* Heading base styles - Urbanist across all levels */
+  /* Keep semantic headings consistent while allowing display components to opt into larger scales. */
   h1 {
-    @apply font-heading font-bold text-4xl md:text-5xl;
+    @apply font-heading font-bold text-4xl leading-tight tracking-[-0.6px] md:text-5xl md:tracking-[-1.8px];
   }
 
   h2 {
-    @apply font-heading font-bold text-3xl md:text-4xl;
+    @apply font-heading font-bold text-3xl leading-tight tracking-[-0.3px] md:text-4xl md:tracking-[-1.2px];
   }
  
   h3 {
-    @apply font-heading font-bold text-xl md:text-2xl;
+    @apply font-heading font-bold text-xl leading-tight tracking-[-0.3px] md:text-2xl md:tracking-[-0.6px];
   }
 
   h4 {
-    @apply font-heading font-bold text-lg;
+    @apply font-heading font-bold text-lg leading-tight tracking-normal;
   }
 
   h5,

@@ -1,4 +1,5 @@
 import { tinaField } from "tinacms/dist/react";
+import type { ReactNode } from "react";
 import { Page, PageBlocks, Insight, CaseStudy } from "../../tina/__generated__/types";
 
 // Primary block components
@@ -39,19 +40,21 @@ interface BlocksProps extends Omit<Page, "id" | "_sys" | "_values"> {
   posts?: (Insight | CaseStudy)[];
   /** Unique tags extracted from posts, for use in TagsSidebar */
   tags?: Array<{ name: string; slug: string; count?: number }>;
+  afterFirstBlock?: ReactNode;
 }
 
-export const Blocks = ({ blocks, posts, tags }: BlocksProps) => {
+export const Blocks = ({ blocks, posts, tags, afterFirstBlock }: BlocksProps) => {
   if (!blocks) return null;
   return (
     <>
       {blocks.map(function (block, i) {
         if (!block) return null;
-        return (
-          <div key={i} data-tina-field={tinaField(block)}>
+        return [
+          <div key={`block-${i}`} data-tina-field={tinaField(block)}>
             <Block block={block} posts={posts} tags={tags} />
-          </div>
-        );
+          </div>,
+          i === 0 && afterFirstBlock ? <div key="after-first-block">{afterFirstBlock}</div> : null,
+        ];
       })}
     </>
   );
@@ -81,25 +84,7 @@ const Block = ({ block, posts, tags }: BlockComponentProps) => {
     case "PageBlocksTeamGrid":
       return <TeamGrid data={block} />;
     case "PageBlocksPostsGrid":
-      // Render sidebar content if showSidebar is enabled
-      const sidebarContent = block.showSidebar ? (
-        <>
-          <TagsSidebar
-            data={{ title: 'Topics', contentType: block.contentType || 'insights' } as any}
-            tags={tags}
-            basePath={block.contentType === 'case-studies' ? '/case-studies/tag' : '/insights/tag'}
-          />
-          <CtaSection
-            data={{
-              variant: 'compact',
-              title: 'Need Expert Help?',
-              subtitle: 'Get in touch with our team for personalized guidance.',
-              buttons: [{ label: 'Contact Us', href: '/contact', variant: 'default' }],
-            } as any}
-          />
-        </>
-      ) : undefined;
-      return <PostsGrid data={block} posts={posts} tags={tags} sidebarContent={sidebarContent} />;
+      return <PostsGrid data={block} posts={posts} tags={tags} />;
     case "PageBlocksFaqSection":
       return <FaqSection data={block} />;
     case "PageBlocksMilestones":

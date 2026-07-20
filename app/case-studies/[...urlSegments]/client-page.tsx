@@ -5,7 +5,7 @@ import type { CaseStudyQuery } from '@/tina/__generated__/types';
 import ErrorBoundary from '@/components/error-boundary';
 import { PostHero } from '@/components/blocks/post-hero';
 import { PostContent } from '@/components/blocks/post-content';
-import { PostSidebar, type PostResult } from '@/components/blocks/post-sidebar';
+import { PostSidebar } from '@/components/blocks/post-sidebar';
 import { RelatedPosts } from '@/components/blocks/related-posts';
 
 type CaseStudyPost = CaseStudyQuery['caseStudy'];
@@ -23,14 +23,6 @@ export default function CaseStudyClientPage(props: ClientCaseStudyProps) {
   const { relatedPosts = [] } = props;
   const { data } = useTina({ ...props });
   const caseStudy = data.caseStudy;
-
-  // Map TinaCMS results to PostSidebar format
-  const sidebarResults: PostResult[] = (caseStudy.results || [])
-    .filter((r): r is NonNullable<typeof r> => Boolean(r?.value && r?.label))
-    .map((r) => ({
-      metric: r.value!,
-      label: r.label!,
-    }));
 
   return (
     <ErrorBoundary>
@@ -55,12 +47,11 @@ export default function CaseStudyClientPage(props: ClientCaseStudyProps) {
             <div className="lg:col-span-1">
               <PostSidebar
                 post={caseStudy}
-                results={sidebarResults}
                 contentType="case-studies"
                 cta={{
-                  title: 'Similar Results for Your Business?',
-                  description: 'Let us help you achieve similar outcomes with our proven approach.',
-                  buttonText: 'Start a Conversation',
+                  title: 'Review Your Environment',
+                  description: 'Discuss the decisions, risks and delivery constraints affecting your Microsoft environment.',
+                  buttonText: 'Discuss Your Priorities',
                   buttonHref: '/contact',
                 }}
               />

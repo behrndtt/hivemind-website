@@ -42,6 +42,15 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/case-studies/Proud-to-Be-Part-of-the-South-Australian-Business-Chamber-Community',
+        destination: '/about',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig

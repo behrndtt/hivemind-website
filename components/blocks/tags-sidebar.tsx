@@ -46,7 +46,7 @@ export function TagsSidebar({ data, tags, basePath = '/insights/tag' }: TagsSide
       </div>
 
       {displayTags.length > 0 ? (
-        <nav aria-label="Filter by tag" className="flex flex-wrap gap-2 px-2">
+        <nav aria-label="Filter by tag" className="flex flex-wrap gap-2.5">
           {displayTags.map((tag) => (
             <Link
               key={tag.slug}
@@ -56,7 +56,7 @@ export function TagsSidebar({ data, tags, basePath = '/insights/tag' }: TagsSide
               <Badge
                 variant="outline"
                 className={cn(
-                  'cursor-pointer transition-colors',
+                  'cursor-pointer px-3 py-1.5 transition-colors',
                   'hover:bg-primary hover:text-primary-foreground hover:border-primary'
                 )}
               >

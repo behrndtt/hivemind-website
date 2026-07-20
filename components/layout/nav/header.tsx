@@ -40,6 +40,17 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!menuState) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [menuState]);
+
   if (!header) return null;
 
   const navItems = (header.nav || []) as GlobalHeaderNav[];
@@ -69,7 +80,7 @@ export const Header = () => {
               aria-label={menuState ? "Close Menu" : "Open Menu"}
               aria-expanded={menuState}
               aria-controls="mobile-navigation"
-              className="lg:hidden rounded-md p-2 transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="lg:hidden flex h-11 w-11 items-center justify-center rounded-md transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               {menuState ? (
                 <X className="w-6 h-6" />
@@ -223,7 +234,7 @@ export const Header = () => {
                             key={colIdx}
                             href={column?.href || "#"}
                             onClick={() => setMenuState(false)}
-                            className="block py-2 text-foreground/80 hover:text-primary transition-colors"
+                            className="flex min-h-11 items-center text-foreground/80 hover:text-primary transition-colors"
                           >
                             {column?.title}
                           </Link>
@@ -240,7 +251,7 @@ export const Header = () => {
                       key={idx}
                       href={item.href || "#"}
                       onClick={() => setMenuState(false)}
-                      className="block py-2 text-foreground/80 hover:text-primary transition-colors"
+                      className="flex min-h-11 items-center text-foreground/80 hover:text-primary transition-colors"
                     >
                       {item.label}
                     </Link>

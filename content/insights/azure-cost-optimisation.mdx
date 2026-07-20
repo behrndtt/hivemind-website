@@ -1,14 +1,14 @@
 ---
-category: Azure
-blocks:
-  - category: Azure
-    readingTime: 10 min read
-    _template: postHero
-title: 'Azure Cost Optimisation: Tips from the Field'
+title: 'Azure Cost Optimisation: Fix Waste Before Buying Commitments'
 heroImg: /uploads/insights/sasun-bughdaryan-njiadDwbgaM-unsplash.jpg
+author: Hivemind Solutions
+topic: Azure
+executiveSummary: |
+  Remove unused resources, schedule non-production systems and rightsize active workloads before purchasing reservations or savings plans. Measure the result against a clear cost baseline.
 excerpt: |
-  Practical strategies for reducing your Azure spending without sacrificing performance or reliability.
+  Reduce Azure waste in the right order: establish ownership, remove idle capacity, rightsize workloads, then assess reservations or savings plans against stable demand.
 date: 2026-06-15T00:00:00.000Z
+updatedDate: 2026-07-20T00:00:00.000Z
 featured: true
 tags:
   - tag: azure
@@ -18,64 +18,62 @@ tags:
   - tag: governance
 ---
 
-## Why Azure Costs Spiral
+## Context
 
-We've seen it countless times: organisations migrate to Azure expecting cost savings, only to find their bills higher than anticipated. The good news? Most overspending is preventable with the right strategies.
+Azure charges reflect architecture and operating decisions made across subscriptions, resource groups and teams. Costs become difficult to control when resources lack owners, budgets do not reflect expected usage, or technical teams treat the monthly invoice as a finance problem.
 
-## Quick Wins
+Cost optimisation is ongoing operational work. It should protect reliability, security and delivery commitments while removing spend that does not support a business outcome.
 
-### 1. Right-Size Your VMs
+## Why It Matters
 
-Over 70% of Azure VMs are over-provisioned. Use Azure Advisor to identify opportunities:
+Poor cost visibility delays decisions. An unused disk, oversized database or continuously running test environment might look minor in isolation, but repeated gaps accumulate across an estate.
 
-* **Review CPU and memory utilisation** over 30 days
-* **Downsize underutilised VMs** one tier at a time
-* **Consider B-series VMs** for variable workloads
+The reverse problem also matters. A rushed cost reduction that ignores performance, recovery or licensing constraints creates operational risk. Every recommendation needs an owner, evidence and a rollback path where the change affects service capacity.
 
-### 2. Use Reserved Instances
+## Risks and Considerations
 
-Commit to 1 or 3-year terms for predictable workloads:
+### Discounts can preserve waste
 
-* **Save up to 72%** compared to pay-as-you-go
-* **Exchange or cancel** with flexibility options
-* **Start with production workloads** you know will run continuously
+Reservations and savings plans reduce eligible rates in exchange for a one-year or three-year commitment. They work best for stable, understood demand. Rightsizing or shutdown changes that demand, so calculate commitments after those changes have settled.
 
-### 3. Shut Down Dev/Test Resources
+### Low utilisation needs context
 
-Non-production resources don't need to run 24/7:
+A quiet virtual machine might provide standby capacity, support a monthly process or meet a recovery requirement. Review utilisation over a period that covers the workload cycle and speak with the owner before changing it.
 
-* **Implement auto-shutdown schedules** via Azure Automation
-* **Use Azure DevTest Labs** for developer environments
-* **Consider Azure Spot VMs** for fault-tolerant workloads
+### Storage tiers have access costs
 
-### 4. Optimise Storage
+Moving data to cool, cold or archive tiers changes retrieval cost and availability. Confirm access patterns, retention obligations and recovery expectations before changing lifecycle rules.
 
-Storage costs accumulate quickly:
+### Allocation is not optimisation
 
-* **Move cold data** to Archive tier
-* **Delete orphaned disks** and snapshots
-* **Review blob lifecycle policies**
+Tags and cost centres explain who pays. They do not reduce spend by themselves. Use allocation data to create ownership and prompt decisions.
 
-## Governance Strategies
+## Recommended Approach
 
-### Implement Budgets and Alerts
+1. **Establish the baseline.** Review actual and amortised cost, major service categories, recent changes and forecast demand.
+2. **Assign ownership.** Record an owner, environment, service and cost centre for each material resource group or workload.
+3. **Remove obvious waste.** Investigate unattached disks, old snapshots, unused public IP addresses, idle services and superseded test resources.
+4. **Schedule non-production workloads.** Deallocate eligible virtual machines and other resources outside required hours. Confirm that shutdown automation results in the billable state you expect.
+5. **Rightsize active services.** Use Azure Advisor, platform metrics and workload knowledge. Change one controlled group at a time and monitor performance.
+6. **Review architecture and licensing.** Check Azure Hybrid Benefit, service tiers, scaling rules and whether managed services reduce total operating cost.
+7. **Assess commitments.** Compare reservations and savings plans only after demand is stable. Review scope, utilisation, term, exchange limits and ownership.
+8. **Measure realised savings.** Record the recommendation, approved action, expected saving and observed cost after implementation.
 
-* Set budgets at the subscription and resource group level
-* Configure alerts at 50%, 75%, and 90% thresholds
-* Review spending weekly with stakeholders
+Microsoft recommends applying Azure Advisor actions in this order: rightsizing or shutdown, then reservations, then savings plans. Each action changes the demand used to calculate the next recommendation.
 
-### Use Tags Consistently
+## Practical Next Steps
 
-* Tag resources with cost centre, environment, and owner
-* Run monthly reports by tag to identify trends
-* Automate tag enforcement with Azure Policy
+Run a focused review of your largest cost drivers:
 
-## Long-Term Optimisation
+* identify the workload owner and business purpose
+* compare the last three complete billing periods
+* review Azure Advisor recommendations and utilisation data
+* check whether existing reservations or savings plans are fully used
+* agree one low-risk action and measure the result
 
-* **Consider Azure Hybrid Benefit** for Windows Server and SQL
-* **Evaluate PaaS alternatives** to IaaS workloads
-* **Review architecture** for serverless opportunities
+The [ONRSR Azure governance case study](/case-studies/Modernising-Azure-Governance-for-a-Critical-Regulatory-Environment) shows how cost, governance and risk work fit together in a real environment. Hivemind also provides [Azure consulting services](/services/consulting) for organisations that need an evidence-based review of architecture and spend.
 
-## Need Help?
+## Further Reading
 
-Our team can conduct an Azure cost review and identify savings opportunities specific to your environment.
+* [Calculate cost savings with Azure Advisor](https://learn.microsoft.com/azure/advisor/advisor-how-to-calculate-total-cost-savings)
+* [Cost optimisation recommendations in the Azure Well-Architected Framework](https://learn.microsoft.com/azure/well-architected/cost-optimization/)

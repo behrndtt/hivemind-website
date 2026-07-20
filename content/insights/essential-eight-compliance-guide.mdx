@@ -1,14 +1,14 @@
 ---
-category: Security
-blocks:
-  - category: Security
-    readingTime: 12 min read
-    _template: postHero
-title: 'Essential Eight: What Australian Businesses Need to Know'
+title: 'Essential Eight: Choose a Maturity Target Before You Buy Tools'
 heroImg: /uploads/insights/towfiqu-barbhuiya-FnA5pAzqhMM-unsplash.jpg
+author: Hivemind Solutions
+topic: Security
+executiveSummary: |
+  Assess your current controls against the latest Essential Eight Maturity Model, choose a target based on risk and obligations, then plan remediation across people, process and technology.
 excerpt: |
-  Understanding the Essential Eight security framework and how to achieve using Microsoft technologies.
+  Use the Essential Eight as a risk-based maturity model. Assess your current controls, choose a defensible target and gather evidence before investing in more Microsoft technology.
 date: 2026-06-02T01:00:00.000Z
+updatedDate: 2026-07-20T00:00:00.000Z
 tags:
   - tag: security
   - tag: essential-eight
@@ -21,68 +21,74 @@ tags:
   - tag: zero-trust
 ---
 
-## What is the Essential Eight?
+## Context
 
-The Essential Eight is a set of baseline mitigation strategies developed by the Australian Cyber Security Centre (ACSC). Originally designed for Australian government agencies, these strategies have become the gold standard for cybersecurity across all sectors.
+The Essential Eight addresses eight areas:
 
-## The Eight Strategies
+1. application control
+2. patch applications
+3. configure Microsoft Office macro settings
+4. user application hardening
+5. restrict administrative privileges
+6. patch operating systems
+7. multi-factor authentication
+8. regular backups
 
-### 1. Application Control
+Each area has requirements for Maturity Levels One, Two and Three. An organisation should implement one maturity level consistently across all eight areas before moving to the next level.
 
-Prevent execution of unapproved programs. Microsoft solutions include:
+The Essential Eight is mandatory in some Australian Government contexts. Other organisations often adopt it as a practical baseline or because contracts, insurers, boards or regulators expect evidence of stronger controls. Confirm which obligations apply to your organisation rather than describing every implementation as "compliance".
 
-* **Windows Defender Application Control (WDAC)**
-* **AppLocker policies** via Group Policy or Intune
+## Why It Matters
 
-### 2. Patch Applications
+Security settings drift. Devices fall outside management, emergency accounts avoid normal controls, applications stop receiving updates, and backup jobs complete without anyone testing recovery.
 
-Keep applications up to date. Leverage:
+An Essential Eight assessment gives leaders a clearer view of those gaps. It also creates a basis for funding decisions, remediation priorities and later reassessment.
 
-* **Microsoft Endpoint Manager** for application updates
-* **Windows Update for Business** for automatic patching
+## Risks and Considerations
 
-### 3. Configure Microsoft Office Macro Settings
+### Maturity is not a product feature
 
-Block macros from the internet. Use:
+Microsoft Intune, Microsoft Defender, Microsoft Entra ID, Windows Update for Business and related services support many controls. Their presence does not prove that requirements are configured, enforced and operating across the assessed scope.
 
-* **Attack Surface Reduction rules** in Microsoft Defender
-* **Office cloud policy service** for consistent settings
+### Scope changes the result
 
-### 4. User Application Hardening
+Define the systems, users, devices, cloud services and administrative paths covered by the assessment. Record exclusions and their risk treatment. A narrow assessment presented as an organisation-wide result will mislead decision-makers.
 
-Block web ads, Java, and Flash. Implement:
+### Evidence matters
 
-* **Microsoft Edge security policies**
-* **Defender SmartScreen** for browser protection
+Policy documents and screenshots are weak evidence by themselves. Collect device inventory, configuration exports, vulnerability data, sign-in evidence, privileged-role records, patch reports, backup results and recovery test records.
 
-### 5. Restrict Administrative Privileges
+### Maturity needs ongoing work
 
-Limit admin access. Use:
+Assessment records a point in time. Ownership, reporting and regular review reduce drift after remediation. Reassess after material environment changes and at an agreed interval.
 
-* **Azure AD Privileged Identity Management (PIM)**
-* **Just-in-time admin access** policies
+### The Essential Eight is a baseline
 
-### 6. Patch Operating Systems
+It does not address every cyber risk. Organisations still need controls appropriate to their environment, such as security monitoring, incident response, supplier risk, identity lifecycle management and protection for non-Microsoft platforms.
 
-Keep Windows updated. Deploy:
+## Recommended Approach
 
-* **Windows Autopatch** for automated updates
-* **Update compliance reporting** via Intune
+1. **Confirm obligations and risk.** Identify contractual, government, regulatory, insurance and board requirements.
+2. **Choose the target maturity level.** Base the target on the threats and business consequences relevant to the organisation.
+3. **Define assessment scope.** Include users, devices, applications, cloud services, administrative systems and recovery platforms.
+4. **Assess all eight areas.** Record the requirement, current state, evidence, gap, risk owner and recommended treatment.
+5. **Prioritise blocking controls.** Address gaps that prevent consistent maturity across an area before polishing controls that already exceed the target.
+6. **Implement and test.** Confirm that settings reach the intended scope and test operational outcomes, including patch deployment, privileged access and data recovery.
+7. **Report clearly.** Separate implemented, partially implemented, planned, excluded and not applicable controls.
+8. **Monitor for drift.** Assign owners, review exceptions and repeat evidence collection.
 
-### 7. Multi-Factor Authentication
+## Practical Next Steps
 
-Require MFA everywhere. Implement:
+Ask your IT and security teams for four items:
 
-* **Azure AD Conditional Access**
-* **Microsoft Authenticator** app
+* the target Essential Eight maturity level and why it was selected
+* the systems and users included in the assessment
+* the evidence supporting each assessed control
+* the remediation plan, owners and review dates for open gaps
 
-### 8. Regular Backups
+If those items do not exist, begin with a scoped maturity assessment. Hivemind's [support services](/services/support) cover Microsoft 365, Intune, Entra ID and security improvement work. For an independent discussion about scope and priorities, [contact our Adelaide team](/contact).
 
-Protect against ransomware. Use:
+## Further Reading
 
-* **Microsoft 365 retention policies**
-* **Azure Backup** for comprehensive protection
-
-## Achieving Compliance
-
-Most organisations can achieve Essential Eight Maturity Level 2 using native Microsoft 365 and Azure tools. Our team can assess your current state and create a roadmap to compliance.
+* [Essential Eight maturity model](https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/essential-eight/essential-eight-maturity-model)
+* [Microsoft guidance for the ACSC Essential Eight](https://learn.microsoft.com/compliance/anz/e8-overview)
