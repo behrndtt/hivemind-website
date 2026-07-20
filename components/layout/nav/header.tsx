@@ -51,7 +51,7 @@ export const Header = () => {
         className={cn(
           "fixed z-50 w-full transition-all duration-300",
           scrolled 
-            ? "bg-black/50 backdrop-blur-md" 
+            ? "bg-background/80 backdrop-blur-md border-b border-border/60"
             : "bg-transparent"
         )}
       >
@@ -64,9 +64,12 @@ export const Header = () => {
 
             {/* Mobile Menu Button */}
             <button
+              type="button"
               onClick={() => setMenuState(!menuState)}
               aria-label={menuState ? "Close Menu" : "Open Menu"}
-              className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+              aria-expanded={menuState}
+              aria-controls="mobile-navigation"
+              className="lg:hidden rounded-md p-2 transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               {menuState ? (
                 <X className="w-6 h-6" />
@@ -195,6 +198,7 @@ export const Header = () => {
 
         {/* Mobile Menu Panel */}
         <div
+          id="mobile-navigation"
           className={cn(
             "lg:hidden overflow-hidden transition-all duration-300 ease-in-out",
             menuState 

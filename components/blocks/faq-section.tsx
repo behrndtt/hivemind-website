@@ -32,7 +32,7 @@ function FaqItem({ item, index, isOpen, onToggle }: FaqItemProps) {
       <button
         type="button"
         onClick={onToggle}
-        className="flex w-full items-center justify-between py-5 text-left"
+        className="flex w-full items-center justify-between py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         aria-expanded={isOpen}
         aria-controls={`faq-answer-${index}`}
       >

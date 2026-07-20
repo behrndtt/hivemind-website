@@ -286,7 +286,7 @@ export function CtaSection({ data }: CtaSectionProps) {
             viewOptions={{ once: true, margin: '-100px' }}
           >
             <div className={cn(
-              "relative overflow-hidden rounded-3xl border border-border",
+              "relative overflow-hidden rounded-lg border border-border",
               paddingClasses[padding as keyof typeof paddingClasses],
               cardBackgroundClasses[cardBackground as keyof typeof cardBackgroundClasses],
               alignmentClasses[alignment as keyof typeof alignmentClasses]
@@ -311,7 +311,7 @@ export function CtaSection({ data }: CtaSectionProps) {
                       alignment === 'center' ? 'justify-center' : alignment === 'right' ? 'justify-end' : 'justify-start'
                     )}
                   >
-                    <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
                       <Icon data={data.icon} className="w-8 h-8 text-primary" />
                     </div>
                   </div>
